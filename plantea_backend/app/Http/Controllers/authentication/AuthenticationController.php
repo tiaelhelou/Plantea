@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 use Validator;
+use Auth;
 
 class AuthenticationController extends Controller
 {
@@ -62,5 +63,17 @@ class AuthenticationController extends Controller
             return response()->json(['error' => 'Unauthorized'], 200);
         }
         return $this->respondWithToken($token);
+    }
+
+    /*
+     * Get the token array structure.
+     */
+    protected function respondWithToken($token) {
+        return response()->json([
+            'access_token' => $token,
+            'user' => Auth::user(),
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
     }
 }
