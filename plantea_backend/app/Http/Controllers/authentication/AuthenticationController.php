@@ -27,9 +27,9 @@ class AuthenticationController extends Controller
 
         $user = new User;
 
-        $user->user_name = $request->name;
-        $user->user_email = $request->email;
-        $user->user_password = bcrypt($request->password);
+        $user->user_name = $request->user_name;
+        $user->user_email = $request->user_email;
+        $user->user_password = bcrypt($request->user_password);
     
         if($user->save()){
             return response()->json([
@@ -44,5 +44,23 @@ class AuthenticationController extends Controller
             ], 200);
         }
 
+    }
+
+    /*
+     * Login the User. Get a JWT via given credentials.
+     */
+    public function login(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'user_email' => 'required|email',
+            'user_password' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 202);
+        }
+        if (! $token = auth()->attempt($validator->validated())) {
+            return response()->json(['error' => 'Unauthorized'], 200);
+        }
+        return $this->respondWithToken($token);
     }
 }
