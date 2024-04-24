@@ -28,6 +28,12 @@ Route::group(['prefix' => 'v1'], function () {
             //api for admin auth
         });
     });
+    Route::group(['prefix' => 'admin'], function () {
+             // api for admin functions
+    });
+    Route::group(['prefix' => 'user'], function () {
+             //api for user function
+    });
     
 
 });
