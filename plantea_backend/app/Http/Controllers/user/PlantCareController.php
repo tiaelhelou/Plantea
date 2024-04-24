@@ -7,5 +7,5 @@ use Illuminate\Http\Request;
 
 class PlantCareController extends Controller
 {
-    //
+    //add plant , list plant reminder per plant
 }
