@@ -66,6 +66,18 @@ class AuthenticationController extends Controller
     }
 
     /*
+     * Logout the User.
+     */
+    public function logout() {
+        Auth::guard('api')->logout();
+    
+        return response()->json([
+            'status' => 'success',
+            'message' => 'logout'
+        ], 200);
+    }    
+
+    /*
      * Get the token array structure.
      */
     protected function respondWithToken($token) {
