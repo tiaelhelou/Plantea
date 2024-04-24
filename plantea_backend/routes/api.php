@@ -5,6 +5,14 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
+| Path Of The Controllers
+|--------------------------------------------------------------------------
+*/
+
+use App\Http\Controllers\authentication\AuthenticationController;
+
+/*
+|--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
 */
@@ -14,6 +22,8 @@ Route::group(['prefix' => 'v1'], function () {
 
     /* Authentication Routes */
     Route::group(['prefix' => 'authentication'], function () {
+
+        Route::post('/login', [AuthenticationController::class, 'register']);
 
     });
 
