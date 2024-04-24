@@ -7,35 +7,32 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
+/* v1 Routes */
 Route::group(['prefix' => 'v1'], function () {
-    Route::group(['prefix' => 'authentication'], function () {
-        Route::group([
-            'middleware' => 'api',
-            'prefix' => 'auth'], function () {
 
-            //api for admin auth
+    /* Authentication Routes */
+    Route::group(['prefix' => 'authentication'], function () {
+
+    });
+
+    /* Middleware for authentication */
+    Route::group(['middleware' => 'auth:api'], function () {
+
+        /* Authorization Routes */
+        Route::group(['prefix' => 'authorization'], function () {
+            Route::group(['prefix' => 'user'], function () {
+                //api for user function
+            });
+
+            Route::group(['prefix' => 'admin'], function () {
+                // api for admin functions
+            });
         });
-    });
-    Route::group(['prefix' => 'admin'], function () {
-             // api for admin functions
-    });
-    Route::group(['prefix' => 'user'], function () {
-             //api for user function
+
     });
     
-
 });
 
 
