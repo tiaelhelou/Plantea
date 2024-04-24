@@ -23,7 +23,7 @@ Route::group(['prefix' => 'v1'], function () {
     /* Authentication Routes */
     Route::group(['prefix' => 'authentication'], function () {
 
-        Route::post('/login', [AuthenticationController::class, 'register']);
+        Route::post('/register', [AuthenticationController::class, 'register']);
         Route::post('/login', [AuthenticationController::class, 'login']);
 
 
