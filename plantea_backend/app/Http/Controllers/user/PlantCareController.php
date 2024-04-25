@@ -81,7 +81,7 @@ class PlantCareController extends Controller
     {
         if(user_id!= NULL)
         {
-            $plants = MyPlant::get();
+            $plants = UserPlant::get();
         }else{
             //get all plants
             $plants = Plant::get();
@@ -125,8 +125,8 @@ class PlantCareController extends Controller
         }
     }   
 
-    //function to return the user id (id of logged in user) given a plant name
 
+    //takes oplantname return plantid
 
 
     //reminder per plant
