@@ -43,6 +43,61 @@ class PlantCareController extends Controller
             ], 400);
         }
     }
+    //delete plant
+    public function deletePlant(Request $request, $id = null)
+    {
+        //delete plant from db
+        $plant = Plant::find($id); //given id or search for it in front end?
+        
+
+        if (!$plant) { //plant isn't found in our database\
+            return response()->json([
+                'result' => false,
+                'message' => 'error ,plant does not exist',
+            ], 400);
+        } else {
+
+            if ($plant->delete()) {
+                return response()->json([
+                    'result' => true,
+                    'message' => 'plant is deleted',
+                ], 201);
+            } else {
+                return response()->json([
+                    'result' => false,
+                    'message' => 'error',
+                ], 400);
+
+            }
+
+        }
+
+    }
+
+    //list myplants
+    //list plant libraries
+    public function viewPlants($user_id =NULL) //function to return the user id (id of logged in user)
+    {
+        if(user_id!= NULL)
+        {
+            $plants = MyPlants::get();
+        }else{
+            //get all plants
+            $plants = Plant::get();
+        }
+        if($plants->save()) {
+            return response()->json([
+                'result' => true,
+                'message' => 'plants displayed',
+                'data' => $plant
+            ],200);
+        } else {
+            return response()->json([
+                'result' => false,
+                'message' => 'error',
+            ], 400);
+        }
+    }
 
 
 }
