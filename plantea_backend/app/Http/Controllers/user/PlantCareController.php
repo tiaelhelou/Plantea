@@ -99,5 +99,36 @@ class PlantCareController extends Controller
         }
     }
 
+    //list plant name and return id of selected with id of logged in user
+    public function viewPlantNames() //for myplants
+    {
+    
+        $plant = Plant::get();
+        $subset = $plant->map(function ($plant) {
+            return collect($plant->toArray())
+                ->only(['plant_name','plant_id'])
+                ->all();
+        });
+        
+        if($plants->save()) {
+            return response()->json([
+                'result' => true,
+                'message' => 'plants displayed',
+                'data' => $subset
+            ],200);
+        } else {
+            return response()->json([
+                'result' => false,
+                'message' => 'error',
+            ], 400);
+        }
+    }   
+
+    //function to return the user id (id of logged in user) given a plant name
+
+
+
+    //reminder per plant
+
 
 }
