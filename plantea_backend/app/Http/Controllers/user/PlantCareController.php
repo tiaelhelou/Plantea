@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Plant;
 use App\Models\Reminder;
+use App\Models\UserPlant;
 class PlantCareController extends Controller
 {
     //add plant , list plant ,reminder per plant
@@ -79,7 +80,7 @@ class PlantCareController extends Controller
     //list plant libraries
     public function viewPlants($user_id =NULL) //function to return the user id (id of logged in user)
     {
-        if(user_id!= NULL)
+        if($user_id!= NULL)
         {
             $plants = UserPlant::get();
         }else{
@@ -90,7 +91,7 @@ class PlantCareController extends Controller
             return response()->json([
                 'result' => true,
                 'message' => 'plants displayed',
-                'data' => $plant
+                'data' => $plants
             ],200);
         } else {
             return response()->json([
@@ -104,8 +105,8 @@ class PlantCareController extends Controller
     public function viewPlantNames() //for myplants
     {
     
-        $plant = Plant::get();
-        $subset = $plant->map(function ($plant) {
+        $plants = Plant::get();
+        $subset = $plants->map(function ($plant) {
             return collect($plant->toArray())
                 ->only(['plant_name','plant_id'])
                 ->all();
