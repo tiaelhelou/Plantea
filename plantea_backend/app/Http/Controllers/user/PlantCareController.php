@@ -4,7 +4,8 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Plant;
+use App\Models\Reminder;
 class PlantCareController extends Controller
 {
     //add plant , list plant ,reminder per plant
@@ -80,7 +81,7 @@ class PlantCareController extends Controller
     {
         if(user_id!= NULL)
         {
-            $plants = MyPlants::get();
+            $plants = MyPlant::get();
         }else{
             //get all plants
             $plants = Plant::get();
