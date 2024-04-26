@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:plantea/main.dart';
 
 import 'welcome_model.dart';
 export 'welcome_model.dart';
@@ -44,17 +41,24 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).accent2,
         body: Container(
-          width: 431,
-          height: 946,
+          width: 1445,
+          height: 1373,
+          constraints: BoxConstraints(
+            minWidth: 20,
+            minHeight: 20,
+            maxWidth: 2000,
+            maxHeight: 2000,
+          ),
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,
             image: DecorationImage(
               fit: BoxFit.cover,
               image: Image.asset(
-                'assets/images/3e1d67b096f91e4bba80dcf2ada4ed4c.jpeg',
+                'assets/background.jpg',
               ).image,
             ),
           ),
+          alignment: AlignmentDirectional(0, 1),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -73,8 +77,9 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   ),
                 ),
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
+                  mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Align(
                       alignment: AlignmentDirectional(0, 0),
@@ -126,6 +131,12 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     FFButtonWidget(
                       onPressed: () {
                         print('Button pressed ...');
+                        
+           // Navigator.push(
+            //  context,
+            //  MaterialPageRoute(builder: (context) => const FirstPage(title: 'First Page')),
+            //);
+          
                       },
                       text: 'Sign up',
                       options: FFButtonOptions(
@@ -159,4 +170,3 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     );
   }
 }
-

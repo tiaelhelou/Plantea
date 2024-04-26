@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:plantea/welcome_page.dart';
+import 'package:plantea/login_page.dart';
 
 void main() {
 
@@ -17,18 +19,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
        debugShowCheckedModeBanner: false,
       title: 'Naviation Demo',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => (),
-        '/second': (context) => SecondScreen(),
-      },
+
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-     home: const FirstPage(title: ''),
+     home: const WelcomeWidget(),
     );
   }
 }
+
 class FirstPage extends StatelessWidget {
   const FirstPage({Key? key, required this.title}) : super(key: key);
   final String title;
