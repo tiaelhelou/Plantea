@@ -110,7 +110,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                             /// navigate to other page without cond
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const LogIn()),
+                                MaterialPageRoute(builder: (context) => const LogWidget()),
                               ); 
                           },
                           text: 'Log In',
