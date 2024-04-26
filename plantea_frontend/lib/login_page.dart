@@ -38,7 +38,7 @@ class _LogWidgetState extends State<LogWidget> {
   }
 
 
-   @override
+ @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -61,7 +61,7 @@ class _LogWidgetState extends State<LogWidget> {
             image: DecorationImage(
               fit: BoxFit.cover,
               image: Image.asset(
-                'assets/images/3e1d67b096f91e4bba80dcf2ada4ed4c.jpeg',
+                'assets/background.jpg',
               ).image,
             ),
           ),
@@ -109,7 +109,7 @@ class _LogWidgetState extends State<LogWidget> {
                                 ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primaryText,
+                                color: Color(0xFFA8ABAC),
                                 width: 3,
                               ),
                               borderRadius: BorderRadius.circular(4),
@@ -154,8 +154,8 @@ class _LogWidgetState extends State<LogWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(45, 50, 45, 100),
                         child: TextFormField(
-                        /*  controller: _model.textController2,
-                          focusNode: _model.textFieldFocusNode,*/
+                         // controller: _model.textController2,
+                          //focusNode: _model.textFieldFocusNode,
                           autofocus: true,
                           autofillHints: [AutofillHints.password],
                           obscureText: !_model.passwordVisibility,
@@ -169,7 +169,7 @@ class _LogWidgetState extends State<LogWidget> {
                                 ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primaryText,
+                                color: Color(0xFFA8ABAC),
                                 width: 3,
                               ),
                               borderRadius: BorderRadius.circular(4),
@@ -218,9 +218,9 @@ class _LogWidgetState extends State<LogWidget> {
                                     fontFamily: 'Montserrat',
                                     letterSpacing: 0,
                                   ),
-                          /*keyboardType: TextInputType.visiblePassword,
-                          validator: _model.textController2Validator
-                              .asValidator(context),*/
+                          keyboardType: TextInputType.visiblePassword,
+                         // validator: _model.textController2Validator
+                          //    .asValidator(context),
                         ),
                       ),
                       Expanded(
@@ -228,17 +228,8 @@ class _LogWidgetState extends State<LogWidget> {
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 130),
                           child: FFButtonWidget(
-                            onPressed: () async {
-                            /*  if ((/* NOT RECOMMENDED */ _model
-                                          .emailAdressTextController.text ==
-                                      'true') &&
-                                  (/* NOT RECOMMENDED */ _model
-                                          .textController2.text ==
-                                      'true')) {
-                                context.pushNamed('welcome');
-                              } else {
-                                context.pushNamed('log');
-                              }*/
+                            onPressed: () {
+                              print('Button pressed ...');
                             },
                             text: 'Log In',
                             options: FFButtonOptions(
