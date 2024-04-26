@@ -88,7 +88,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                         alignment: AlignmentDirectional(0, 0),
                         child: Padding(
                           padding:
-                              EdgeInsetsDirectional.fromSTEB(0, 20, 0, 100),
+                              EdgeInsetsDirectional.fromSTEB(0, 50, 0, 90),
                           child: Text(
                             'Welcom to  Plantea',
                             textAlign: TextAlign.center,
@@ -142,7 +142,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       FFButtonWidget(
                         onPressed: () {
                           print('Button pressed ...');
-                          
+                           Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const FirstPage(title: "FirstPage")),
+                              ); 
                         },
                         text: 'Sign up',
                         options: FFButtonOptions(
