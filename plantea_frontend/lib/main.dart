@@ -17,6 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
        debugShowCheckedModeBanner: false,
       title: 'Naviation Demo',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => (),
+        '/second': (context) => SecondScreen(),
+      },
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
