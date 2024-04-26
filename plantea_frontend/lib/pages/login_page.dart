@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutterflow_ui/flutterflow_ui.dart';
-import 'package:plantea/plant_care_home_page.dart';
+import 'package:plantea/pages/plant_care_home_page.dart';
 
-import 'log_model.dart';
-export 'log_model.dart';
+import '../models/log_model.dart';
+export '../models/log_model.dart';
 
 class LogWidget extends StatefulWidget {
   const LogWidget({super.key});

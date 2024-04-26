@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plantea/welcome_page.dart';
+import 'package:plantea/pages/welcome_page.dart';
 void main() {
 
 

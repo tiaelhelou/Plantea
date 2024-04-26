@@ -1,7 +1,7 @@
 // TODO Implement this library.
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:plantea/login_page.dart';
+import 'package:plantea/pages/login_page.dart';
 
 class LogModel extends FlutterFlowModel<LogWidget> {
   ///  State fields for stateful widgets in this page.

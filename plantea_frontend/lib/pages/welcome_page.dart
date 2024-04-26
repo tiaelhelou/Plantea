@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutterflow_ui/flutterflow_ui.dart';
-import 'package:plantea/login_page.dart';
+import 'package:plantea/pages/login_page.dart';
 import 'package:plantea/main.dart';
 
-import 'welcome_model.dart';
-export 'welcome_model.dart';
+import '../models/welcome_model.dart';
+export '../models/welcome_model.dart';
 
 class WelcomeWidget extends StatefulWidget {
   const WelcomeWidget({super.key});

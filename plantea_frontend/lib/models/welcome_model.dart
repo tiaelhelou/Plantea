@@ -2,7 +2,7 @@
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 
 import 'package:flutter/material.dart';
-import 'package:plantea/welcome_page.dart';
+import 'package:plantea/pages/welcome_page.dart';
 
 
 class WelcomeModel extends FlutterFlowModel<WelcomeWidget> {
