@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutterflow_ui/flutterflow_ui.dart';
-import 'package:plantea/welcome_page.dart';
+import 'package:plantea/plant_care_home_page.dart';
 
 import 'log_model.dart';
 export 'log_model.dart';
@@ -230,6 +230,10 @@ class _LogWidgetState extends State<LogWidget> {
                           child: FFButtonWidget(
                             onPressed: () {
                               print('Button pressed ...');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const PlantCareWidget()),
+                              ); 
                             },
                             text: 'Log In',
                             options: FFButtonOptions(
