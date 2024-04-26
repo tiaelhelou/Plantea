@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:plantea/login_page.dart';
 import 'package:plantea/main.dart';
 
 import 'welcome_model.dart';
@@ -64,47 +65,86 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Container(
-                width: 390,
-                height: 550,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(0),
-                    bottomRight: Radius.circular(0),
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
+              Expanded(
+                flex: 10,
+                child: Container(
+                  width: 389,
+                  height: 550,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(0),
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16),
+                    ),
                   ),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional(0, 0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 100),
-                        child: Text(
-                          'Welcom to  Plantea',
-                          textAlign: TextAlign.center,
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 24,
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional(0, 0),
+                        child: Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(0, 20, 0, 100),
+                          child: Text(
+                            'Welcom to  Plantea',
+                            textAlign: TextAlign.center,
+                            style:
+                                FlutterFlowTheme.of(context).bodyLarge.override(
+                                      fontFamily: 'Montserrat',
+                                      fontSize: 24,
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 80),
-                      child: FFButtonWidget(
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 80),
+                        child: FFButtonWidget(
+                          onPressed:  () async {
+                            print('Button pressed ...'); 
+                            /// navigate to other page without cond
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const LogIn()),
+                              ); 
+                          },
+                          text: 'Log In',
+                          options: FFButtonOptions(
+                            width: 296,
+                            height: 54,
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                            iconPadding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            color: Color(0xFF355E3B),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  fontSize: 16,
+                                  letterSpacing: 0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                            elevation: 3,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                      FFButtonWidget(
                         onPressed: () {
                           print('Button pressed ...');
+                          
                         },
-                        text: 'Log In',
+                        text: 'Sign up',
                         options: FFButtonOptions(
                           width: 296,
                           height: 54,
@@ -114,7 +154,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                           color: Color(0xFF355E3B),
                           textStyle:
                               FlutterFlowTheme.of(context).titleMedium.override(
-                                    fontFamily: 'Readex Pro',
+                                    fontFamily: 'Montserrat',
                                     fontSize: 16,
                                     letterSpacing: 0,
                                     fontWeight: FontWeight.bold,
@@ -127,40 +167,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                    ),
-                    FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
-                        
-           // Navigator.push(
-            //  context,
-            //  MaterialPageRoute(builder: (context) => const FirstPage(title: 'First Page')),
-            //);
-          
-                      },
-                      text: 'Sign up',
-                      options: FFButtonOptions(
-                        width: 296,
-                        height: 54,
-                        padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                        iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: Color(0xFF355E3B),
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleMedium.override(
-                                  fontFamily: 'Montserrat',
-                                  fontSize: 16,
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                        elevation: 3,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
