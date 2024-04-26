@@ -10,6 +10,26 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+        body: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 153, 247, 171),
+          ),
+          child: const Column(
+            children: [
+              SizedBox(height: 20),
+              Text(
+                'Plantea',
+                style: TextStyle(
+                  fontStyle: FontStyle.italic,
+                  color: Color.fromARGB(255, 0, 50, 31),
+                  fontSize: 96,
+                ),
+              )
+            ],
+          ),
+        ),
+    );
   }
 }
