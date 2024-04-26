@@ -106,8 +106,8 @@ class PlantCareController extends Controller
     {
     
         $plants = Plant::get();
-        $subset = $plants->map(function ($plant) {
-            return collect($plant->toArray())
+        $subset = $plants->map(function ($plants) {
+            return collect($plants->toArray())
                 ->only(['plant_name','plant_id'])
                 ->all();
         });
