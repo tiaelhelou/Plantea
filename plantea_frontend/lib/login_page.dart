@@ -1,51 +1,18 @@
 import 'package:flutter/material.dart';
 
-class LogIn extends StatelessWidget {
-  const LogIn({super.key});
- 
-  @override //adding a backgorund
-  Widget build(BuildContext context){
-    return  Scaffold(
-      body: Container(
-       decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/background.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: const Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            // Add other widgets here
-          ],
-        ),
-      ),
-    );
-  }
-
-
-  
-}
-/**
- * from flutter flow
- * import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 
 import 'log_model.dart';
 export 'log_model.dart';
 
-class LogWidget extends StatefulWidget {
-  const LogWidget({super.key});
+class LogIn extends StatefulWidget {
+  const LogIn({super.key});
 
   @override
-  State<LogWidget> createState() => _LogWidgetState();
+  State<LogIn> createState() => _LogInState();
 }
 
-class _LogWidgetState extends State<LogWidget> {
+class _LogInState extends State<LogIn> {
   late LogModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -262,17 +229,8 @@ class _LogWidgetState extends State<LogWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 150, 0, 16),
                             child: FFButtonWidget(
-                              onPressed: () async {
-                                context.pushNamed(
-                                  'welcome',
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType: PageTransitionType.fade,
-                                      duration: Duration(milliseconds: 0),
-                                    ),
-                                  },
-                                );
+                              onPressed: () { // add button function
+                                
                               },
                               text: 'Log In',
                               options: FFButtonOptions(
@@ -339,4 +297,3 @@ class _LogWidgetState extends State<LogWidget> {
   }
 }
 
- */
