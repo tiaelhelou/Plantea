@@ -1,7 +1,9 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/services.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:plantea/pages/welcome_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,40 +12,55 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>{ 
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 153, 247, 171),
-          ),
-          child: Column(
+    return GestureDetector(
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: Color(0xFF99F7AB),
+        body: SafeArea(
+          top: true,
+          child: Stack(
             children: [
-              SizedBox(height: 20),
-              Text(
-                'Plantea',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  color: Color.fromARGB(255, 0, 50, 31),
-                  fontSize: 96,
-                ),
-              ),
-              Container(
+              Align(
+                alignment: AlignmentDirectional(0, 1),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
                     'assets/logo.jpg',
                     width: 300,
-                    height: 200,
+                    height: 252,
                     fit: BoxFit.cover,
+                    alignment: Alignment(0, 0),
                   ),
                 ),
               ),
+              Align(
+                alignment: AlignmentDirectional(0, -1),
+                child: Padding(
+                  padding: EdgeInsets.all(24),
+                  child: Text(
+                    'Plantea',
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Readex Pro',
+                          color: Color(0xFF00321F),
+                          fontSize: 96,
+                          letterSpacing: 0,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
+                        ),
+                  ),
+                ),
+              )
             ],
           ),
         ),
+      ),
     );
   }
 }
