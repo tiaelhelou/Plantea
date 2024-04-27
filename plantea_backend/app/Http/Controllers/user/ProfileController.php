@@ -127,7 +127,7 @@ class ProfileController extends Controller
         }
         else{
             $user = User::find($id);
-            if ($user == null) {
+            if ($user != null) {
                 $checkins = CheckIn::where('user_id', $id)->get();
                 $checkins->checkin_total = $checkins->checkin_total + 1;
 
