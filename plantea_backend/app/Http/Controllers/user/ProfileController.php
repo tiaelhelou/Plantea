@@ -138,6 +138,9 @@ class ProfileController extends Controller
                     return response()->json(['message' => 'Checkin Failed'], 400);
                 }
             }
+            else{
+                return response()->json(['message' => 'User not found'], 400);
+            }
         }
     }
 }
