@@ -104,8 +104,7 @@ class _LogWidgetState extends State<LogWidget> {
                           children: [
                           
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                              padding: EdgeInsetsDirectional.fromSTEB(45, 100, 45, 16),
                               child: TextFormField(
                                 controller: emailController,
                                 decoration: const InputDecoration(
@@ -119,8 +118,7 @@ class _LogWidgetState extends State<LogWidget> {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                               padding: EdgeInsetsDirectional.fromSTEB(45, 50, 45, 100),
                               child: TextFormField(
                                 controller: passwordController,
                                 obscureText: true,
