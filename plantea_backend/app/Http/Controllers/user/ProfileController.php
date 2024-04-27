@@ -131,7 +131,9 @@ class ProfileController extends Controller
                 $checkins = CheckIn::where('user_id', $id)->get();
                 $checkins->checkin_total = $checkins->checkin_total + 1;
 
-                if($checkins->save()){
+                $user->user_points = $user->user_points + 5;
+
+                if($checkins->save() && $user->save()) {
                     return response()->json(['message' => 'Checkin Successful'], 200);
                 }
                 else{
