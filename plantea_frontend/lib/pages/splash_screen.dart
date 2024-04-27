@@ -12,7 +12,28 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen>{ 
+class _SplashScreenState extends State<SplashScreen>
+  with SingleTickerProviderStateMixin { 
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+
+    Future.delayed(Duration(seconds:  2), () {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (_) => WelcomeWidget(),
+        )
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    super.dispose();
+
+  }
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
