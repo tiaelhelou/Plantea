@@ -107,8 +107,28 @@ class _LogWidgetState extends State<LogWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(45, 100, 45, 16),
                               child: TextFormField(
                                 controller: emailController,
-                                decoration: const InputDecoration(
-                                    border: OutlineInputBorder(), labelText: "Email"),
+                                    decoration: InputDecoration(
+                                      labelText: 'Email',
+                                      labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                            fontFamily: 'Montserrat',
+                                            letterSpacing: 0,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFA8ABAC),
+                                          width: 3,
+                                        ),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+
+
+                                    ),
+                                    style: FlutterFlowTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
+                                    textAlign: TextAlign.start,
+  
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter your email';
@@ -122,8 +142,27 @@ class _LogWidgetState extends State<LogWidget> {
                               child: TextFormField(
                                 controller: passwordController,
                                 obscureText: true,
-                                decoration: const InputDecoration(
-                                    border: OutlineInputBorder(), labelText: "Password"),
+                                decoration: InputDecoration(
+                                      labelText: 'Password',
+                                      labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                            fontFamily: 'Montserrat',
+                                            letterSpacing: 0,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFA8ABAC),
+                                          width: 3,
+                                        ),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+
+
+                                    ),
+                                    style: FlutterFlowTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
+                                    textAlign: TextAlign.start,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter your password';
@@ -132,28 +171,47 @@ class _LogWidgetState extends State<LogWidget> {
                                 },
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16.0),
-                              child: Center(
-                                child: ElevatedButton(
-                                onPressed: () {
-                                if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-                                  // Navigate the user to the Home page
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => const WelcomeWidget()),
-                                  );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Please fill input')),
-                                  );
-                                }
-                              },
-                                  child: const Text('Submit'),
+                            
+                             
+                              Padding(
+                               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
+                               child: FFButtonWidget(
+                                  onPressed: () {
+                                  if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+                                                              // Navigate the user to the Home page
+                                                              Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(builder: (context) => const WelcomeWidget()),
+                                                              );
+                                                            } else {
+                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                const SnackBar(content: Text('Please fill input')),
+                                                              );
+                                                            }
+                                                          },
+                                  text: 'Log In',
+                                  options: FFButtonOptions(
+                                    width: 296,
+                                    height: 54,
+                                    padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                    color: Color(0xFF355E3B),
+                                    textStyle: FlutterFlowTheme.of(context).titleMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          fontSize: 16,
+                                          letterSpacing: 0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                    elevation: 3,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
                                 ),
                               ),
-                            ),
+                            
                           ],
                         ),
                       ),
