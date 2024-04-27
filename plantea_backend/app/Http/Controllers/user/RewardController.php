@@ -19,7 +19,7 @@ class RewardController extends Controller
         $rewards = Gift::has('gift_count', '>=', 1)->get();
 
         if ($rewards == null) {
-            return response()->json(['message' => 'Checkin Failed'], 400);
+            return response()->json(['message' => 'Redeemed Failed'], 400);
         }
         return response()->json([
             'message' => 'Gifts retrieved successfully',
@@ -34,13 +34,13 @@ class RewardController extends Controller
     {
 
         if ($id == null || $name == null) {
-            return response()->json(['message' => 'Checkin Failed'], 400);
+            return response()->json(['message' => 'Redeemed Failed'], 400);
         }
 
         $reward = Gift::where('gift_name', $name)->first();
 
         if ($reward == null) {
-            return response()->json(['message' => 'Checkin Failed'], 400);
+            return response()->json(['message' => 'Redeemed Failed'], 400);
         }
 
         $user = User::find($id);
