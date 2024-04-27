@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UserPlant;
 use App\Models\User;
+
+use Illuminate\Support\Facades\Hash;
+
 class ProfileController extends Controller
 {
     //change pass , edit profile , display profile

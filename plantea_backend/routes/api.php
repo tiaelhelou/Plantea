@@ -26,7 +26,8 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('/register', [AuthenticationController::class, 'register']);
         Route::post('/login', [AuthenticationController::class, 'login']);
         Route::post('/logout', [AuthenticationController::class, 'logout']);
-
+        Route::post('/resetPassword', [AuthenticationController::class,'resetPassword']);
+        
     });
 
     /* Middleware for authentication */
