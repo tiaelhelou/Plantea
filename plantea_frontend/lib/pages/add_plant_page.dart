@@ -22,7 +22,7 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
   final _formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   
-  String dropdownValue = list.first;
+ // String dropdownValue = list.first;
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
   }
-  String? selectedValue;
+  String ?selectedValue ;
 final TextEditingController textEditingController = TextEditingController();
   @override
   void dispose() {
@@ -39,7 +39,10 @@ final TextEditingController textEditingController = TextEditingController();
 
     super.dispose();
   }
-  
+  bool isDropdownValueSelected() {
+  return selectedValue != null;
+}
+
   @override
   Widget build(BuildContext context) {
     
@@ -186,84 +189,90 @@ final TextEditingController textEditingController = TextEditingController();
                     Padding( //////drop down  in flutter
                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                       child: DropdownButtonHideUnderline(
-        child: DropdownButton2<String>(
-          isExpanded: true,
-          hint: Text(
-            'Select Item',
-            style: TextStyle(
-              fontSize: 14,
-              color: Theme.of(context).hintColor,
-            ),
-          ),
-          items: list
-              .map((item) => DropdownMenuItem(
-                    value: item,
-                    child: Text(
-                      item,
-                      style: const TextStyle(
-                        fontSize: 14,
+                        
+                      child: DropdownButton2<String>(
+                        
+                        isExpanded: true,
+                        hint: Text(
+                          'Select Item',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).hintColor,
+                          ),
+                        ),
+                        items: list
+                            .map((item) => DropdownMenuItem(
+                                  value: item,
+                                  
+                                  child: Text(
+                                    item,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        value: selectedValue,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedValue = value;
+                            
+                          });
+                        },
+                        buttonStyleData: const ButtonStyleData(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          height: 54,
+                          width: 296,
+                        ),
+                        dropdownStyleData: const DropdownStyleData(
+                          maxHeight: 200,
+                        ),
+                        menuItemStyleData: const MenuItemStyleData(
+                          height: 40,
+                        ),
+                        dropdownSearchData: DropdownSearchData(
+                          searchController: textEditingController,
+                          searchInnerWidgetHeight: 50,
+                          searchInnerWidget: Container(
+                            height: 50,
+                            padding: const EdgeInsets.only(
+                              top: 8,
+                              bottom: 4,
+                              right: 8,
+                              left: 8,
+                            ),
+                            child: TextFormField(
+                              expands: true,
+                              maxLines: null,
+                              controller: textEditingController,
+                              decoration: InputDecoration(
+                                isDense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 8,
+                                ),
+                                hintText: 'Search for an item...',
+                                hintStyle: const TextStyle(fontSize: 12),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                            ),
+                          ),
+                          searchMatchFn: (item, searchValue) {
+                            return item.value.toString().contains(searchValue);
+                          },
+                        ),
+                        //This to clear the search value when you close the menu
+                        onMenuStateChange: (isOpen) {
+                          if (!isOpen) {
+                            textEditingController.clear();
+                          }
+                        },
+                        
                       ),
+                      
                     ),
-                  ))
-              .toList(),
-          value: selectedValue,
-          onChanged: (value) {
-            setState(() {
-              selectedValue = value;
-            });
-          },
-          buttonStyleData: const ButtonStyleData(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            height: 40,
-            width: 200,
-          ),
-          dropdownStyleData: const DropdownStyleData(
-            maxHeight: 200,
-          ),
-          menuItemStyleData: const MenuItemStyleData(
-            height: 40,
-          ),
-          dropdownSearchData: DropdownSearchData(
-            searchController: textEditingController,
-            searchInnerWidgetHeight: 50,
-            searchInnerWidget: Container(
-              height: 50,
-              padding: const EdgeInsets.only(
-                top: 8,
-                bottom: 4,
-                right: 8,
-                left: 8,
-              ),
-              child: TextFormField(
-                expands: true,
-                maxLines: null,
-                controller: textEditingController,
-                decoration: InputDecoration(
-                  isDense: true,
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 8,
-                  ),
-                  hintText: 'Search for an item...',
-                  hintStyle: const TextStyle(fontSize: 12),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-            ),
-            searchMatchFn: (item, searchValue) {
-              return item.value.toString().contains(searchValue);
-            },
-          ),
-          //This to clear the search value when you close the menu
-          onMenuStateChange: (isOpen) {
-            if (!isOpen) {
-              textEditingController.clear();
-            }
-          },
-        ),
-      ),
                       /*DropdownMenu<String>(
                         
                        // initialSelection: list.first,
@@ -282,7 +291,7 @@ final TextEditingController textEditingController = TextEditingController();
                       padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 0),
                       child: FFButtonWidget(
                                   onPressed: () {
-                                  if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+                                  if (_formKey.currentState != null && _formKey.currentState!.validate()&&  isDropdownValueSelected()==true) {
                                                               // Navigate the user to the Home page
                                        Navigator.push(
                                         context,
@@ -293,6 +302,7 @@ final TextEditingController textEditingController = TextEditingController();
                                          const SnackBar(content: Text('Please fill input')),
                                          );
                                   }
+                                  
                                 },
                                   text: 'ADD',
                                   options: FFButtonOptions(
