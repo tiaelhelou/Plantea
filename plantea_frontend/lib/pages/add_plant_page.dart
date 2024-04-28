@@ -234,4 +234,96 @@ final TextEditingController textEditingController = TextEditingController();
                 right: 8,
                 left: 8,
               ),
-             
+              child: TextFormField(
+                expands: true,
+                maxLines: null,
+                controller: textEditingController,
+                decoration: InputDecoration(
+                  isDense: true,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 8,
+                  ),
+                  hintText: 'Search for an item...',
+                  hintStyle: const TextStyle(fontSize: 12),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+            ),
+            searchMatchFn: (item, searchValue) {
+              return item.value.toString().contains(searchValue);
+            },
+          ),
+          //This to clear the search value when you close the menu
+          onMenuStateChange: (isOpen) {
+            if (!isOpen) {
+              textEditingController.clear();
+            }
+          },
+        ),
+      ),
+                      /*DropdownMenu<String>(
+                        
+                       // initialSelection: list.first,
+                        onSelected: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValue = value!;
+                          });
+                        },
+                        dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+                          return DropdownMenuEntry<String>(value: value, label: value);
+                        }).toList(),
+                      ),*/
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 0),
+                      child: FFButtonWidget(
+                                  onPressed: () {
+                                  if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+                                                              // Navigate the user to the Home page
+                                       Navigator.push(
+                                        context,
+                                         MaterialPageRoute(builder: (context) => const PlantcareWidget()),
+                                        );
+                                  } else {
+                                     ScaffoldMessenger.of(context).showSnackBar(
+                                         const SnackBar(content: Text('Please fill input')),
+                                         );
+                                  }
+                                },
+                                  text: 'ADD',
+                                  options: FFButtonOptions(
+                                    width: 296,
+                                    height: 54,
+                                    padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                    color: Color(0xFF355E3B),
+                                    textStyle: FlutterFlowTheme.of(context).titleMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          fontSize: 16,
+                                          letterSpacing: 0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                    elevation: 3,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
