@@ -107,4 +107,131 @@ final TextEditingController textEditingController = TextEditingController();
                             ),
                         ),
                       ),
-                    
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 80),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            flex: 10,
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(20, 0, 50, 0),
+                              child: TextFormField(
+                                controller: nameController,
+                                    decoration: InputDecoration(
+                                      labelText: '',
+                                      labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                            fontFamily: 'Montserrat',
+                                            letterSpacing: 0,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFA8ABAC),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+
+
+                                    ),
+                                    style: FlutterFlowTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
+                                    textAlign: TextAlign.start,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter some text';
+                                      }
+                                      return null;
+                                    },
+
+                                
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                            child: FlutterFlowIconButton(
+                              borderColor: Color(0xFF355E3B),
+                              borderRadius: 5,
+                              borderWidth: 1,
+                              buttonSize: 47,
+                              icon: Icon(
+                                Icons.camera_alt,
+                                color: Color(0xFF8A9A5B),
+                                size: 24,
+                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 225, 10),
+                    child: Text(
+                      'SPECIES',
+                      textAlign: TextAlign.start,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Montserrat',
+                            letterSpacing: 0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                      ),
+                    ),
+                    Padding( //////drop down  in flutter
+                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      child: DropdownButtonHideUnderline(
+        child: DropdownButton2<String>(
+          isExpanded: true,
+          hint: Text(
+            'Select Item',
+            style: TextStyle(
+              fontSize: 14,
+              color: Theme.of(context).hintColor,
+            ),
+          ),
+          items: list
+              .map((item) => DropdownMenuItem(
+                    value: item,
+                    child: Text(
+                      item,
+                      style: const TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ))
+              .toList(),
+          value: selectedValue,
+          onChanged: (value) {
+            setState(() {
+              selectedValue = value;
+            });
+          },
+          buttonStyleData: const ButtonStyleData(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            height: 40,
+            width: 200,
+          ),
+          dropdownStyleData: const DropdownStyleData(
+            maxHeight: 200,
+          ),
+          menuItemStyleData: const MenuItemStyleData(
+            height: 40,
+          ),
+          dropdownSearchData: DropdownSearchData(
+            searchController: textEditingController,
+            searchInnerWidgetHeight: 50,
+            searchInnerWidget: Container(
+              height: 50,
+              padding: const EdgeInsets.only(
+                top: 8,
+                bottom: 4,
+                right: 8,
+                left: 8,
+              ),
+             
