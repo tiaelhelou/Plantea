@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import '../pages/plant_care_home_page.dart';
 import '../pages/welcome_page.dart';
 
 import '../models/plantcare_model.dart';
 export '../models/plantcare_model.dart';
-
+const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 class PlantcareWidget extends StatefulWidget {
   const PlantcareWidget({super.key});
 
@@ -17,9 +17,13 @@ class PlantcareWidget extends StatefulWidget {
 
 class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
   late PlantcareModel _model;
+  TextEditingController nameController = TextEditingController();
+  
+  
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
+    String ?selectedValue ;
+final TextEditingController textEditingController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -86,61 +90,107 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(18, 0, 18, 16),
-                  child: TextFormField(
-                    controller: _model.textController,
-                    focusNode: _model.textFieldFocusNode,
-                    autofocus: true,
-                    autofillHints: [AutofillHints.email],
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      labelStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Readex Pro',
-                                letterSpacing: 0,
+                Padding( //////drop down  in flutter
+                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      child: DropdownButtonHideUnderline(
+                        
+                      child: DropdownButton2<String>(
+                        
+                        isExpanded: true,
+                        hint: Text(
+                          'Select Item',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).hintColor,
+                          ),
+                        ),
+                        items: list
+                            .map((item) => DropdownMenuItem(
+                                  value: item,
+                                  
+                                  child: Text(
+                                    item,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        value: selectedValue,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedValue = value;
+                            
+                          });
+                        },
+                        buttonStyleData: const ButtonStyleData(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          height: 54,
+                          width: 296,
+                        ),
+                        dropdownStyleData: const DropdownStyleData(
+                          maxHeight: 200,
+                        ),
+                        menuItemStyleData: const MenuItemStyleData(
+                          height: 40,
+                        ),
+                        dropdownSearchData: DropdownSearchData(
+                          searchController: textEditingController,
+                          searchInnerWidgetHeight: 50,
+                          searchInnerWidget: Container(
+                            height: 50,
+                            padding: const EdgeInsets.only(
+                              top: 8,
+                              bottom: 4,
+                              right: 8,
+                              left: 8,
+                            ),
+                            child: TextFormField(
+                              expands: true,
+                              maxLines: null,
+                              controller: textEditingController,
+                              decoration: InputDecoration(
+                                isDense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 8,
+                                ),
+                                hintText: 'Search for an item...',
+                                hintStyle: const TextStyle(fontSize: 12),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFFA8ABAC),
-                          width: 3,
+                            ),
+                          ),
+                          searchMatchFn: (item, searchValue) {
+                            return item.value.toString().contains(searchValue);
+                          },
                         ),
-                        borderRadius: BorderRadius.circular(4),
+                        //This to clear the search value when you close the menu
+                        onMenuStateChange: (isOpen) {
+                          if (!isOpen) {
+                            textEditingController.clear();
+                          }
+                        },
+                        
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFF355E3B),
-                          width: 3,
-                        ),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).tertiary,
-                          width: 3,
-                        ),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).tertiary,
-                          width: 3,
-                        ),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).info,
-                      contentPadding: EdgeInsets.all(6),
+                      
                     ),
-                    style: FlutterFlowTheme.of(context).labelMedium.override(
-                          fontFamily: 'Readex Pro',
-                          letterSpacing: 0,
-                        ),
-                    keyboardType: TextInputType.emailAddress,
-                    validator:
-                        _model.textControllerValidator.asValidator(context),
-                  ),
-                ),
+                      /*DropdownMenu<String>(
+                        
+                       // initialSelection: list.first,
+                        onSelected: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValue = value!;
+                          });
+                        },
+                        dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+                          return DropdownMenuEntry<String>(value: value, label: value);
+                        }).toList(),
+                      ),*/
+                    ),
                 Align(
                   alignment: AlignmentDirectional(-1, 0),
                   child: Padding(
@@ -156,175 +206,185 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                     ),
                   ),
                 ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 296,
-                      height: 150,
-                      constraints: BoxConstraints(
-                        minWidth: 296,
-                        minHeight: 180,
-                        maxWidth: 296,
-                        maxHeight: 180,
-                      ),
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          alignment: AlignmentDirectional(0, 0),
-                          image: Image.network(
-                            'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
-                          ).image,
-                        ),
-                        borderRadius: BorderRadius.circular(23),
-                      ),
-                      child: Align(
-                        alignment: AlignmentDirectional(1, 1),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
-                          child: FlutterFlowIconButton(
-                            borderRadius: 5,
-                            borderWidth: 1,
-                            buttonSize: 40,
-                            fillColor: Color(0xFFFAF49D),
-                            icon: Icon(
-                              Icons.add_rounded,
-                              color: Color(0xFF355E3B),
-                              size: 24,
-                            ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 296,
-                      height: 150,
-                      constraints: BoxConstraints(
-                        minWidth: 296,
-                        minHeight: 180,
-                        maxWidth: 296,
-                        maxHeight: 180,
-                      ),
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          alignment: AlignmentDirectional(0, 0),
-                          image: Image.network(
-                            'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
-                          ).image,
-                        ),
-                        borderRadius: BorderRadius.circular(23),
-                      ),
-                      child: Align(
-                        alignment: AlignmentDirectional(1, 1),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
-                          child: FlutterFlowIconButton(
-                            borderRadius: 5,
-                            borderWidth: 1,
-                            buttonSize: 40,
-                            fillColor: Color(0xFFFAF49D),
-                            icon: Icon(
-                              Icons.add_rounded,
-                              color: Color(0xFF355E3B),
-                              size: 24,
-                            ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 296,
-                      height: 150,
-                      constraints: BoxConstraints(
-                        minWidth: 296,
-                        minHeight: 180,
-                        maxWidth: 296,
-                        maxHeight: 180,
-                      ),
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          alignment: AlignmentDirectional(0, 0),
-                          image: Image.network(
-                            'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
-                          ).image,
-                        ),
-                        borderRadius: BorderRadius.circular(23),
-                      ),
-                      child: Align(
-                        alignment: AlignmentDirectional(1, 1),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
-                          child: FlutterFlowIconButton(
-                            borderRadius: 5,
-                            borderWidth: 1,
-                            buttonSize: 40,
-                            fillColor: Color(0xFFFAF49D),
-                            icon: Icon(
-                              Icons.add_rounded,
-                              color: Color(0xFF355E3B),
-                              size: 24,
-                            ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 296,
-                      height: 150,
-                      constraints: BoxConstraints(
-                        minWidth: 296,
-                        minHeight: 180,
-                        maxWidth: 296,
-                        maxHeight: 180,
-                      ),
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          alignment: AlignmentDirectional(0, 0),
-                          image: Image.network(
-                            'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
-                          ).image,
-                        ),
-                        borderRadius: BorderRadius.circular(23),
-                      ),
-                      child: Align(
-                        alignment: AlignmentDirectional(1, 1),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
-                          child: FlutterFlowIconButton(
-                            borderRadius: 5,
-                            borderWidth: 1,
-                            buttonSize: 40,
-                            fillColor: Color(0xFFFAF49D),
-                            icon: Icon(
-                              Icons.add_rounded,
-                              color: Color(0xFF355E3B),
-                              size: 24,
-                            ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                  ].divide(SizedBox(height: 0)),
-                ),
+                // Generated code for this Container Widget...
+Container(
+  width: 340,
+  height: 644,
+  decoration: BoxDecoration(
+    color: FlutterFlowTheme.of(context).secondaryBackground,
+  ),
+  child: ListView(
+    padding: EdgeInsets.zero,
+    scrollDirection: Axis.vertical,
+    children: [
+      Container(
+        width: 296,
+        height: 150,
+        constraints: BoxConstraints(
+          minWidth: 296,
+          minHeight: 180,
+          maxWidth: 296,
+          maxHeight: 180,
+        ),
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            alignment: AlignmentDirectional(0, 0),
+            image: Image.network(
+              'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
+            ).image,
+          ),
+          borderRadius: BorderRadius.circular(23),
+        ),
+        child: Align(
+          alignment: AlignmentDirectional(1, 1),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
+            child: FlutterFlowIconButton(
+              borderRadius: 5,
+              borderWidth: 1,
+              buttonSize: 40,
+              fillColor: Color(0xFFFAF49D),
+              icon: Icon(
+                Icons.add_rounded,
+                color: Color(0xFF355E3B),
+                size: 24,
+              ),
+              onPressed: () {
+                print('IconButton pressed ...');
+              },
+            ),
+          ),
+        ),
+      ),
+      Container(
+        width: 296,
+        height: 150,
+        constraints: BoxConstraints(
+          minWidth: 296,
+          minHeight: 180,
+          maxWidth: 296,
+          maxHeight: 180,
+        ),
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            alignment: AlignmentDirectional(0, 0),
+            image: Image.network(
+              'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
+            ).image,
+          ),
+          borderRadius: BorderRadius.circular(23),
+        ),
+        child: Align(
+          alignment: AlignmentDirectional(1, 1),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
+            child: FlutterFlowIconButton(
+              borderRadius: 5,
+              borderWidth: 1,
+              buttonSize: 40,
+              fillColor: Color(0xFFFAF49D),
+              icon: Icon(
+                Icons.add_rounded,
+                color: Color(0xFF355E3B),
+                size: 24,
+              ),
+              onPressed: () {
+                print('IconButton pressed ...');
+              },
+            ),
+          ),
+        ),
+      ),
+      Container(
+        width: 296,
+        height: 150,
+        constraints: BoxConstraints(
+          minWidth: 296,
+          minHeight: 180,
+          maxWidth: 296,
+          maxHeight: 180,
+        ),
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            alignment: AlignmentDirectional(0, 0),
+            image: Image.network(
+              'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
+            ).image,
+          ),
+          borderRadius: BorderRadius.circular(23),
+        ),
+        child: Align(
+          alignment: AlignmentDirectional(1, 1),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
+            child: FlutterFlowIconButton(
+              borderRadius: 5,
+              borderWidth: 1,
+              buttonSize: 40,
+              fillColor: Color(0xFFFAF49D),
+              icon: Icon(
+                Icons.add_rounded,
+                color: Color(0xFF355E3B),
+                size: 24,
+              ),
+              onPressed: () {
+                print('IconButton pressed ...');
+              },
+            ),
+          ),
+        ),
+      ),
+      Container(
+        width: 296,
+        height: 150,
+        constraints: BoxConstraints(
+          minWidth: 296,
+          minHeight: 180,
+          maxWidth: 296,
+          maxHeight: 180,
+        ),
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            alignment: AlignmentDirectional(0, 0),
+            image: Image.network(
+              'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
+            ).image,
+          ),
+          borderRadius: BorderRadius.circular(23),
+        ),
+        child: Align(
+          alignment: AlignmentDirectional(1, 1),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
+            child: FlutterFlowIconButton(
+              borderRadius: 5,
+              borderWidth: 1,
+              buttonSize: 40,
+              fillColor: Color(0xFFFAF49D),
+              icon: Icon(
+                Icons.add_rounded,
+                color: Color(0xFF355E3B),
+                size: 24,
+              ),
+              onPressed: () {
+                print('IconButton pressed ...');
+              },
+            ),
+          ),
+        ),
+      ),
+    ].divide(SizedBox(height: 20)),
+  ),
+)
+
               ],
             ),
           ),
