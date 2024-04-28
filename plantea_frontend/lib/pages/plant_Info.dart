@@ -90,7 +90,7 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                             fontWeight: FontWeight.bold,
                           ),
                     ),
-                    Container( // containe images for specified pant
+                    Container( // containe images for specified plant which will be extracted from db
                       width: 413,
                       height: 100,
                       decoration: BoxDecoration(
