@@ -92,7 +92,7 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                     ),
                     Container( // containe images for specified plant which will be extracted from db
                       width: 413,
-                      height: 100,
+                      height: 130,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
@@ -108,8 +108,8 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.network(
                                   'https://picsum.photos/seed/155/600',
-                                  width: 94,
-                                  height: 125,
+                                  width: 193,
+                                  height: 130,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -117,8 +117,8 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.network(
                                   'https://picsum.photos/seed/942/600',
-                                  width: 150,
-                                  height: 113,
+                                  width: 193,
+                                  height: 130,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -126,8 +126,8 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.network(
                                   'https://picsum.photos/seed/555/600',
-                                  width: 300,
-                                  height: 200,
+                                  width: 193,
+                                  height: 130,
                                   fit: BoxFit.cover,
                                 ),
                               ),
