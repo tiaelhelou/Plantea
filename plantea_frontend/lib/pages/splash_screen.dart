@@ -70,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen>
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           color: Color(0xFF00321F),
-                          fontSize: 96,
+                          fontSize: 70,
                           letterSpacing: 0,
                           fontWeight: FontWeight.bold,
                           fontStyle: FontStyle.italic,
