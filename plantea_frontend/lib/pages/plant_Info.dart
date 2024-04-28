@@ -109,7 +109,7 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                 child: Image.network(
                                   'https://picsum.photos/seed/155/600',
                                   width: 193,
-                                  height: 130,
+                                  height: 1,
                                   fit: BoxFit.cover,
                                 ),
                               ),
