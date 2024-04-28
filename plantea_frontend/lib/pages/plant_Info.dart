@@ -148,4 +148,106 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                             fontWeight: FontWeight.bold,
                           ),
                     ),
-                   
+                    Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: Container(
+                        width: 340,
+                        height: 81,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF3F3F3),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4,
+                              color: Color(0xFF9FBCAA),
+                              offset: Offset(
+                                0,
+                                2,
+                              ),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(23),
+                        ),
+                        child: Text(
+                          'Input here from db',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Montserrat',
+                                    letterSpacing: 0,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      'Description',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Montserrat',
+                            fontSize: 16,
+                            letterSpacing: 0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: Container(
+                        width: 340,
+                        height: 81,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF3F3F3),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4,
+                              color: Color(0xFF9FBCAA),
+                              offset: Offset(
+                                0,
+                                2,
+                              ),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(23),
+                        ),
+                        child: Text(
+                          'Input here from db',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Montserrat',
+                                    letterSpacing: 0,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      'Description',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Montserrat',
+                            fontSize: 16,
+                            letterSpacing: 0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: Container(
+                        width: 340,
+                        height: 81,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF3F3F3),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4,
+                              color: Color(0xFF9FBCAA),
+                              offset: Offset(
+                                0,
+                                2,
+                              ),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(23),
+                        ),
+                        child: Text(
+                          'Input here from db',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Montserrat',
+                                    letterSpacing: 0,
+                                  ),
+                      
