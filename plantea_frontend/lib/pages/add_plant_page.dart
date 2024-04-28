@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'package:image_picker/image_picker.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
@@ -17,6 +17,8 @@ class AddPlantWidget extends StatefulWidget {
 }
 
 class _AddPlantWidgetState extends State<AddPlantWidget> {
+
+  
   late AddPlantModel _model;
   TextEditingController nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -31,6 +33,7 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
   }
+  
   String ?selectedValue ;
 final TextEditingController textEditingController = TextEditingController();
   @override
@@ -167,7 +170,8 @@ final TextEditingController textEditingController = TextEditingController();
                                 size: 24,
                               ),
                               onPressed: () {
-                                print('IconButton pressed ...');
+                                print('IconButton pressed ...'); ////// add prersonal image of the plant
+                                
                               },
                             ),
                           ),
@@ -290,7 +294,7 @@ final TextEditingController textEditingController = TextEditingController();
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 0),
                       child: FFButtonWidget(
-                                  onPressed: () {
+                                  onPressed: () { /// check if both field are filled and adds  default image if non selected
                                   if (_formKey.currentState != null && _formKey.currentState!.validate()&&  isDropdownValueSelected()==true) {
                                                               // Navigate the user to the Home page
                                        Navigator.push(
