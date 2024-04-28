@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:plantea/pages/add_image.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
 
 import '../models/add_plant_model.dart';
@@ -169,7 +171,11 @@ final TextEditingController textEditingController = TextEditingController();
                                 size: 24,
                               ),
                               onPressed: () {
-
+                                print('IconButton pressed ...'); ////// add prersonal image of the plant
+                               Navigator.push(
+                                                                 context,
+                                                                 MaterialPageRoute(builder: (context) => Productdetails()),
+                                                               );
                               },
                             ),
                           ),
