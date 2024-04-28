@@ -56,7 +56,7 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
             image: DecorationImage(
               fit: BoxFit.cover,
               image: Image.asset(
-                'assets/images/3e1d67b096f91e4bba80dcf2ada4ed4c.jpeg',
+                'assets/background.jpg', // image of selected plant or default
               ).image,
             ),
           ),
@@ -90,7 +90,7 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                             fontWeight: FontWeight.bold,
                           ),
                     ),
-                    Container(
+                    Container( // containe images for specified pant
                       width: 413,
                       height: 100,
                       decoration: BoxDecoration(
@@ -136,6 +136,9 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                         ),
                       ),
                     ),
+
+                    //plant informtion displayed. extracted from db ad replaced in container instead of  "Input here from db"
+                    //replace hardcoded for main text
                     Text(
                       'Description',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -145,156 +148,4 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                             fontWeight: FontWeight.bold,
                           ),
                     ),
-                    Align(
-                      alignment: AlignmentDirectional(0, 0),
-                      child: Container(
-                        width: 340,
-                        height: 81,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF3F3F3),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4,
-                              color: Color(0xFF9FBCAA),
-                              offset: Offset(
-                                0,
-                                2,
-                              ),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(23),
-                        ),
-                        child: Text(
-                          'Input here from db',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Montserrat',
-                                    letterSpacing: 0,
-                                  ),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      'Description',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Montserrat',
-                            fontSize: 16,
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(0, 0),
-                      child: Container(
-                        width: 340,
-                        height: 81,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF3F3F3),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4,
-                              color: Color(0xFF9FBCAA),
-                              offset: Offset(
-                                0,
-                                2,
-                              ),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(23),
-                        ),
-                        child: Text(
-                          'Input here from db',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Montserrat',
-                                    letterSpacing: 0,
-                                  ),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      'Description',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Montserrat',
-                            fontSize: 16,
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(0, 0),
-                      child: Container(
-                        width: 340,
-                        height: 81,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF3F3F3),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4,
-                              color: Color(0xFF9FBCAA),
-                              offset: Offset(
-                                0,
-                                2,
-                              ),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(23),
-                        ),
-                        child: Text(
-                          'Input here from db',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Montserrat',
-                                    letterSpacing: 0,
-                                  ),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      'Description',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Montserrat',
-                            fontSize: 16,
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(0, 0),
-                      child: Container(
-                        width: 340,
-                        height: 81,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF3F3F3),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 4,
-                              color: Color(0xFF9FBCAA),
-                              offset: Offset(
-                                0,
-                                2,
-                              ),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(23),
-                        ),
-                        child: Text(
-                          'Input here from db',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Montserrat',
-                                    letterSpacing: 0,
-                                  ),
-                        ),
-                      ),
-                    ),
-                  ].divide(SizedBox(height: 10)),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+                   
