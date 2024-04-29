@@ -1,12 +1,14 @@
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'settings_model.dart';
-export 'settings_model.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:plantea/pages/image_display.dart';
+import 'package:plantea/pages/plant_care_home_page.dart';
+
+import '../models/settings_model.dart';
+
+export '../models/settings_model.dart';
 
 class SettingsWidget extends StatefulWidget {
   const SettingsWidget({super.key});
