@@ -19,7 +19,8 @@ class SettingsWidget extends StatefulWidget {
 
 class _SettingsWidgetState extends State<SettingsWidget> {
   late SettingsModel _model;
-
+TextEditingController oldpasswordController = TextEditingController();
+  TextEditingController newpasswordController = TextEditingController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -164,129 +165,73 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(45, 0, 45, 16),
-                  child: TextFormField(
-                    controller: _model.emailAdressTextController,
-                    focusNode: _model.emailAdressFocusNode,
-                    autofocus: false,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      labelStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Montserrat',
-                                letterSpacing: 0,
+                              padding: EdgeInsetsDirectional.fromSTEB(45, 100, 45, 16),
+                              child: TextFormField(
+                                controller: oldpasswordController,
+                                    decoration: InputDecoration(
+                                      labelText: 'old password',
+                                      labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                            fontFamily: 'Montserrat',
+                                            letterSpacing: 0,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFA8ABAC),
+                                          width: 3,
+                                        ),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+
+
+                                    ),
+                                    style: FlutterFlowTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
+                                    textAlign: TextAlign.start,
+  
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your old';
+                                  }
+                                  return null;
+                                },
                               ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFFA8ABAC),
-                          width: 3,
-                        ),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0x00000000),
-                          width: 3,
-                        ),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0x00000000),
-                          width: 3,
-                        ),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0x00000000),
-                          width: 3,
-                        ),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).info,
-                      contentPadding: EdgeInsets.all(6),
-                    ),
-                    style: FlutterFlowTheme.of(context).labelMedium.override(
-                          fontFamily: 'Readex Pro',
-                          letterSpacing: 0,
-                        ),
-                    textAlign: TextAlign.start,
-                    validator: _model.emailAdressTextControllerValidator
-                        .asValidator(context),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(45, 50, 45, 5),
-                  child: TextFormField(
-                    controller: _model.textController2,
-                    focusNode: _model.textFieldFocusNode,
-                    autofocus: true,
-                    autofillHints: [AutofillHints.password],
-                    obscureText: !_model.passwordVisibility,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      labelStyle:
-                          FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Montserrat',
-                                letterSpacing: 0,
+                            ),
+                            Padding(
+                               padding: EdgeInsetsDirectional.fromSTEB(45, 50, 45, 100),
+                              child: TextFormField(
+                                controller: newpasswordController,
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                      labelText: 'Password',
+                                      labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                            fontFamily: 'Montserrat',
+                                            letterSpacing: 0,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFA8ABAC),
+                                          width: 3,
+                                        ),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+
+
+                                    ),
+                                    style: FlutterFlowTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
+                                    textAlign: TextAlign.start,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your password';
+                                  }
+                                  return null;
+                                },
                               ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xFFA8ABAC),
-                          width: 3,
-                        ),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).accent2,
-                          width: 3,
-                        ),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).tertiary,
-                          width: 3,
-                        ),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).tertiary,
-                          width: 3,
-                        ),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).info,
-                      suffixIcon: InkWell(
-                        onTap: () => setState(
-                          () => _model.passwordVisibility =
-                              !_model.passwordVisibility,
-                        ),
-                        focusNode: FocusNode(skipTraversal: true),
-                        child: Icon(
-                          _model.passwordVisibility
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 24,
-                        ),
-                      ),
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Montserrat',
-                          letterSpacing: 0,
-                        ),
-                    keyboardType: TextInputType.visiblePassword,
-                    validator:
-                        _model.textController2Validator.asValidator(context),
-                  ),
-                ),
+                            ),
                 Expanded(
                   child: Align(
                     alignment: AlignmentDirectional(1, 0),
