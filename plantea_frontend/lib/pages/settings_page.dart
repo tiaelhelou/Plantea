@@ -5,6 +5,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/image_display.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
+import 'package:plantea/pages/profile_page.dart';
 
 import '../models/settings_model.dart';
 
@@ -12,6 +13,7 @@ export '../models/settings_model.dart';
 
 class SettingsWidget extends StatefulWidget {
   const SettingsWidget({super.key});
+  
 
   @override
   State<SettingsWidget> createState() => _SettingsWidgetState();
@@ -19,6 +21,7 @@ class SettingsWidget extends StatefulWidget {
 
 class _SettingsWidgetState extends State<SettingsWidget> {
   late SettingsModel _model;
+  final _formKey = GlobalKey<FormState>();
 TextEditingController oldpasswordController = TextEditingController();
   TextEditingController newpasswordController = TextEditingController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -64,19 +67,23 @@ TextEditingController oldpasswordController = TextEditingController();
             color: Color(0xFFE5FFE7),
           ),
           alignment: AlignmentDirectional(0, 1),
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
+          child:
+          Form(
+            key: _formKey,
+            child: 
+           Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  flex: 1,
+                  flex: 5,
                   child: Align(
                     alignment: AlignmentDirectional(-1, 0),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(50, 0, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(40, 40, 0, 0),
                       child: Text(
                         'Notification',
                         style: FlutterFlowTheme.of(context)
@@ -92,12 +99,12 @@ TextEditingController oldpasswordController = TextEditingController();
                   ),
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 5,
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 40),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
                     child: Container(
                       width: 299,
-                      height: 56,
+                      height: 100,
                       decoration: BoxDecoration(
                         color: Color(0xFFBCB88A),
                         borderRadius: BorderRadius.circular(23),
@@ -106,7 +113,7 @@ TextEditingController oldpasswordController = TextEditingController();
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Expanded(
-                            flex: 1,
+                            flex: 5,
                             child: Align(
                               alignment: AlignmentDirectional(-1, 0),
                               child: Padding(
@@ -145,7 +152,7 @@ TextEditingController oldpasswordController = TextEditingController();
                   ),
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 5,
                   child: Align(
                     alignment: AlignmentDirectional(-1, 0),
                     child: Padding(
@@ -159,13 +166,14 @@ TextEditingController oldpasswordController = TextEditingController();
                               color: FlutterFlowTheme.of(context).primaryText,
                               letterSpacing: 0,
                               fontWeight: FontWeight.bold,
+                              
                             ),
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(45, 100, 45, 16),
+                              padding: EdgeInsetsDirectional.fromSTEB(40, 0, 40, 16),
                               child: TextFormField(
                                 controller: oldpasswordController,
                                     decoration: InputDecoration(
@@ -192,19 +200,19 @@ TextEditingController oldpasswordController = TextEditingController();
   
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter your old';
+                                    return 'Please enter your old password';
                                   }
                                   return null;
                                 },
                               ),
                             ),
                             Padding(
-                               padding: EdgeInsetsDirectional.fromSTEB(45, 50, 45, 100),
+                               padding: EdgeInsetsDirectional.fromSTEB(40, 10, 40, 10),
                               child: TextFormField(
                                 controller: newpasswordController,
                                 obscureText: true,
                                 decoration: InputDecoration(
-                                      labelText: 'Password',
+                                      labelText: 'New Password',
                                       labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
                                             fontFamily: 'Montserrat',
                                             letterSpacing: 0,
@@ -226,7 +234,7 @@ TextEditingController oldpasswordController = TextEditingController();
                                     textAlign: TextAlign.start,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please enter your password';
+                                    return 'Please enter your new password';
                                   }
                                   return null;
                                 },
@@ -240,10 +248,21 @@ TextEditingController oldpasswordController = TextEditingController();
                       child: FFButtonWidget(
                         onPressed: () {
                           print('Button pressed ...');
+                          if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+                                                              // Navigate the user to the Home page
+                                       Navigator.push(
+                                        context,
+                                         MaterialPageRoute(builder: (context) => const ProfileWidget()),
+                                        );
+                                  } else {
+                                     ScaffoldMessenger.of(context).showSnackBar(
+                                         const SnackBar(content: Text('Please Fill All Input')),
+                                         );
+                                  }
                         },
                         text: 'Save',
                         options: FFButtonOptions(
-                          height: 40,
+                          height: 56,
                           padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
                           iconPadding:
                               EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
@@ -267,7 +286,7 @@ TextEditingController oldpasswordController = TextEditingController();
                   ),
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 5,
                   child: Align(
                     alignment: AlignmentDirectional(-1, 0),
                     child: Padding(
@@ -278,19 +297,21 @@ TextEditingController oldpasswordController = TextEditingController();
                             FlutterFlowTheme.of(context).titleMedium.override(
                                   fontFamily: 'Montserrat',
                                   letterSpacing: 0,
+                                  color: FlutterFlowTheme.of(context).primaryText,
                                   fontWeight: FontWeight.bold,
                                 ),
+                                
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
                   child: FFButtonWidget(
                     onPressed: () {
                       print('Button pressed ...');
                     },
-                    text: 'Sign up',
+                    text: 'Edit Profile',
                     options: FFButtonOptions(
                       width: 296,
                       height: 54,
@@ -314,12 +335,12 @@ TextEditingController oldpasswordController = TextEditingController();
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 40),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 100),
                   child: FFButtonWidget(
                     onPressed: () {
                       print('Button pressed ...');
                     },
-                    text: 'Sign up',
+                    text: 'Log out',
                     options: FFButtonOptions(
                       width: 296,
                       height: 54,
@@ -345,6 +366,7 @@ TextEditingController oldpasswordController = TextEditingController();
               ],
             ),
           ),
+        )
         ),
       ),
     );
