@@ -240,49 +240,53 @@ Container(
   scrollDirection: Axis.vertical,
   itemCount: 4, // Define the number of items in your list
   itemBuilder: (context, index) {
-    return Container(
-      width: 296,
-      height: 150,
-      constraints: BoxConstraints(
-        minWidth: 296,
-        minHeight: 180,
-        maxWidth: 296,
-        maxHeight: 180,
-      ),
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          alignment: AlignmentDirectional(0, 0),
-          image: Image.network(
-            'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
-          ).image,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10), // Add vertical padding
+      child: Container(
+        width: 296,
+        height: 150,
+        constraints: BoxConstraints(
+          minWidth: 296,
+          minHeight: 180,
+          maxWidth: 296,
+          maxHeight: 180,
         ),
-        borderRadius: BorderRadius.circular(23),
-      ),
-      child: Align(
-        alignment: AlignmentDirectional(1, 1),
-        child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
-          child: FlutterFlowIconButton(
-            borderRadius: 5,
-            borderWidth: 1,
-            buttonSize: 40,
-            fillColor: Color(0xFFFAF49D),
-            icon: Icon(
-              Icons.add_rounded,
-              color: Color(0xFF355E3B),
-              size: 24,
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            alignment: AlignmentDirectional(0, 0),
+            image: Image.network(
+              'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
+            ).image,
+          ),
+          borderRadius: BorderRadius.circular(23),
+        ),
+        child: Align(
+          alignment: AlignmentDirectional(1, 1),
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
+            child: FlutterFlowIconButton(
+              borderRadius: 5,
+              borderWidth: 1,
+              buttonSize: 40,
+              fillColor: Color(0xFFFAF49D),
+              icon: Icon(
+                Icons.add_rounded,
+                color: Color(0xFF355E3B),
+                size: 24,
+              ),
+              onPressed: () {
+                print('IconButton pressed ...');
+              },
             ),
-            onPressed: () {
-              print('IconButton pressed ...');
-            },
           ),
         ),
       ),
     );
   },
 )
+
 
 )
 
