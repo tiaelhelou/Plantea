@@ -208,4 +208,84 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 .titleSmall
                                 .override(
                                   fontFamily: 'Montserrat',
-                            
+                                  color: Colors.white,
+                                  letterSpacing: 0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                            elevation: 3,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: 389,
+                height: 574,
+                constraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                  maxWidth: 2000,
+                  maxHeight: 2000,
+                ),
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(0),
+                    bottomRight: Radius.circular(0),
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                ),
+                child: GridView(
+                  padding: EdgeInsets.zero,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 1,
+                  ),
+                  scrollDirection: Axis.vertical,
+                  children: [
+                    Container(
+                      width: 125,
+                      height: 115,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: Image.network(
+                            'https://images.unsplash.com/photo-1518709779341-56cf4535e94b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxST1NFU3xlbnwwfHx8fDE3MTQzODg2NTJ8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                          ).image,
+                        ),
+                        borderRadius: BorderRadius.circular(23),
+                      ),
+                    ),
+                    Container(
+                      width: 125,
+                      height: 115,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: Image.network(
+                            'https://images.unsplash.com/photo-1585337913966-114ba3cf1f80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyMXx8Zmxvd2VyfGVufDB8fHx8MTcxNDM4MDY4OHww&ixlib=rb-4.0.3&q=80&w=1080',
+                          ).image,
+                        ),
+                        borderRadius: BorderRadius.circular(23),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
