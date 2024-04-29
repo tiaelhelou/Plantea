@@ -12,6 +12,14 @@ const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 
 /**
  * the list should be displayed in the listview and search bar
+ *  get from db 
+ *  store container in list 
+ *  let list diplay container from db then store selected container and display it only
+ * 
+ */
+
+/**
+ * when the user clicks the button the plant details (plant id, plant name)will be transported to the next page  to add a reminder  to this specific plant
  */
 class PlantcareWidget extends StatefulWidget {
   const PlantcareWidget({super.key});
