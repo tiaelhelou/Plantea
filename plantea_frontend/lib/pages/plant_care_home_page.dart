@@ -19,7 +19,7 @@ const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
  */
 
 /**
- * when the user clicks the button the plant details (plant id, plant name)will be transported to the next page  to add a reminder  to this specific plant
+ * when the user clicks the button the plant details (plant id, plantwill be transported to the next page  to add a reminder  to this specific plant
  */
 class PlantcareWidget extends StatefulWidget {
   const PlantcareWidget({super.key});
