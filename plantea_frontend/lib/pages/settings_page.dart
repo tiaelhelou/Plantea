@@ -373,4 +373,33 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       print('Button pressed ...');
                     },
                     text: 'Sign up',
-                   
+                    options: FFButtonOptions(
+                      width: 296,
+                      height: 54,
+                      padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                      iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      color: Color(0xFF355E3B),
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleMedium.override(
+                                fontFamily: 'Montserrat',
+                                fontSize: 16,
+                                letterSpacing: 0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                      elevation: 3,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
