@@ -213,7 +213,29 @@ Container(
   decoration: BoxDecoration(
     color: FlutterFlowTheme.of(context).secondaryBackground,
   ),
-  child: ListView(
+  child: 
+  /*ListView.builder(
+        itemCount: 10, // Number of containers you want to display
+        itemBuilder: (context, index) {
+          return Container(
+            height: 100, // Height of each container
+            margin: EdgeInsets.all(8), // Margin around each container
+            decoration: BoxDecoration(
+              color: Colors.blue, // Color of the container
+              borderRadius: BorderRadius.circular(10), // Border radius of the container
+            ),
+            child: Center(
+              child: Text(
+                'Container ${index + 1}', // Text inside the container
+                style: TextStyle(
+                  color: Colors.white, // Text color
+                  fontSize: 20, // Text size
+                ),
+              ),
+            ),
+          );
+        },
+      ),*/ListView(
     padding: EdgeInsets.zero,
     scrollDirection: Axis.vertical,
     children: [
