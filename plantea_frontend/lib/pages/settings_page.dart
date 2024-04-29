@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:plantea/pages/edit_profile_page.dart';
 import 'package:plantea/pages/image_display.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
 import 'package:plantea/pages/profile_page.dart';
@@ -239,53 +240,51 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         },
                       ),
                     ),
-                    Expanded(
-                      child: Align(
-                        alignment: AlignmentDirectional(1, 0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 40, 0),
-                          child: FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
-                              if (_formKey.currentState != null &&
-                                  _formKey.currentState!.validate()) {
-                                // Navigate the user to the Home page
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ProfileWidget()),
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text('Please Fill All Input')),
-                                );
-                              }
-                            },
-                            text: 'Save',
-                            options: FFButtonOptions(
-                              height: 56,
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                              iconPadding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                              color: Color(0xFF8A9A5B),
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Montserrat',
-                                    color: Colors.white,
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                              elevation: 3,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(5),
+                    Align(
+                      alignment: AlignmentDirectional(1, 0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 40, 0),
+                        child: FFButtonWidget(
+                          onPressed: () {
+                            print('Button pressed ...');
+                            if (_formKey.currentState != null &&
+                                _formKey.currentState!.validate()) {
+                              // Navigate the user to the Home page
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ProfileWidget()),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Please Fill All Input')),
+                              );
+                            }
+                          },
+                          text: 'Save',
+                          options: FFButtonOptions(
+                            height: 56,
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                            iconPadding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            color: Color(0xFF8A9A5B),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.white,
+                                  letterSpacing: 0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                            elevation: 3,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
                             ),
+                            borderRadius: BorderRadius.circular(5),
                           ),
                         ),
                       ),
@@ -316,6 +315,12 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       child: FFButtonWidget(
                         onPressed: () {
                           print('Button pressed ...');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const EditProfileWidget()),
+                          );
                         },
                         text: 'Edit Profile',
                         options: FFButtonOptions(
