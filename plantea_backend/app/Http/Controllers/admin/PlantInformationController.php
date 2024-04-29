@@ -24,19 +24,20 @@ class PlantInformationController extends Controller
         if ($plant_info == null) {
             return response()->json(['message' => 'Display Information Failed'], 400);
         }
-        else if ($id != null) {
+        
+        if ($id != null) {
 
             $plant_add_info = Userplant::where("plant_id", $plant_info->plant_id)->get();
 
-            return response()->json([
-                'message' => 'Plant Information retrieved successfully',
-                'data' => $plant_info,
-                'aditional_info' => $plant_add_info
-            ], 200);
+            if($id == $plant_add_info->user_id) {
+                return response()->json([
+                    'message' => 'Plant Information retrieved successfully',
+                    'data' => $plant_info,
+                    'aditional_info' => $plant_add_info
+                ], 200);
+            }
+            return response()->json(['message' => 'Display Information Failed'], 400);
         }
-        return response()->json([
-            'message' => 'Plant Information retrieved successfully',
-            'data' => $plant_info
-        ], 200);      
+        return response()->json(['message' => 'Display Information Failed'], 400);     
     }
 }
