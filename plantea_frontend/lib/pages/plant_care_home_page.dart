@@ -65,35 +65,28 @@ final TextEditingController textEditingController = TextEditingController();
                   alignment: AlignmentDirectional(1, 0),
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(25, 25, 25, 25),
-                    child: FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
-                        Navigator.push(
-                                                                 context,
-                                                                 MaterialPageRoute(builder: (context) => AddPlantWidget()),
-                                                               );
-                             
-                      },
-                      text: '',
-                      options: FFButtonOptions(
-                        height: 40,
-                        padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                        iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: Color(0xFF8A9A5B),
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.white,
-                                  letterSpacing: 0,
-                                ),
-                        elevation: 3,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
+                    child: SizedBox(
+  width: 80, // Add the desired width here
+  child: FlutterFlowIconButton(
+    borderRadius: 5,
+    borderWidth: 1,
+    buttonSize: 40,
+    fillColor: Color(0xFF8A9A5B),
+    icon: Icon(
+      Icons.add_rounded,
+      color: Colors.white,
+      size: 24,
+    ),
+    onPressed: () {
+      print('IconButton pressed ...');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AddPlantWidget()),
+      );
+    },
+  ),
+),
+
                   ),
                 ),
                 Padding( //////drop down  in flutter
