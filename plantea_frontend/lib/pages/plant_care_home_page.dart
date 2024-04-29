@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:plantea/pages/add_plant_page.dart';
 import '../pages/plant_care_home_page.dart';
 import '../pages/welcome_page.dart';
 
@@ -67,6 +68,11 @@ final TextEditingController textEditingController = TextEditingController();
                     child: FFButtonWidget(
                       onPressed: () {
                         print('Button pressed ...');
+                        Navigator.push(
+                                                                 context,
+                                                                 MaterialPageRoute(builder: (context) => AddPlantWidget()),
+                                                               );
+                             
                       },
                       text: '',
                       options: FFButtonOptions(
@@ -214,28 +220,7 @@ Container(
     color: FlutterFlowTheme.of(context).secondaryBackground,
   ),
   child: 
-  /*ListView.builder(
-        itemCount: 10, // Number of containers you want to display
-        itemBuilder: (context, index) {
-          return Container(
-            height: 100, // Height of each container
-            margin: EdgeInsets.all(8), // Margin around each container
-            decoration: BoxDecoration(
-              color: Colors.blue, // Color of the container
-              borderRadius: BorderRadius.circular(10), // Border radius of the container
-            ),
-            child: Center(
-              child: Text(
-                'Container ${index + 1}', // Text inside the container
-                style: TextStyle(
-                  color: Colors.white, // Text color
-                  fontSize: 20, // Text size
-                ),
-              ),
-            ),
-          );
-        },
-      ),*/ListView.builder(
+ ListView.builder(
   padding: EdgeInsets.zero,
   scrollDirection: Axis.vertical,
   itemCount: 4, // Define the number of items in your list
