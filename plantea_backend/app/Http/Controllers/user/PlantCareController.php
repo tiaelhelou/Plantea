@@ -11,8 +11,6 @@ class PlantCareController extends Controller
 {
     //add plant , list plant ,reminder per plant
 
-
-
     public function addPlant(Request $request)
     {
         // add plant
@@ -44,36 +42,6 @@ class PlantCareController extends Controller
                 'message' => 'error',
             ], 400);
         }
-    }
-    //delete plant
-    public function deletePlant(Request $request, $id = null)
-    {
-        //delete plant from db
-        $plant = Plant::find($id); //given id or search for it in front end?
-        
-
-        if (!$plant) { //plant isn't found in our database\
-            return response()->json([
-                'result' => false,
-                'message' => 'error ,plant does not exist',
-            ], 400);
-        } else {
-
-            if ($plant->delete()) {
-                return response()->json([
-                    'result' => true,
-                    'message' => 'plant is deleted',
-                ], 201);
-            } else {
-                return response()->json([
-                    'result' => false,
-                    'message' => 'error',
-                ], 400);
-
-            }
-
-        }
-
     }
 
     //list myplants
