@@ -9,6 +9,10 @@ import '../pages/welcome_page.dart';
 import '../models/plantcare_model.dart';
 export '../models/plantcare_model.dart';
 const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+
+/**
+ * the list should be displayed in the listview and search bar
+ */
 class PlantcareWidget extends StatefulWidget {
   const PlantcareWidget({super.key});
 
@@ -25,6 +29,23 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
     String ?selectedValue ;
 final TextEditingController textEditingController = TextEditingController();
+/// the list should be displayed in the listview and search bar
+// Future<void> _fetchData() async {
+//     final response = await http.get(Uri.parse('http://your_backend_server_url/data'));
+//     if (response.statusCode == 200) {
+//       setState(() {
+//         _data = json.decode(response.body);
+//       });
+//     } else {
+//       throw Exception('Failed to fetch data');
+//     }
+//   }
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _fetchData();
+//   }
   @override
   void initState() {
     super.initState();
@@ -44,6 +65,55 @@ final TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    List<Container> containerList = [];
+
+containerList.add(Container(
+  width: 296,
+  height: 150,
+  constraints: BoxConstraints(
+    minWidth: 296,
+    minHeight: 180,
+    maxWidth: 296,
+    maxHeight: 180,
+  ),
+  decoration: BoxDecoration(
+    color: FlutterFlowTheme.of(context).secondaryBackground,
+    image: DecorationImage(
+      fit: BoxFit.cover,
+      alignment: AlignmentDirectional(0, 0),
+      image: Image.network(
+        'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
+      ).image,
+    ),
+    borderRadius: BorderRadius.circular(23),
+  ),
+  child: Align(
+    alignment: AlignmentDirectional(1, 1),
+    child: Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
+      child: FlutterFlowIconButton(
+        borderRadius: 5,
+        borderWidth: 1,
+        buttonSize: 40,
+        fillColor: Color(0xFFFAF49D),
+        icon: Icon(
+          Icons.add_rounded,
+          color: Color(0xFF355E3B),
+          size: 24,
+        ),
+        onPressed: () {
+          print('IconButton pressed ...');
+        },
+      ),
+    ),
+  ),
+));
+
+// Add more containers to the list as needed
+
+// To use the list of containers, you can display them in a ListView or any other widget that accepts a list of widgets.
+//create a container for every item in user plant to be displayed
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -176,19 +246,6 @@ final TextEditingController textEditingController = TextEditingController();
                       ),
                       
                     ),
-                      /*DropdownMenu<String>(
-                        
-                       // initialSelection: list.first,
-                        onSelected: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValue = value!;
-                          });
-                        },
-                        dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
-                          return DropdownMenuEntry<String>(value: value, label: value);
-                        }).toList(),
-                      ),*/
                     ),
                 Align(
                   alignment: AlignmentDirectional(-1, 0),
@@ -213,12 +270,23 @@ Container(
     color: FlutterFlowTheme.of(context).secondaryBackground,
   ),
   child: 
+//list from database
+// ListView.builder(
+//         itemCount: _data.length,
+//         itemBuilder: (context, index) {
+//           final item = _data[index];
+//           return ListTile(
+//             title: Text(item['title']),
+//             subtitle: Text(item['description']),
+//           );
+//         },
+//       ),
  ListView.builder(
   padding: EdgeInsets.zero,
   scrollDirection: Axis.vertical,
   itemCount: 4, // Define the number of items in your list
   itemBuilder: (context, index) {
-    return Padding(
+    return Padding( // list of container
       padding: const EdgeInsets.symmetric(vertical: 10), // Add vertical padding
       child: Container(
         width: 296,
