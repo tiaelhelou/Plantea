@@ -34,7 +34,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     super.dispose();
   }
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -42,7 +42,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).accent2,
         body: Container(
           width: 1583,
           height: 1373,
@@ -50,7 +49,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             minWidth: 20,
             minHeight: 20,
             maxWidth: 2000,
-            maxHeight: 2000,
           ),
           decoration: BoxDecoration(
             color: Color(0xFFE5FFE7),
@@ -77,9 +75,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       child: FFButtonWidget(
                         onPressed: () {
                           print('CHECKIN pressed ...');
-                          // send req to db and change buttong text to '' and add icon check
                         },
-                        text: 'CHECKIN', // send req to db and change buttong text to '' and add icon check
+                        text: 'CHECKIN',
                         options: FFButtonOptions(
                           width: 78,
                           height: 34,
@@ -104,7 +101,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         ),
                       ),
                     ),
-                    // Generated code for this IconButton Widget...
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 10),
                       child: FlutterFlowIconButton(
@@ -117,15 +113,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         ),
                         onPressed: () {
                           print('IconButton pressed ...');
-                          Navigator.push(
-                                                                 context,
-                                                                 MaterialPageRoute(builder: (context) => Productdetails()), //go to settings
-                                                               );
-                              
                         },
                       ),
-                    )
-
+                    ),
                   ],
                 ),
               ),
@@ -158,12 +148,14 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             borderRadius: BorderRadius.circular(23),
                           ),
                           child: Text(
-              '',
-              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: 'Readex Pro',
-                    letterSpacing: 0,
-                  ),
-            ),
+                            '',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0,
+                                ),
+                          ),
                         ),
                       ),
                     ),
@@ -190,10 +182,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         child: FFButtonWidget(
                           onPressed: () {
                             print('Button pressed ...');
-                            Navigator.push(
-                                                                 context,
-                                                                 MaterialPageRoute(builder: (context) => Productdetails()), //go to redeem
-                                                               );
                           },
                           text: 'REDEEM',
                           options: FFButtonOptions(
@@ -225,61 +213,64 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ],
                 ),
               ),
-              Container(
-                width: 389,
-                height: 574,
-                constraints: BoxConstraints(
-                  minWidth: 20,
-                  minHeight: 20,
-                  maxWidth: 2000,
-                  maxHeight: 2000,
-                ),
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(0),
-                    bottomRight: Radius.circular(0),
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
+              Expanded(
+                flex: 10,
+                child: Container(
+                  width: 389,
+                  height: 574,
+                  constraints: BoxConstraints(
+                    minWidth: 20,
+                    minHeight: 20,
+                    maxWidth: 2000,
+                    maxHeight: 2000,
                   ),
-                ),
-                child: GridView(
-                  padding: EdgeInsets.zero,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 1,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(0),
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16),
+                    ),
                   ),
-                  scrollDirection: Axis.vertical,
-                  children: [
-                    Container(
-                      width: 125,
-                      height: 115,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: Image.network(
-                            'https://images.unsplash.com/photo-1518709779341-56cf4535e94b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxST1NFU3xlbnwwfHx8fDE3MTQzODg2NTJ8MA&ixlib=rb-4.0.3&q=80&w=1080',
-                          ).image,
-                        ),
-                        borderRadius: BorderRadius.circular(23),
-                      ),
+                  child: GridView(
+                    padding: EdgeInsets.zero,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 1,
                     ),
-                    Container(
-                      width: 125,
-                      height: 115,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: Image.network(
-                            'https://images.unsplash.com/photo-1585337913966-114ba3cf1f80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyMXx8Zmxvd2VyfGVufDB8fHx8MTcxNDM4MDY4OHww&ixlib=rb-4.0.3&q=80&w=1080',
-                          ).image,
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      Container(
+                        width: 125,
+                        height: 115,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: Image.network(
+                              'https://images.unsplash.com/photo-1518709779341-56cf4535e94b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxST1NFU3xlbnwwfHx8fDE3MTQzODg2NTJ8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                            ).image,
+                          ),
+                          borderRadius: BorderRadius.circular(23),
                         ),
-                        borderRadius: BorderRadius.circular(23),
                       ),
-                    ),
-                  ],
+                      Container(
+                        width: 125,
+                        height: 115,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: Image.network(
+                              'https://images.unsplash.com/photo-1585337913966-114ba3cf1f80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyMXx8Zmxvd2VyfGVufDB8fHx8MTcxNDM4MDY4OHww&ixlib=rb-4.0.3&q=80&w=1080',
+                            ).image,
+                          ),
+                          borderRadius: BorderRadius.circular(23),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
