@@ -26,7 +26,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
   TextEditingController emailController = TextEditingController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-    @override
+  @override
   void initState() {
     super.initState();
     _model = createModel(context, () => EditProfileModel());
@@ -41,7 +41,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
-       return GestureDetector(
+    return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
@@ -160,6 +160,90 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       width: 1,
                     ),
                     borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+              Form(
+                key: _formKey,
+                child: Expanded(
+                  flex: 10,
+                  child: Container(
+                    width: 389,
+                    height: 574,
+                    constraints: BoxConstraints(
+                      minWidth: 20,
+                      minHeight: 20,
+                      maxWidth: 2000,
+                      maxHeight: 2000,
+                    ),
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(0),
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        /// add name email and button
+                        ///
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(0, 50, 245, 10),
+                          child: Text(
+                            'NAME',
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Montserrat',
+                                  letterSpacing: 0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                        ),
+
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(45, 0, 45, 16),
+                          child: TextFormField(
+                            controller: nameController,
+                            decoration: InputDecoration(
+                              labelText: '',
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Montserrat',
+                                    letterSpacing: 0,
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFA8ABAC),
+                                  width: 3,
+                                ),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0,
+                                ),
+                            textAlign: TextAlign.start,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your name';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
