@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 
@@ -13,6 +15,11 @@ class DonateWidget extends StatefulWidget {
 
 class _DonateWidgetState extends State<DonateWidget> {
   late DonateModel _model;
+  String? _selectedCurrency;
+  final _formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  String? amount = '0';
+  String? curr = '';
 
   @override
   void initState() {
@@ -46,5 +53,40 @@ class _DonateWidgetState extends State<DonateWidget> {
   }
 
   @override
-  Widget build(BuildContext context) {}
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        body: Container(
+          width: 1445,
+          height: 1373,
+          constraints: BoxConstraints(
+            minWidth: 20,
+            minHeight: 20,
+            maxWidth: 2000,
+            maxHeight: 2000,
+          ),
+          decoration: BoxDecoration(
+            color: FlutterFlowTheme.of(context).secondaryBackground,
+            image: DecorationImage(
+              fit: BoxFit.contain,
+              alignment: AlignmentDirectional(0, -1),
+              image: Image.network(
+                'https://images.unsplash.com/photo-1579621970795-87facc2f976d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw2fHxtb25leXxlbnwwfHx8fDE3MTQzOTU3OTl8MA&ixlib=rb-4.0.3&q=80&w=1080',
+              ).image,
+            ),
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(0),
+              bottomRight: Radius.circular(0),
+              topLeft: Radius.circular(0),
+              topRight: Radius.circular(0),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
