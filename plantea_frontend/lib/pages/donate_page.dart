@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:plantea/pages/image_display.dart';
+import 'package:plantea/pages/plant_care_home_page.dart';
+import 'package:plantea/pages/profile_page.dart';
 
 import '../models/donate_model.dart';
 export '../models/donate_model.dart';
@@ -536,138 +540,193 @@ class _DonateWidgetState extends State<DonateWidget> {
                               maxWidth: 296,
                             ),
                             decoration: BoxDecoration(),
-                            child:
-                                Row(mainAxisSize: MainAxisSize.max, children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                                child: Container(
-                                  width: 200,
-                                  child: TextFormField(
-                                    controller: _model
-                                        .textController6, //// amount is saved in db
-                                    //focusNode: _model.textFieldFocusNode6,
-                                    //autofocus: true,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText: 'Amount',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 0, 0, 0),
+                                  child: Container(
+                                    width: 200,
+                                    child: TextFormField(
+                                      controller: _model
+                                          .textController6, //// amount is saved in db
+                                      //focusNode: _model.textFieldFocusNode6,
+                                      //autofocus: true,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText: 'Amount',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 16,
+                                              letterSpacing: 0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0,
+                                            ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        filled: true,
+                                        contentPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                10, 0, 0, 0),
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
                                           .override(
-                                            fontFamily: 'Readex Pro',
+                                            fontFamily: 'Montserrat',
                                             fontSize: 16,
                                             letterSpacing: 0,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w500,
                                           ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            letterSpacing: 0,
-                                          ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      filled: true,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              10, 0, 0, 0),
+                                      textAlign: TextAlign.start,
+                                      onChanged: (value) {
+                                        amount =
+                                            value; // Update the variable with the new value
+                                      },
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Amount is required';
+                                        }
+                                        return null;
+                                      },
                                     ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 16,
-                                          letterSpacing: 0,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                    textAlign: TextAlign.start,
-                                    onChanged: (value) {
-                                      amount =
-                                          value; // Update the variable with the new value
-                                    },
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Amount is required';
-                                      }
-                                      return null;
-                                    },
                                   ),
                                 ),
-                              ),
-                              Container(
-                                width: 70,
-                                height: 50,
-                                padding: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors
-                                          .grey.shade700), // Dark grey border
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                child: DropdownButton<String>(
-                                  value: _selectedCurrency,
-                                  icon: Icon(Icons.arrow_drop_down),
-                                  iconSize: 16,
-                                  elevation: 16,
-                                  style: TextStyle(color: Colors.black),
-                                  underline:
-                                      SizedBox(), // Hide default underline
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      _selectedCurrency = newValue;
-                                    });
-                                  },
+                                Container(
+                                  width: 70,
+                                  height: 50,
+                                  padding: EdgeInsets.all(8.0),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors
+                                            .grey.shade700), // Dark grey border
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  child: DropdownButton<String>(
+                                    value: _selectedCurrency,
+                                    icon: Icon(Icons.arrow_drop_down),
+                                    iconSize: 16,
+                                    elevation: 16,
+                                    style: TextStyle(color: Colors.black),
+                                    underline:
+                                        SizedBox(), // Hide default underline
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        _selectedCurrency = newValue;
+                                      });
+                                    },
 
-                                  items: <String>[
-                                    'USD',
-                                    'EUR',
-                                    'GBP',
-                                    'JPY',
-                                    'AUD'
-                                  ] // Currency signs
-                                      .map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(
-                                        value,
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                    );
-                                  }).toList(),
+                                    items: <String>[
+                                      'USD',
+                                      'EUR',
+                                      'GBP',
+                                      'JPY',
+                                      'AUD'
+                                    ] // Currency signs
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(
+                                          value,
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
                                 ),
-                              ),
-                            ]),
+                              ],
+                            ),
                           ),
                         ],
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(1, 0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 30, 20, 0),
+                        child: FFButtonWidget(
+                          onPressed: () {
+                            print(
+                                'Button pressed ...'); // save in db the amount and date
+                            if (_formKey.currentState != null &&
+                                _formKey.currentState!.validate()) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ProfileWidget()),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Please Fill All Input')),
+                              );
+                            }
+                          },
+                          text: 'Donate',
+                          options: FFButtonOptions(
+                            width: 88,
+                            height: 40,
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(10, 0, 10, 10),
+                            iconPadding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            color: Color(0xFF8A9A5B),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 15,
+                                  letterSpacing: 0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                            elevation: 3,
+                            borderSide: BorderSide(
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
                       ),
                     ),
                   ],
