@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plantea/pages/add_plant_page.dart';
+import 'package:plantea/pages/edit_profile_page.dart';
+import 'package:plantea/pages/login_page.dart';
 
 import 'package:plantea/pages/plant_Info.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
@@ -8,6 +10,7 @@ import 'package:plantea/pages/profile_page.dart';
 import 'package:plantea/pages/redeem_gifts_page.dart';
 import 'package:plantea/pages/reminders_page.dart';
 import 'package:plantea/pages/settings_page.dart';
+import 'package:plantea/pages/signup_page.dart';
 import 'package:plantea/pages/splash_screen.dart';
 
 void main() {
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RedeemWidget(),
+      home: SignupWidget(),
     );
   }
 }

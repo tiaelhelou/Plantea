@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/login_page.dart';
 import 'package:plantea/main.dart';
+import 'package:plantea/pages/signup_page.dart';
 
 import '../models/welcome_model.dart';
 export '../models/welcome_model.dart';
@@ -87,8 +88,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       Align(
                         alignment: AlignmentDirectional(0, 0),
                         child: Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(0, 50, 0, 90),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 90),
                           child: Text(
                             'Welcom to  Plantea',
                             textAlign: TextAlign.center,
@@ -105,13 +105,15 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 80),
                         child: FFButtonWidget(
-                          onPressed:  () async {
-                            print('Button pressed ...'); 
+                          onPressed: () async {
+                            print('Button pressed ...');
+
                             /// navigate to other page without cond
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const LogWidget()),
-                              ); 
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LogWidget()),
+                            );
                           },
                           text: 'Log In',
                           options: FFButtonOptions(
@@ -142,10 +144,11 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       FFButtonWidget(
                         onPressed: () {
                           print('Button pressed ...');
-                           Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const FirstPage(title: "FirstPage")),
-                              ); 
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignupWidget()),
+                          );
                         },
                         text: 'Sign up',
                         options: FFButtonOptions(
