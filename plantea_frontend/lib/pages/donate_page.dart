@@ -530,6 +530,100 @@ class _DonateWidgetState extends State<DonateWidget> {
                               ),
                             ),
                           ),
+                          Container(
+                            constraints: BoxConstraints(
+                              minWidth: 296,
+                              maxWidth: 296,
+                            ),
+                            decoration: BoxDecoration(),
+                            child:
+                                Row(mainAxisSize: MainAxisSize.max, children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                                child: Container(
+                                  width: 200,
+                                  child: TextFormField(
+                                    controller: _model
+                                        .textController6, //// amount is saved in db
+                                    //focusNode: _model.textFieldFocusNode6,
+                                    //autofocus: true,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'Amount',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 16,
+                                            letterSpacing: 0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0,
+                                          ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      filled: true,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              10, 0, 0, 0),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 16,
+                                          letterSpacing: 0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                    textAlign: TextAlign.start,
+                                    onChanged: (value) {
+                                      amount =
+                                          value; // Update the variable with the new value
+                                    },
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Amount is required';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ]),
+                          ),
                         ],
                       ),
                     ),
