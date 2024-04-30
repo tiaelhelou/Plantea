@@ -7,5 +7,17 @@ use Illuminate\Http\Request;
 
 class PlantLibraryController extends Controller
 {
-    //
+     /*
+     * Display all for User.
+     */
+    public function displayPlants()
+    {
+        $plants = Plant::orderBy("plant_category", "asc")->get();
+
+        if ($plants != null) {
+            return response()->json([
+                'message' => 'Image retrieved successfully',
+                'data' => $plants
+            ], 200);
+       
 }
