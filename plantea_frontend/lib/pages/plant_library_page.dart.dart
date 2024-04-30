@@ -11,7 +11,8 @@ import '../models/plantLibrary_model.dart';
 export '../models/plantLibrary_model.dart';
 
 const List<String> list = <String>[
-  'One',
+  'DisplayAll'
+      'One',
   'Two',
   'Three',
   'Four',
@@ -278,7 +279,9 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                       ),
                       itemCount: selectedValue != null
                           ? 1
-                          : list.length, // Conditionally set the itemCount
+                          : selectedValue == "DisplayAll"
+                              ? list.length
+                              : list.length, // Conditionally set the itemCount
                       itemBuilder: (context, index) {
                         // Retrieve the item from yourList
 
