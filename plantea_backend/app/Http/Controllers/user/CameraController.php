@@ -44,4 +44,21 @@ class CameraController extends Controller
       return response()->json(['message' => 'User not found'], 400);
     }
   }
+   /*
+  * Fetch image for User.
+  */
+  public function fetch_image($id = null){
+
+    if ($id != null) {
+
+      $images = CameraImage::where('user_id', $id)->get();
+
+      if ($images != null) {
+        return response()->json([
+          'message' => 'Image retrieved successfully',
+          'data' => $images
+      ], 200);
+      } 
+      
+
 }
