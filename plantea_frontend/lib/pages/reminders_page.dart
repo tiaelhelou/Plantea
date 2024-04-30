@@ -21,8 +21,11 @@ class RemindersWidget extends StatefulWidget {
 
 class _RemindersWidgetState extends State<RemindersWidget> {
   late RemindersModel _model;
-
+  String? _selectedtype1;
+  String? _selectedtype2;
+  String? _selectedtype3;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  String? savetype;
 
   @override
   void initState() {
@@ -137,104 +140,118 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Padding(
-                                // addd drop down of 3 types of reminder
-                                /**
-                                 * Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton2<String>(
-                      isExpanded: true,
-                      hint: Text(
-                        'Select Item',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Theme.of(context).hintColor,
-                        ),
-                      ),
-                      items: list
-                          .map((item) => DropdownMenuItem(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: const TextStyle(
-                                    fontSize: 14,
+                              Container(
+                                width: 200,
+                                height: 32,
+                                padding: EdgeInsets.all(8.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      40, 0, 0, 0),
+                                  child: DropdownButton<String>(
+                                    value: _selectedtype1,
+                                    icon: Icon(Icons.arrow_drop_down),
+                                    iconSize: 30,
+                                    elevation: 0,
+                                    style: TextStyle(color: Colors.black),
+                                    underline:
+                                        SizedBox(), // Hide default underline
+                                    onChanged: (String? newValue1) {
+                                      setState(() {
+                                        savetype = newValue1;
+                                        _selectedtype1 = newValue1;
+                                      });
+                                    },
+
+                                    items: <String>[
+                                      'sunlight',
+                                      'water',
+                                      'repot'
+                                    ] // Currency signs
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(
+                                          value,
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                      );
+                                    }).toList(),
                                   ),
                                 ),
-                              ))
-                          .toList(),
-                      value: selectedValue, //// selected container
-                      onChanged: (value) {
-                        setState(() {
-                          selectedValue = value;
-                          textEditingController.text = value ?? '';
-                        });
-                      },
-                      buttonStyleData: const ButtonStyleData(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        height: 54,
-                        width: 296,
-                      ),
-                      dropdownStyleData: const DropdownStyleData(
-                        maxHeight: 200,
-                      ),
-                      menuItemStyleData: const MenuItemStyleData(
-                        height: 40,
-                      ),
-                      dropdownSearchData: DropdownSearchData(
-                        searchInnerWidgetHeight: 50,
-                        searchInnerWidget: Container(
-                          height: 50,
-                          padding: const EdgeInsets.only(
-                            top: 8,
-                            bottom: 4,
-                            right: 8,
-                            left: 8,
-                          ),
-                          child: TextFormField(
-                            expands: true,
-                            maxLines: null,
-                            controller: textEditingController,
-                            decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 8,
                               ),
-                              hintText: 'Search for an item...',
-                              hintStyle: const TextStyle(fontSize: 12),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(2, 5, 10, 5),
+                                child: FlutterFlowIconButton(
+                                  borderRadius: 5,
+                                  borderWidth: 1,
+                                  buttonSize: 50,
+                                  fillColor: Color(0xFF8A9A5B),
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.plus,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    size: 12,
+                                  ),
+                                  onPressed: () {
+                                    print('IconButton pressed ...');
+                                    // save selected dropdown in db
+                                  },
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                        searchMatchFn: (item, searchValue) {
-                          return item.value.toString().contains(searchValue);
-                        },
-                      ),
-                      // This to clear the search value when you close the menu
-                      onMenuStateChange: (isOpen) {
-                        if (!isOpen) {
-                          textEditingController.clear();
-                        }
-                      },
-                    ),
-                  ),
-                ),
-                                 */
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 5, 10, 5),
-                                child: Text(
-                                  ' ',
-                                  textAlign: TextAlign.start,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Montserrat',
-                                        letterSpacing: 0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                        Container(
+                          width: 296,
+                          height: 34,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFBDC9A0),
+                            borderRadius: BorderRadius.circular(23),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: 200,
+                                height: 32,
+                                padding: EdgeInsets.all(8.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      40, 0, 0, 0),
+                                  child: DropdownButton<String>(
+                                    value: _selectedtype2,
+                                    icon: Icon(Icons.arrow_drop_down),
+                                    iconSize: 30,
+                                    elevation: 0,
+                                    style: TextStyle(color: Colors.black),
+                                    underline:
+                                        SizedBox(), // Hide default underline
+                                    onChanged: (String? newValue2) {
+                                      setState(() {
+                                        savetype = newValue2;
+                                        _selectedtype2 = newValue2;
+                                      });
+                                    },
+
+                                    items: <String>[
+                                      'sunlight',
+                                      'water',
+                                      'repot'
+                                    ] // Currency signs
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(
+                                          value,
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -270,67 +287,44 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 5, 10, 5),
-                                child: Text(
-                                  ' ',
-                                  textAlign: TextAlign.start,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Montserrat',
-                                        letterSpacing: 0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(2, 5, 10, 5),
-                                child: FlutterFlowIconButton(
-                                  borderRadius: 5,
-                                  borderWidth: 1,
-                                  buttonSize: 50,
-                                  fillColor: Color(0xFF8A9A5B),
-                                  icon: FaIcon(
-                                    FontAwesomeIcons.plus,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 12,
+                              Container(
+                                width: 200,
+                                height: 32,
+                                padding: EdgeInsets.all(8.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      40, 0, 0, 0),
+                                  child: DropdownButton<String>(
+                                    value: _selectedtype3,
+                                    icon: Icon(Icons.arrow_drop_down),
+                                    iconSize: 30,
+                                    elevation: 0,
+                                    style: TextStyle(color: Colors.black),
+                                    underline:
+                                        SizedBox(), // Hide default underline
+                                    onChanged: (String? newValue3) {
+                                      setState(() {
+                                        savetype = newValue3;
+                                        _selectedtype3 = newValue3;
+                                      });
+                                    },
+
+                                    items: <String>[
+                                      'sunlight',
+                                      'water',
+                                      'repot'
+                                    ] // Currency signs
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(
+                                          value,
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                      );
+                                    }).toList(),
                                   ),
-                                  onPressed: () {
-                                    print('IconButton pressed ...');
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          width: 296,
-                          height: 34,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFBDC9A0),
-                            borderRadius: BorderRadius.circular(23),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 5, 10, 5),
-                                child: Text(
-                                  ' ',
-                                  textAlign: TextAlign.start,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Montserrat',
-                                        letterSpacing: 0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
                                 ),
                               ),
                               Padding(
