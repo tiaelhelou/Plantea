@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,6 +21,10 @@ class EditProfileWidget extends StatefulWidget {
 
 class _EditProfileWidgetState extends State<EditProfileWidget> {
   late EditProfileModel _model;
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
     @override
   void initState() {
@@ -35,6 +41,32 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
-
+       return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        body: Container(
+          width: 1583,
+          height: 1373,
+          constraints: BoxConstraints(
+            minWidth: 20,
+            minHeight: 20,
+            maxWidth: 2000,
+          ),
+          decoration: BoxDecoration(
+            color: Color(0xFFE5FFE7),
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              alignment: AlignmentDirectional(0, -1),
+              image: Image.network(
+                '',
+              ).image,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
