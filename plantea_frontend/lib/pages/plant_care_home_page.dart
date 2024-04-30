@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/add_plant_page.dart';
+import 'package:plantea/pages/reminders_page.dart';
 import '../pages/plant_care_home_page.dart';
 import '../pages/welcome_page.dart';
 
@@ -375,6 +376,12 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                   ),
                                   onPressed: () {
                                     print('IconButton pressed ...');
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              RemindersWidget()),
+                                    );
                                   },
                                 ),
                               ),
