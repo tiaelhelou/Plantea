@@ -1,0 +1,31 @@
+///////// gridview that displays container . string is taken from list from db and added in the container:
+GridView.builder(
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 2, // Number of columns in the grid
+  ),
+  itemCount: yourList.length, // Total number of items in the grid
+  itemBuilder: (context, index) {
+    // Retrieve the item from yourList
+    var item = yourList[index];
+    
+    // Create a Container with some styling
+    return Container(
+      margin: EdgeInsets.all(8), // Add some margin around the container
+      decoration: BoxDecoration(
+        color: Colors.blue, // Example color, you can change it
+        borderRadius: BorderRadius.circular(10), // Add rounded corners
+      ),
+      child: Center(
+        child: Text(
+          item.toString(), // Display the item data inside the container
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  },
+)
+
+////////////////////// list view to fetch data from db and display it
