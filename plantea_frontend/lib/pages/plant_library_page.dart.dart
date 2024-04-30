@@ -169,8 +169,12 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Colors.grey.shade700), // Dark grey border
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton2<String>(
                       isExpanded: true,
