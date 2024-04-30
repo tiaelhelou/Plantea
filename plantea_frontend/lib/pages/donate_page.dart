@@ -100,6 +100,35 @@ class _DonateWidgetState extends State<DonateWidget> {
                   topRight: Radius.circular(16),
                 ),
               ),
+              alignment: AlignmentDirectional(0, -1),
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(-1, 0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(50, 30, 0, 0),
+                        child: Text(
+                          'Contact Information',
+                          style: FlutterFlowTheme.of(context)
+                              .titleMedium
+                              .override(
+                                fontFamily: 'Montserrat',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                fontSize: 16,
+                                letterSpacing: 0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
         ),
