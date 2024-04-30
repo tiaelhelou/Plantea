@@ -62,35 +62,39 @@ class _RedeemWidgetState extends State<RedeemWidget> {
             children: [
               Align(
                 alignment: AlignmentDirectional(-1, -1),
-                child: FFButtonWidget(
-                  onPressed: () {
-                    print('CHECKIN pressed ...');
-                  },
-                  text: '',
-                  icon: FaIcon(
-                    FontAwesomeIcons.arrowLeft,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    size: 30,
-                  ),
-                  options: FFButtonOptions(
-                    width: 78,
-                    height: 34,
-                    padding: EdgeInsetsDirectional.fromSTEB(10, 0, 5, 0),
-                    iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                    color: Color(0xFF8A9A5B),
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Montserrat',
-                          color: Colors.white,
-                          fontSize: 13,
-                          letterSpacing: 0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                    elevation: 3,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(30, 20, 0, 0),
+                  child: FFButtonWidget(
+                    onPressed: () {
+                      print('back pressed ...');
+                    },
+                    text: '',
+                    icon: FaIcon(
+                      FontAwesomeIcons.arrowLeft,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      size: 30,
                     ),
-                    borderRadius: BorderRadius.circular(5),
+                    options: FFButtonOptions(
+                      width: 78,
+                      height: 34,
+                      padding: EdgeInsetsDirectional.fromSTEB(10, 0, 5, 0),
+                      iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      color: Color(0xFF8A9A5B),
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Montserrat',
+                                color: Colors.white,
+                                fontSize: 13,
+                                letterSpacing: 0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                      elevation: 3,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
                   ),
                 ),
               ),
@@ -153,7 +157,7 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                   ),
                 ].divide(SizedBox(width: 10)),
               ),
-              Padding(
+              Padding(   //// list of redeeeem
                 padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                 child: Container(
                   width: 427,
@@ -161,7 +165,7 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
-                  child: ListView(
+                  child: /*ListView(
                     padding: EdgeInsets.zero,
                     scrollDirection: Axis.vertical,
                     children: [
@@ -223,7 +227,7 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                         ].divide(SizedBox(width: 0)),
                       ),
                     ].divide(SizedBox(height: 20)),
-                  ),
+                  ),*/
                 ),
               ),
             ],
