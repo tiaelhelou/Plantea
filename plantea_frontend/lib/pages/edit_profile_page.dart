@@ -205,7 +205,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 ),
                           ),
                         ),
-
                         Padding(
                           padding:
                               EdgeInsetsDirectional.fromSTEB(45, 0, 45, 16),
@@ -242,6 +241,58 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             },
                           ),
                         ),
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(0, 50, 245, 10),
+                          child: Text(
+                            'EMAIL',
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Montserrat',
+                                  letterSpacing: 0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(45, 0, 45, 16),
+                          child: TextFormField(
+                            controller: emailController,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              labelText: '',
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Montserrat',
+                                    letterSpacing: 0,
+                                  ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0xFFA8ABAC),
+                                  width: 3,
+                                ),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0,
+                                ),
+                            textAlign: TextAlign.start,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your Email';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),  
                       ],
                     ),
                   ),
