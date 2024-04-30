@@ -11,8 +11,8 @@ import '../models/plantLibrary_model.dart';
 export '../models/plantLibrary_model.dart';
 
 const List<String> list = <String>[
-  'DisplayAll'
-      'One',
+  'DisplayAll',
+  'One',
   'Two',
   'Three',
   'Four',
@@ -21,7 +21,7 @@ const List<String> list = <String>[
   'Three3',
   'Four4'
 ];
-
+List<String> newList = list.sublist(1);
 /**
  * the list should be displayed in the listview and search bar
  *  get from db 
@@ -277,19 +277,21 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2, // Number of columns in the grid
                       ),
-                      itemCount: selectedValue != null
+                      itemCount: selectedValue != null &&
+                              selectedValue != 'DisplayAll'
                           ? 1
-                          : selectedValue == "DisplayAll"
-                              ? list.length
-                              : list.length, // Conditionally set the itemCount
+                          : newList.length, // Conditionally set the itemCount
                       itemBuilder: (context, index) {
                         // Retrieve the item from yourList
 
                         /////////////add cond if selected value null or not
 
-                        if (selectedValue != null) {
+                        if (selectedValue != null &&
+                            selectedValue != 'DisplayAll') {
                           // Display only one container
                           var item = selectedValue; // Use the selected value
+                          print(selectedValue);
+
                           return Container(
                             margin: EdgeInsets.all(8),
                             decoration: BoxDecoration(
@@ -318,7 +320,10 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                           );
                         } else {
                           // Return a container with a button inside
-                          var item = list[index];
+                          var item = newList[index];
+                          print(item);
+                          print("object");
+
                           return Container(
                             margin: EdgeInsets.all(8),
                             decoration: BoxDecoration(
