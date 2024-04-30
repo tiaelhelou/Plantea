@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
+
+import '../models/donate_model.dart';
+export '../models/donate_model.dart';
 
 class DonateWidget extends StatefulWidget {
   const DonateWidget({super.key});
@@ -8,6 +12,7 @@ class DonateWidget extends StatefulWidget {
 }
 
 class _DonateWidgetState extends State<DonateWidget> {
+  late DonateModel _model;
 
   @override
   void initState() {
@@ -32,7 +37,7 @@ class _DonateWidgetState extends State<DonateWidget> {
     _model.textController6 ??= TextEditingController();
     _model.textFieldFocusNode6 ??= FocusNode();
   }
-  
+
    @override
   Widget build(BuildContext context) {
   }
