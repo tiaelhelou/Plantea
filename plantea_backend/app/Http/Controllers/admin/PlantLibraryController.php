@@ -19,5 +19,9 @@ class PlantLibraryController extends Controller
                 'message' => 'Image retrieved successfully',
                 'data' => $plants
             ], 200);
-       
+        } else {
+            return response()->json(['message' => 'Image retrieving Failed'], 400);
+        }
+    }
+
 }
