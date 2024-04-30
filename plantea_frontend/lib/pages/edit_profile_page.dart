@@ -124,6 +124,17 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                   ),
                 ),
               ),
+              Align(
+                alignment: AlignmentDirectional(0, 0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 5),
+                  child: Icon(
+                    Icons.tag_faces_sharp,
+                    color: Color(0xFF355E3B),
+                    size: 100,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
