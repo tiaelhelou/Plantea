@@ -38,7 +38,13 @@ class _DonateWidgetState extends State<DonateWidget> {
     _model.textFieldFocusNode6 ??= FocusNode();
   }
 
-   @override
-  Widget build(BuildContext context) {
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
   }
+
+  @override
+  Widget build(BuildContext context) {}
 }
