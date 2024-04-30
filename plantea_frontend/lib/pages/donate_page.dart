@@ -622,6 +622,49 @@ class _DonateWidgetState extends State<DonateWidget> {
                                   ),
                                 ),
                               ),
+                              Container(
+                                width: 70,
+                                height: 50,
+                                padding: EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors
+                                          .grey.shade700), // Dark grey border
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: DropdownButton<String>(
+                                  value: _selectedCurrency,
+                                  icon: Icon(Icons.arrow_drop_down),
+                                  iconSize: 16,
+                                  elevation: 16,
+                                  style: TextStyle(color: Colors.black),
+                                  underline:
+                                      SizedBox(), // Hide default underline
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      _selectedCurrency = newValue;
+                                    });
+                                  },
+
+                                  items: <String>[
+                                    'USD',
+                                    'EUR',
+                                    'GBP',
+                                    'JPY',
+                                    'AUD'
+                                  ] // Currency signs
+                                      .map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
                             ]),
                           ),
                         ],
