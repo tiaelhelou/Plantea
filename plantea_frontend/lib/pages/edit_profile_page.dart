@@ -292,7 +292,53 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               return null;
                             },
                           ),
-                        ),  
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 50),
+                          child: FFButtonWidget(
+                            onPressed: () {
+                              if (_formKey.currentState != null &&
+                                  _formKey.currentState!.validate()) {
+                                // Navigate the user to the Home page
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProfileWidget()),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Please fill input')),
+                                );
+                              }
+                            },
+                            text: 'Save Changes',
+                            options: FFButtonOptions(
+                              width: 296,
+                              height: 54,
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                              iconPadding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                              color: Color(0xFF355E3B),
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 16,
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                              elevation: 3,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
