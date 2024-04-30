@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Plant;
+
 use Illuminate\Http\Request;
 
 class PlantLibraryController extends Controller
