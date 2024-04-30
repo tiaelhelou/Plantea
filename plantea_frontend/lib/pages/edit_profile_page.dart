@@ -65,6 +65,67 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
               ).image,
             ),
           ),
+          alignment: AlignmentDirectional(0, 1),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional(-1, -1),
+                        child: FFButtonWidget(
+                          onPressed: () {
+                            print('Back Button pressed ...');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SettingsWidget()),
+                            );
+                          },
+                          text: '',
+                          icon: FaIcon(
+                            FontAwesomeIcons.arrowLeft,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 30,
+                          ),
+                          options: FFButtonOptions(
+                            width: 78,
+                            height: 34,
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(10, 0, 5, 0),
+                            iconPadding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                            color: Color(0xFF8A9A5B),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Montserrat',
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  letterSpacing: 0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                            elevation: 3,
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
