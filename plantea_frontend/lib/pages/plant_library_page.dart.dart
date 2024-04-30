@@ -15,10 +15,10 @@ const List<String> list = <String>[
   'Two',
   'Three',
   'Four',
-  'One',
-  'Two',
-  'Three',
-  'Four'
+  'One1',
+  'Two2',
+  'Three3',
+  'Four4'
 ];
 
 /**
@@ -264,21 +264,7 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: AlignmentDirectional(-1, 0),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 20),
-                    child: Text(
-                      'MY PLANTS',
-                      textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Montserrat',
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                  ),
-                ),
+
                 // Generated code for this Container Widget...
                 Container(
                     width: 400,
@@ -294,40 +280,67 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                           list.length, // Total number of items in the grid
                       itemBuilder: (context, index) {
                         // Retrieve the item from yourList
-                        var item = list[index];
 
-                        // Return a container with a button inside
-                        return Container(
-                          margin: EdgeInsets.all(
-                              8), // Add some margin around the container
-                          decoration: BoxDecoration(
-                            color:
-                                Colors.blue, // Example color, you can change it
-                            borderRadius: BorderRadius.circular(
-                                10), // Add rounded corners
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                item.toString(), // Display the item data inside the container
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
+                        /////////////add cond if selected value null or not
+                        if (selectedValue != null) {
+                          // Display only one container
+                          var item = selectedValue; // Use the selected value
+                          return Container(
+                            margin: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  item.toString(),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                  height:
-                                      10), // Add some spacing between the text and button
-                              ElevatedButton(
-                                onPressed: () {
-                                  // Button action
-                                },
-                                child: Text('Button'),
-                              ),
-                            ],
-                          ),
-                        );
+                                SizedBox(height: 10),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Button action
+                                  },
+                                  child: Text('Button'),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          // Return a container with a button inside
+                          var item = list[index];
+                          return Container(
+                            margin: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  item.toString(),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Button action
+                                  },
+                                  child: Text('Button'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
                       },
                     ))
               ],
