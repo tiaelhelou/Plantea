@@ -276,12 +276,14 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2, // Number of columns in the grid
                       ),
-                      itemCount:
-                          list.length, // Total number of items in the grid
+                      itemCount: selectedValue != null
+                          ? 1
+                          : list.length, // Conditionally set the itemCount
                       itemBuilder: (context, index) {
                         // Retrieve the item from yourList
 
                         /////////////add cond if selected value null or not
+
                         if (selectedValue != null) {
                           // Display only one container
                           var item = selectedValue; // Use the selected value
