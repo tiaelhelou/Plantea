@@ -59,6 +59,13 @@ class CameraController extends Controller
           'data' => $images
       ], 200);
       } 
-      
+      else {
+        return response()->json(['message' => 'Image retrieving Failed'], 400);
+      }
+    } 
+    else {
+      return response()->json(['message' => 'User not found'], 400);
+    }
+  }
 
 }
