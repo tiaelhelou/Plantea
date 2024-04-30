@@ -3,6 +3,7 @@ import 'package:plantea/pages/add_plant_page.dart';
 
 import 'package:plantea/pages/plant_Info.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
+import 'package:plantea/pages/plant_library_page.dart.dart';
 import 'package:plantea/pages/profile_page.dart';
 import 'package:plantea/pages/reminders_page.dart';
 import 'package:plantea/pages/settings_page.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RemindersWidget(),
+      home: PlantLibraryWidget(),
     );
   }
 }
