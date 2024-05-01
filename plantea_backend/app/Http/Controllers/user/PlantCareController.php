@@ -67,7 +67,42 @@ class PlantCareController extends Controller
         }
     }
 
-    
+    /*
+     * Add reminder for User plant.
+     */
+    public function addReminder($id = null, Request $request)
+    {
+        if ($id == null) {
+            return response()->json([
+                'result' => false,
+                'message' => 'User not found',
+            ], 400);
+        } else {
+            $request->validate([
+                'plant_id' => 'required',
+                'reminder_type' => 'required',
+                'reminder_time' => 'required'
+            ]);
+
+            $reminder = new Reminder;
+            $reminder->user_id = $id;
+            $reminder->reminder_type = $request->reminder_type;
+            $reminder->reminder_time = $request->reminder_time;
+
+            if ($reminder->save()) {
+                return response()->json([
+                    'result' => true,
+                    'message' => 'reminder added',
+                ], 200);
+            } else {
+                return response()->json([
+                    'result' => false,
+                    'message' => 'error',
+                ], 400);
+            }
+        }
+    }
+
 
     //list plant name and return id of selected with id of logged in user
     public function viewPlantNames() //for myplants
