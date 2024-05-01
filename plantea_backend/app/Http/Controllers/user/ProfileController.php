@@ -79,34 +79,38 @@ class ProfileController extends Controller
      */
     public function editProfile(Request $request)
     {
-        $request->validate([
-            'user_name' => 'required',
-            'user_email' => 'required',
-            'user_profile' => 'required',
-        ]);
-
-        $user = User::all()->firstorFail();
-
-        $new_username = $request->input('user_name'); //take input
-        $new_email = $request->input('user_email');
-        $new_profile_information = $request->input('user_profille');
-        $user->user_name = $new_username;
-        $user->user_email = $new_email;
-        $user->user_profile = $new_profile_information;
-
-        if ($user->save()) {
-
-            return response()->json([
-                'result' => true,
-                'message' => 'general information has been edited',
-            ], 201);
-        } else {
+        if ($id == null) {
             return response()->json([
                 'result' => false,
-                'message' => "error",
+                'message' => 'User not found',
+            ], 400);
+        } else {
+            $request->validate([
+                'user_name' => 'required',
+                'user_email' => 'required',
+                'user_profile' => 'required',
+            ]);
 
-            ], 201);
+            $user = User::where('user_id', $id)->first();
+
+            $user->user_name = $request->user_name;
+            $user->user_email = $request->user_email;
+            $user->user_profile = $request->new_profile;
+
+            if ($user->save()) {
+                return response()->json([
+                    'result' => true,
+                    'message' => "Information saved",
+                ], 201);
+            } else {
+                return response()->json([
+                    'result' => false,
+                    'message' => "Information not saved",
+
+                ], 201);
+            }
         }
+
     }
 
     /*
