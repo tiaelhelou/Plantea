@@ -42,30 +42,32 @@ class PlantCareController extends Controller
 
     }
 
-    //list myplants
-    //list plant libraries
-    public function viewPlants($user_id =NULL) //function to return the user id (id of logged in user)
+    /*
+     * Display User plant.
+     */
+    public function viewPlants($id = null)
     {
-        if($user_id!= NULL)
-        {
-            $plants = UserPlant::get();
-        }else{
-            //get all plants
-            $plants = Plant::get();
-        }
-        if($plants->save()) {
-            return response()->json([
-                'result' => true,
-                'message' => 'plants displayed',
-                'data' => $plants
-            ],200);
-        } else {
+        if ($id == null) {
             return response()->json([
                 'result' => false,
-                'message' => 'error',
+                'message' => 'User not found',
             ], 400);
+        } else {
+            $user_plants = UserPlant::where('user_id', $id)->get();
+
+            foreach ($user_plants->plant_id as $plant_id) {
+                $plants_details = Plant::where('plant_id', $plant_id)->get();
+            }
+
+            return response()->json([
+                'message' => 'Image retrieved successfully',
+                'data1' => $user_plants,
+                'data2' => $plants_details
+            ], 200);
         }
     }
+
+    
 
     //list plant name and return id of selected with id of logged in user
     public function viewPlantNames() //for myplants
