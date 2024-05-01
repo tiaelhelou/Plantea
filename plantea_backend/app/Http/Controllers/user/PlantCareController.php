@@ -131,35 +131,38 @@ class PlantCareController extends Controller
 
 
     
-    //delete reminder
-    public function deleteReminder(Request $request, $id = null)
+    /*
+     * Delete reminder for User plant.
+     */
+    public function deleteReminder($id = null, Request $request)
     {
-        //delete reminder from db
-        $reminder = Reminder::find($id); //given id or search for it in front end?
-
-
-        if (!$reminder) { //reminder isn't found in our database\
+        if ($id == null) {
             return response()->json([
                 'result' => false,
-                'message' => 'error ,reminder does not exist',
+                'message' => 'User not found',
             ], 400);
         } else {
+            $reminder = Reminder::find($id);
 
-            if ($reminder->delete()) {
-                return response()->json([
-                    'result' => true,
-                    'message' => 'reminder is deleted',
-                ], 201);
-            } else {
+            if ($reminder == null) {
                 return response()->json([
                     'result' => false,
-                    'message' => 'error',
+                    'message' => 'reminder does not exist',
                 ], 400);
-
+            } 
+            else {
+                if ($reminder->delete()) {
+                    return response()->json([
+                        'result' => true,
+                        'message' => 'reminder is deleted',
+                    ], 201);
+                } else {
+                    return response()->json([
+                        'result' => false,
+                        'message' => 'reminder not deleted',
+                    ], 400);
+                }
             }
-
         }
-
     }
-
 }
