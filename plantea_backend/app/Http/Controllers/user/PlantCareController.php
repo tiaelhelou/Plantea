@@ -130,42 +130,7 @@ class PlantCareController extends Controller
     }   
 
 
-    //takes oplantname return plantid
-
-
-    //reminder per plant
-    //add reminder
-    public function addReminder(Request $request)
-    {
-        // add reminder
-        $request->validate([
-            'user_id' => 'required',
-            'plant_id'=>'required',
-            'reminder_id' => 'required',
-            'reminder_type' => 'required', //given from hardcoded dropdown list  in front end(sql injections)
-            'reminder_time' => 'required'
-           
-        ]);
-        $reminder = new Reminder;
-        $reminder->user_id = $request->user_id;
-        $reminder->reminder_id = $request->reminder_id; //taken from id of logged in user
-        $reminder->reminder_type = $request->reminder_type;
-        $reminder->reminder_time = $request->reminder_time; //save as time in db How?  
-        
-        if($reminder->save()) {
-            return response()->json([
-                'result' => true,
-                'message' => 'reminder added',
-                //'data' => $reminder
-            ],200);
-        } else {
-            return response()->json([
-                'result' => false,
-                'message' => 'error',
-            ], 400);
-        }
-    }
-
+    
     //delete reminder
     public function deleteReminder(Request $request, $id = null)
     {
