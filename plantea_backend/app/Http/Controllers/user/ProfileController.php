@@ -47,36 +47,28 @@ class ProfileController extends Controller
      */
     public function changePassword(Request $request)
     {
+         $request->validate([
+            'email' => 'required|email',
+            'new_password' => 'required|string',
+            'old_password' => 'required|string',
+        ]);
+
         $user = User::where('email', $request->email)->first();
 
-        if (!$user) { //Email is not found in our database
-            return response()->json([
-                'result' => false,
-                'message' => 'error',
-            ], 200);            
-        } else {
-            $request->validate([
-                'new_password' => 'required|string',
-                'old_password' => 'required|string',
-            ]);
+        if (Hash::check($request->old_password, $user->user_password)) {
+            $user->user_password = Hash::make($request->new_password); 
 
-            $new_password = $request->input('new_password'); //take input
+            if ($user->save()) {
+                return response()->json([
+                    'result' => true,
+                    'message' => 'Success: password is changed.',
+                ], 201);
+            } else {
+                return response()->json([
+                    'result' => false,
+                    'message' => "Fail :incorrect old pass",
 
-            if (Hash::check($request->old_password, $user->user_password)) {
-                $user->user_password = Hash::make($new_password);  //replace old with new
-                if ($user->save()) {
-                    return response()->json([
-                        'result' => true,
-                        'message' => 'Success: password is changed.',
-                    ], 201);
-                } else {
-                    return response()->json([
-                        'result' => false,
-                        'message' => "Fail :incorrect old pass",
-
-                    ], 201);
-                }
-
+                ], 201);
             }
         }
 
