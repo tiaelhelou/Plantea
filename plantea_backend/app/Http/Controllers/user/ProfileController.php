@@ -18,28 +18,32 @@ class ProfileController extends Controller
      */
     public function viewProfileDetails() // research how to add image to db and get image
     {
-        $user = User::get();
-        $subset = $user->map(function ($user) {
-            return collect($user->toArray())
-                ->only(['user_name', 'profile', 'user_points'])
-                ->all();
-        });
-
-        $user_plants = UserPlant::get(); 
-
-        if ($user->save() && $user_plants) {
-            return response()->json([
-                'result' => true,
-                'message' => 'user displayed',
-                'user_data' => $subset,
-                'plant_list' => $user_plants
-            ], 200);
-        } else {
+        if ($id == null) {
             return response()->json([
                 'result' => false,
-                'message' => 'error',
+                'message' => 'User not found',
             ], 400);
+        } else {
+            $user = User::find($id);
+            $user_plants = CameraImage::where('user_id', $id)->get();
+
+
+            if ($user != null && $user_plants) {
+                return response()->json([
+                    'result' => true,
+                    'message' => 'user displayed',
+                    'user_data' => $user,
+                    'images' => $user_plants
+                ], 200);
+            } else {
+                return response()->json([
+                    'result' => false,
+                    'message' => 'error',
+                ], 400);
+            }
+
         }
+
     }
     
      /*
@@ -77,7 +81,7 @@ class ProfileController extends Controller
      /*
      * Edit User profile.
      */
-    public function editProfile(Request $request)
+    public function editProfile($id = null, Request $request)
     {
         if ($id == null) {
             return response()->json([
