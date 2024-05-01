@@ -14,34 +14,32 @@ class PlantCareController extends Controller
     public function addPlant(Request $request)
     {
         // add plant
+
+        //add plant
         $request->validate([
-            'user_id' => 'required',
-            'plant_id' => 'required',
             'plant_nickname' => 'required',
-            'plant_health' => 'required'
-           
+            'plant_name' => 'required'
         ]);
-        $plant = new Plant;
-        $plant->user_id = $request->user_id;
-        $plant->plant_id = $request->plant_id; //taken from a drop down list in app
+
+        $plantid = Plant::where('plant_name', $request->plant_name)->first()->plant_id;
+        $plant = new UserPlant;
+
+        $plant->user_id = $id;
+        $plant->plant_id = $plantid;
         $plant->plant_nickname = $request->plant_nickname;
-        $plant->plant_health = $request->plant_health;
-        //display plant info in this section (like plant library)
-        
-        
-        
-        if($plant->save()) {
+
+        if ($plant->save()) {
             return response()->json([
                 'result' => true,
-                'message' => 'plant added',
-                //'data' => $plant
-            ],200);
+                'message' => 'Plant added',
+            ], 200);
         } else {
             return response()->json([
                 'result' => false,
-                'message' => 'error',
+                'message' => 'Plant not added',
             ], 400);
         }
+
     }
 
     //list myplants
