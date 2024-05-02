@@ -43,8 +43,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   dropdown_button2: ^2.3.9
-  image_picker: ^0.8.3
+  image_picker: ^0.8.5+3
   async_extension: ^1.2.12
+  path_provider: ^2.1.3
 
 dev_dependencies:
   flutter_lints: 3.0.0

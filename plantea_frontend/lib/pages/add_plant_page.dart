@@ -104,9 +104,9 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
                     //crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 200, 10),
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 200, 10),
                         child: Text(
-                          'PLANT NAME',
+                          'PLANT NICKNAME',
                           textAlign: TextAlign.start,
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
