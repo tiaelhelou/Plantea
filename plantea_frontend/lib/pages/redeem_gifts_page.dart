@@ -228,7 +228,27 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                                   ),
                                 ),
                               ),
-                             
+                              Align(
+                                alignment: AlignmentDirectional(0, -1),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 5),
+                                  child: FlutterFlowIconButton(
+                                    borderRadius: 20,
+                                    borderWidth: 1,
+                                    buttonSize: 60,
+                                    icon: Icon(
+                                      Icons.card_giftcard_outlined,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 35,
+                                    ),
+                                    onPressed: () {
+                                      print('IconButton pressed ...');
+                                    },
+                                  ),
+                                ),
+                              ),
                             ].divide(SizedBox(width: 0)),
                           );
                         },
