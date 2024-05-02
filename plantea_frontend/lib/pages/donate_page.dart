@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/image_display.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
@@ -15,6 +16,35 @@ class DonateWidget extends StatefulWidget {
 
   @override
   State<DonateWidget> createState() => _DonateWidgetState();
+}
+
+class MonthYearInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    final newText = newValue.text;
+
+    if (newText.length == 1) {
+      if (int.tryParse(newText) == null) {
+        return oldValue;
+      }
+    } else if (newText.length == 2) {
+      if (int.tryParse(newText) == null) {
+        return oldValue;
+      } else {
+        if (int.parse(newText) > 12) {
+          return TextEditingValue(
+            text: '12',
+            selection: TextSelection.collapsed(offset: 2),
+          );
+        }
+      }
+    } else if (newText.length > 5) {
+      return oldValue;
+    }
+
+    return newValue;
+  }
 }
 
 class _DonateWidgetState extends State<DonateWidget> {
@@ -285,6 +315,7 @@ class _DonateWidgetState extends State<DonateWidget> {
                                     letterSpacing: 0,
                                     fontWeight: FontWeight.w500,
                                   ),
+                              keyboardType: TextInputType.number,
                               textAlign: TextAlign.start,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -362,6 +393,7 @@ class _DonateWidgetState extends State<DonateWidget> {
                                       letterSpacing: 0,
                                       fontWeight: FontWeight.w500,
                                     ),
+                                keyboardType: TextInputType.number,
                                 textAlign: TextAlign.start,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -383,8 +415,9 @@ class _DonateWidgetState extends State<DonateWidget> {
                                 autofocus: true,
                                 textCapitalization: TextCapitalization.none,
                                 obscureText: false,
+                                inputFormatters: [MonthYearInputFormatter()],
                                 decoration: InputDecoration(
-                                  labelText: 'Expire Date',
+                                  labelText: 'MM/YYYY',
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
@@ -446,7 +479,6 @@ class _DonateWidgetState extends State<DonateWidget> {
                                       fontWeight: FontWeight.w500,
                                     ),
                                 textAlign: TextAlign.start,
-                                keyboardType: TextInputType.datetime,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Date is required';
@@ -524,6 +556,7 @@ class _DonateWidgetState extends State<DonateWidget> {
                                       letterSpacing: 0,
                                       fontWeight: FontWeight.w500,
                                     ),
+                                keyboardType: TextInputType.number,
                                 textAlign: TextAlign.start,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -618,6 +651,7 @@ class _DonateWidgetState extends State<DonateWidget> {
                                             fontWeight: FontWeight.w500,
                                           ),
                                       textAlign: TextAlign.start,
+                                      keyboardType: TextInputType.number,
                                       onChanged: (value) {
                                         amount =
                                             value; // Update the variable with the new value
