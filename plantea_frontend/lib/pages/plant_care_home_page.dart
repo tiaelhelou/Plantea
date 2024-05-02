@@ -404,7 +404,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                         buttonSize: 40,
                                         fillColor: Color(0xFFFAF49D),
                                         icon: Icon(
-                                          Icons.add_rounded,
+                                          Icons.timer_sharp,
                                           color: Color(0xFF355E3B),
                                           size: 24,
                                         ),
@@ -469,7 +469,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                         buttonSize: 40,
                                         fillColor: Color(0xFFFAF49D),
                                         icon: Icon(
-                                          Icons.add_rounded,
+                                          Icons.timer_sharp,
                                           color: Color(0xFF355E3B),
                                           size: 24,
                                         ),
