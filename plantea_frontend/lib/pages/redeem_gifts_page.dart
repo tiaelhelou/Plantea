@@ -51,6 +51,21 @@ class _RedeemWidgetState extends State<RedeemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    
+    return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: Container(
+          width: 420,
+          height: 842,
+          decoration: BoxDecoration(
+            color: FlutterFlowTheme.of(context).secondaryBackground,
+          ),      
+        ),
+      ),
+    );
   }
 }
