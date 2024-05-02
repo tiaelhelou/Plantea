@@ -9,6 +9,20 @@ import 'package:provider/provider.dart';
 import '../models/redeem_model.dart';
 export '../models/redeem_model.dart';
 
+const List<String> list = <String>[
+  'DisplayAll',
+  'One',
+  'Two',
+  'Three',
+  'Four',
+  'One1',
+  'Two2',
+  'Three3',
+  'One11',
+  'Two22',
+  'Three33',
+  'Four44'
+];
 
 class RedeemWidget extends StatefulWidget {
   const RedeemWidget({Key? key}) : super(key: key);
@@ -18,7 +32,22 @@ class RedeemWidget extends StatefulWidget {
 }
 
 class _RedeemWidgetState extends State<RedeemWidget> {
+  late RedeemModel _model;
 
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => RedeemModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
