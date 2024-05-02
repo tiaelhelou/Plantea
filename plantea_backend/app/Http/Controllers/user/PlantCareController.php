@@ -9,13 +9,11 @@ use App\Models\Reminder;
 use App\Models\UserPlant;
 class PlantCareController extends Controller
 {
-    //add plant , list plant ,reminder per plant
-
-    public function addPlant(Request $request)
+    /*
+     * User Add plant.
+     */
+    public function addPlant($id = null, Request $request)
     {
-        // add plant
-
-        //add plant
         $request->validate([
             'plant_nickname' => 'required',
             'plant_name' => 'required'
@@ -39,7 +37,6 @@ class PlantCareController extends Controller
                 'message' => 'Plant not added',
             ], 400);
         }
-
     }
 
     /*
@@ -103,34 +100,6 @@ class PlantCareController extends Controller
         }
     }
 
-
-    //list plant name and return id of selected with id of logged in user
-    public function viewPlantNames() //for myplants
-    {
-    
-        $plants = Plant::get();
-        $subset = $plants->map(function ($plants) {
-            return collect($plants->toArray())
-                ->only(['plant_name','plant_id'])
-                ->all();
-        });
-        
-        if($plants->save()) {
-            return response()->json([
-                'result' => true,
-                'message' => 'plants displayed',
-                'data' => $subset
-            ],200);
-        } else {
-            return response()->json([
-                'result' => false,
-                'message' => 'error',
-            ], 400);
-        }
-    }   
-
-
-    
     /*
      * Delete reminder for User plant.
      */
