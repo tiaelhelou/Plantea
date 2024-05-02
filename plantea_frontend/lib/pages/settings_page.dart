@@ -7,6 +7,7 @@ import 'package:plantea/pages/edit_profile_page.dart';
 import 'package:plantea/pages/image_display.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
 import 'package:plantea/pages/profile_page.dart';
+import 'package:plantea/pages/welcome_page.dart';
 
 import '../models/settings_model.dart';
 
@@ -350,7 +351,12 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 100),
                       child: FFButtonWidget(
                         onPressed: () {
-                          print('Button pressed ...');
+                          print('edit pressed ...');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WelcomeWidget()),
+                          );
                         },
                         text: 'Log out',
                         options: FFButtonOptions(
