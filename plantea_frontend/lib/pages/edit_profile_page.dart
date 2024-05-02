@@ -139,7 +139,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
                 child: FFButtonWidget(
                   onPressed: () {
-                    print('Button pressed ...');
+                    print('edit pressed ...');
                   },
                   text: 'Edit Photo',
                   options: FFButtonOptions(
