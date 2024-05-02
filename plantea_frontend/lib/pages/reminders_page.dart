@@ -20,24 +20,25 @@ class RemindersWidget extends StatefulWidget {
 }
 
 class _RemindersWidgetState extends State<RemindersWidget> {
+  String? savetype;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   late RemindersModel _model;
   String? _selectedtype1;
   String? _selectedtype2;
   String? _selectedtype3;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  String? savetype;
-
-  @override
-  void initState() {
-    super.initState();
-    _model = createModel(context, () => RemindersModel());
-  }
 
   @override
   void dispose() {
     _model.dispose();
 
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => RemindersModel());
   }
 
   @override
@@ -92,6 +93,7 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                     width: 311,
                     height: 250,
                     decoration: BoxDecoration(
+                      color: Color(0xFFF3F3F3),
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 4,
@@ -103,7 +105,7 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                         )
                       ],
                       gradient: LinearGradient(
-                        colors: [Color(0xFFF3F3F3), Color(0xFF355E3B)],
+                        colors: [Color(0xFFF3F3F3), Color(0xFFF3F3F3)],
                         stops: [0, 1],
                         begin: AlignmentDirectional(0, 1),
                         end: AlignmentDirectional(0, -1),
@@ -121,8 +123,8 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Montserrat',
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   fontSize: 16,
                                   letterSpacing: 0,
                                   fontWeight: FontWeight.bold,
