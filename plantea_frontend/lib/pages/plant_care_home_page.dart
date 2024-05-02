@@ -10,8 +10,18 @@ import '../pages/welcome_page.dart';
 import '../models/plantcare_model.dart';
 export '../models/plantcare_model.dart';
 
-const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
-
+const List<String> list = <String>[
+  'DisplayAll',
+  'One',
+  'Two',
+  'Three',
+  'Four',
+  'One1',
+  'Two2',
+  'Three3',
+  'Four4'
+];
+List<String> newList = list.sublist(1);
 /**
  * the list should be displayed in the listview and search bar
  *  get from db 
@@ -258,7 +268,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                 Align(
                   alignment: AlignmentDirectional(-1, 0),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 50),
+                    padding: EdgeInsetsDirectional.fromSTEB(40, 20, 0, 30),
                     child: Text(
                       'MY PLANTS',
                       textAlign: TextAlign.start,
@@ -272,7 +282,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                 ),
                 // Generated code for this Container Widget...
                 Container(
-                    width: 340,
+                    width: 330,
                     height: 644,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -336,62 +346,127 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                         ListView.builder(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
-                      itemCount: 4, // Define the number of items in your list
+                      itemCount: selectedValue != null &&
+                              selectedValue != 'DisplayAll'
+                          ? 1
+                          : newList
+                              .length, // Define the number of items in your list
                       itemBuilder: (context, index) {
-                        return Padding(
-                          // list of container
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10), // Add vertical padding
-                          child: Container(
-                            width: 296,
-                            height: 150,
-                            constraints: BoxConstraints(
-                              minWidth: 296,
-                              minHeight: 180,
-                              maxWidth: 296,
-                              maxHeight: 180,
-                            ),
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                alignment: AlignmentDirectional(0, 0),
-                                image: Image.network(
-                                  'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
-                                ).image,
+                        if (selectedValue != null &&
+                            selectedValue != 'DisplayAll') {
+                          // Display only one container
+                          var item = selectedValue; // Use the selected value
+                          print(selectedValue);
+                          return Padding(
+                            // list of container
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10), // Add vertical padding
+                            child: Container(
+                              width: 296,
+                              height: 150,
+                              constraints: BoxConstraints(
+                                minWidth: 296,
+                                minHeight: 180,
+                                maxWidth: 296,
+                                maxHeight: 180,
                               ),
-                              borderRadius: BorderRadius.circular(23),
-                            ),
-                            child: Align(
-                              alignment: AlignmentDirectional(1, 1),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 0, 25, 25),
-                                child: FlutterFlowIconButton(
-                                  borderRadius: 5,
-                                  borderWidth: 1,
-                                  buttonSize: 40,
-                                  fillColor: Color(0xFFFAF49D),
-                                  icon: Icon(
-                                    Icons.add_rounded,
-                                    color: Color(0xFF355E3B),
-                                    size: 24,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  alignment: AlignmentDirectional(0, 0),
+                                  image: Image.network(
+                                    'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
+                                  ).image,
+                                ),
+                                borderRadius: BorderRadius.circular(23),
+                              ),
+                              child: Align(
+                                alignment: AlignmentDirectional(1, 1),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 25, 25),
+                                  child: FlutterFlowIconButton(
+                                    borderRadius: 5,
+                                    borderWidth: 1,
+                                    buttonSize: 40,
+                                    fillColor: Color(0xFFFAF49D),
+                                    icon: Icon(
+                                      Icons.add_rounded,
+                                      color: Color(0xFF355E3B),
+                                      size: 24,
+                                    ),
+                                    onPressed: () {
+                                      print('IconButton pressed ...');
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                RemindersWidget()),
+                                      );
+                                    },
                                   ),
-                                  onPressed: () {
-                                    print('IconButton pressed ...');
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              RemindersWidget()),
-                                    );
-                                  },
                                 ),
                               ),
                             ),
-                          ),
-                        );
+                          );
+                        } else {
+                          return Padding(
+                            // list of container
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10), // Add vertical padding
+                            child: Container(
+                              width: 296,
+                              height: 150,
+                              constraints: BoxConstraints(
+                                minWidth: 296,
+                                minHeight: 180,
+                                maxWidth: 296,
+                                maxHeight: 180,
+                              ),
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  alignment: AlignmentDirectional(0, 0),
+                                  image: Image.network(
+                                    'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
+                                  ).image,
+                                ),
+                                borderRadius: BorderRadius.circular(23),
+                              ),
+                              child: Align(
+                                alignment: AlignmentDirectional(1, 1),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 25, 25),
+                                  child: FlutterFlowIconButton(
+                                    borderRadius: 5,
+                                    borderWidth: 1,
+                                    buttonSize: 40,
+                                    fillColor: Color(0xFFFAF49D),
+                                    icon: Icon(
+                                      Icons.add_rounded,
+                                      color: Color(0xFF355E3B),
+                                      size: 24,
+                                    ),
+                                    onPressed: () {
+                                      print('IconButton pressed ...');
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                RemindersWidget()),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        }
                       },
                     ))
               ],
