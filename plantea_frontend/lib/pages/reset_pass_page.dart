@@ -43,4 +43,34 @@ class _ResetPassWidgetState extends State<ResetPassWidget> {
 
   @override
   Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).accent2,
+        body: Container(
+          width: 1445,
+          height: 1373,
+          constraints: BoxConstraints(
+            minWidth: 20,
+            minHeight: 20,
+            maxWidth: 2000,
+            maxHeight: 2000,
+          ),
+          decoration: BoxDecoration(
+            color: FlutterFlowTheme.of(context).secondaryBackground,
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: Image.asset(
+                'assets/background.jpg',
+              ).image,
+            ),
+          ),
+          
+        ),
+      ),
+    );
   }
+}
