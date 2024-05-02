@@ -5,7 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\CheckIn;
 use Illuminate\Http\Request;
-use App\Models\UserPlant;
+use App\Models\CameraImage;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +16,7 @@ class ProfileController extends Controller
     /*
      * Display profile (name , images , profile , points) of User.
      */
-    public function viewProfileDetails() // research how to add image to db and get image
+    public function viewProfileDetails($id = null)
     {
         if ($id == null) {
             return response()->json([
@@ -43,7 +43,6 @@ class ProfileController extends Controller
             }
 
         }
-
     }
     
      /*
