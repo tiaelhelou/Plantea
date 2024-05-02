@@ -16,7 +16,30 @@ class ResetPassWidget extends StatefulWidget {
 }
 
 class _ResetPassWidgetState extends State<ResetPassWidget> {
+  late ResetPassModel _model;
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController oldPassController = TextEditingController();
+  TextEditingController newpasswordController = TextEditingController();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => ResetPassModel());
+
+    _model.oldPassTextController ??= TextEditingController();
+    _model.oldPassFocusNode ??= FocusNode();
+
+    _model.newpasswordTextController ??= TextEditingController();
+    _model.newpasswordFocusNode ??= FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
