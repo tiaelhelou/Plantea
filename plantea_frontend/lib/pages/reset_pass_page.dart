@@ -156,6 +156,59 @@ class _ResetPassWidgetState extends State<ResetPassWidget> {
                                       },
                                     ),
                                   ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        40, 20, 190, 20),
+                                    child: Text(
+                                      'NEW PASSWORD',
+                                      textAlign: TextAlign.start,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Montserrat',
+                                            letterSpacing: 0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        45, 0, 45, 16),
+                                    child: TextFormField(
+                                      controller: newpasswordController,
+                                      obscureText: true,
+                                      decoration: InputDecoration(
+                                        labelText: '',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              letterSpacing: 0,
+                                            ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0xFFA8ABAC),
+                                            width: 3,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                        ),
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0,
+                                          ),
+                                      textAlign: TextAlign.start,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your newpassword';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
                                   
                                 ],
                               ),
