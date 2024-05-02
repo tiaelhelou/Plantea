@@ -161,8 +161,17 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                       ),
                     ],
                   ),
-                ],
-              )
+                  Text(
+                    'Points',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Montserrat',
+                          letterSpacing: 0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ].divide(SizedBox(width: 10)),
+              ),
+              
             ],
           ),
         ),
