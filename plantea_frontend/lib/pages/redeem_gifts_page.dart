@@ -171,7 +171,70 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                   ),
                 ].divide(SizedBox(width: 10)),
               ),
-              
+              Padding(
+                //// list of redeeeem
+                padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                child: SingleChildScrollView(
+                  child: Container(
+                      width: 427,
+                      height: 658,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      child: ListView.builder(
+                        itemCount:
+                            list.length, // Conditionally set the itemCount
+                        itemBuilder: (context, index) {
+                          // Retrieve the item from yourList
+
+                          /////////////add cond if selected value null or not
+
+                          // Return a container with a button inside
+                          var item = list[index];
+                          print(item);
+                          print("object");
+
+                          return Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Align(
+                                alignment: AlignmentDirectional(-1, 0),
+                                child: Container(
+                                  width: 300,
+                                  height: 42,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFBCB88A),
+                                    borderRadius: BorderRadius.circular(23),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10, 0, 0, 0),
+                                      child: Text(
+                                        ' ',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 14,
+                                              letterSpacing: 0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                             
+                            ].divide(SizedBox(width: 0)),
+                          );
+                        },
+                      )),
+                ),
+              ),
             ],
           ),
         ),
