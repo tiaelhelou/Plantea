@@ -5,6 +5,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/image_display.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
+import 'package:plantea/pages/redeem_gifts_page.dart';
 import 'package:plantea/pages/settings_page.dart';
 
 import '../models/profile_model.dart';
@@ -190,11 +191,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         child: FFButtonWidget(
                           onPressed: () {
                             print('Button pressed ...');
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => PlantInfoWidget()),
-                            // );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RedeemWidget()),
+                            );
                           },
                           text: 'REDEEM',
                           options: FFButtonOptions(
