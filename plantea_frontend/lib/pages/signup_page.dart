@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/add_plant_page.dart';
+import 'package:plantea/pages/login_page.dart';
 import 'package:plantea/pages/welcome_page.dart';
 import '../models/signup_model.dart';
 export '../models/signup_model.dart';
@@ -174,7 +175,6 @@ class _SignupWidgetState extends State<SignupWidget> {
                                             45, 0, 45, 16),
                                         child: TextFormField(
                                           controller: emailController,
-                                          obscureText: true,
                                           decoration: InputDecoration(
                                             labelText: '',
                                             labelStyle:
@@ -277,7 +277,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const WelcomeWidget()),
+                                                        const LogWidget()),
                                               );
                                             } else {
                                               ScaffoldMessenger.of(context)
@@ -288,7 +288,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                               );
                                             }
                                           },
-                                          text: 'Save Changes',
+                                          text: 'Sign up',
                                           options: FFButtonOptions(
                                             width: 296,
                                             height: 54,
