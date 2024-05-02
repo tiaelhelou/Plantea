@@ -34,7 +34,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     super.dispose();
   }
 
- @override
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -52,13 +52,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           ),
           decoration: BoxDecoration(
             color: Color(0xFFE5FFE7),
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              alignment: AlignmentDirectional(0, -1),
-              image: Image.network(
-                '',
-              ).image,
-            ),
           ),
           alignment: AlignmentDirectional(0, 1),
           child: Column(

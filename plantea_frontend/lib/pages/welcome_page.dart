@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/login_page.dart';
 import 'package:plantea/main.dart';
-import 'package:plantea/pages/signup_page.dart';
+//import 'package:plantea/pages/signup_page.dart';
 
 import '../models/welcome_model.dart';
 export '../models/welcome_model.dart';
@@ -144,11 +144,11 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       FFButtonWidget(
                         onPressed: () {
                           print('Button pressed ...');
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignupWidget()),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const SignupWidget()),
+                          // );
                         },
                         text: 'Sign up',
                         options: FFButtonOptions(
