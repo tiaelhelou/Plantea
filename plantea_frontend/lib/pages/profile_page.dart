@@ -5,6 +5,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/image_display.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
+import 'package:plantea/pages/settings_page.dart';
 
 import '../models/profile_model.dart';
 export '../models/profile_model.dart';
@@ -34,6 +35,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     super.dispose();
   }
 
+  bool isCheckedIn = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -67,11 +69,19 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       alignment: AlignmentDirectional(-1, -1),
                       child: FFButtonWidget(
                         onPressed: () {
-                          print('CHECKIN pressed ...');
+                          setState(() {
+                            if (isCheckedIn == false) {
+                              isCheckedIn = !isCheckedIn;
+                            }
+                            // Toggle the isCheckedIn state
+                          });
+                          print(isCheckedIn ? 'CHECKED IN' : 'CHECKIN');
                         },
-                        text: 'CHECKIN',
+                        text: isCheckedIn
+                            ? 'CHECKED IN'
+                            : 'CHECKIN', // Change text based on isCheckedIn state
                         options: FFButtonOptions(
-                          width: 78,
+                          width: 110,
                           height: 34,
                           padding: EdgeInsetsDirectional.fromSTEB(10, 0, 5, 0),
                           iconPadding:
@@ -105,7 +115,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           size: 50,
                         ),
                         onPressed: () {
-                          print('IconButton pressed ...');
+                          print('settings pressed ...');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SettingsWidget()),
+                          );
                         },
                       ),
                     ),
@@ -175,6 +190,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         child: FFButtonWidget(
                           onPressed: () {
                             print('Button pressed ...');
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => PlantInfoWidget()),
+                            // );
                           },
                           text: 'REDEEM',
                           options: FFButtonOptions(
