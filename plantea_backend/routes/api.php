@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\user\CameraController;
+use App\Http\Controllers\user\DonateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,7 +39,9 @@ Route::group(['prefix' => 'v1'], function () {
         Route::group(['prefix' => 'authorization'], function () {
             Route::group(['prefix' => 'user'], function () {
                 Route::post('/fetch_image', [CameraController::class, 'fetch_image']);
-                Route::get('/subscribe/{id?}', [CameraController::class, 'insert_image']);
+                Route::get('/insert_image/{id?}', [CameraController::class, 'insert_image']);
+
+                Route::get('/donate/{id?}', [DonateController::class, 'donate']);
                
             });
 
