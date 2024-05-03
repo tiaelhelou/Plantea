@@ -95,7 +95,7 @@ class Api {
   /*
    * Change password api
    */
-  static Future<bool> ChangePassUser(
+  static Future<bool> changePassUser(
       String oldpassword, String newpassword, int id) async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
 

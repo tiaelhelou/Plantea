@@ -250,7 +250,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                           onPressed: () async {
                             if (_formKey.currentState != null &&
                                 _formKey.currentState!.validate()) {
-                              bool response = await Api.ChangePassUser(
+                              bool response = await Api.changePassUser(
                                   oldpasswordController.text,
                                   newpasswordController.text,
                                   4);
