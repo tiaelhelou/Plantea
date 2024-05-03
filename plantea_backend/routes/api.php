@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\user\CameraController;
 use App\Http\Controllers\user\DonateController;
+use App\Http\Controllers\user\PlantCareController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,11 @@ Route::group(['prefix' => 'v1'], function () {
                 Route::get('/insert_image/{id?}', [CameraController::class, 'insert_image']);
 
                 Route::get('/donate/{id?}', [DonateController::class, 'donate']);
+
+                Route::get('/addPlant/{id?}', [PlantCareController::class, 'addPlant']);
+                Route::post('/viewPlants', [PlantCareController::class, 'viewPlants']);
+                Route::get('/addReminder/{id?}', [PlantCareController::class, 'addReminder']);
+                Route::get('/deleteReminder/{id?}', [PlantCareController::class, 'deleteReminder']);
                
             });
 
