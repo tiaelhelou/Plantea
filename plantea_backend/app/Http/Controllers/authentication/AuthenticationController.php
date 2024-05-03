@@ -17,8 +17,8 @@ class AuthenticationController extends Controller
     public function register(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'user_name' => 'required|string',
-            'user_email' => 'required|email',
+            'name' => 'required|string',
+            'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
@@ -28,8 +28,8 @@ class AuthenticationController extends Controller
 
         $user = new User;
 
-        $user->user_name = $request->user_name;
-        $user->user_email = $request->user_email;
+        $user->user_name = $request->name;
+        $user->user_email = $request->email;
         $user->user_password = bcrypt($request->password);
     
         if($user->save()){
@@ -72,14 +72,14 @@ class AuthenticationController extends Controller
     public function resetPassword(Request $request) {
 
         $validator = Validator::make($request->all(), [
-            'user_email' => 'required|email',
+            'email' => 'required|email',
             'new_password' => 'required|string',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 202);
         }
 
-        $user = User::where('user_email', $request->user_email)->first();
+        $user = User::where('user_email', $request->email)->first();
     
         if (!$user) { //Email isn't found in our database
             return response()->json([

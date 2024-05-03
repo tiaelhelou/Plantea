@@ -56,7 +56,7 @@ class ProfileController extends Controller
             'old_password' => 'required|string',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('user_email', $request->email)->first();
 
         if (Hash::check($request->old_password, $user->user_password)) {
             $user->user_password = Hash::make($request->new_password); 
@@ -89,16 +89,16 @@ class ProfileController extends Controller
             ], 400);
         } else {
             $request->validate([
-                'user_name' => 'required',
-                'user_email' => 'required',
-                'user_profile' => 'required',
+                'name' => 'required',
+                'email' => 'required',
+                'profile' => 'required',
             ]);
 
             $user = User::where('user_id', $id)->first();
 
-            $user->user_name = $request->user_name;
-            $user->user_email = $request->user_email;
-            $user->user_profile = $request->user_profile;
+            $user->user_name = $request->name;
+            $user->user_email = $request->email;
+            $user->user_profile = $request->profile;
 
             if ($user->save()) {
                 return response()->json([

@@ -23,11 +23,6 @@ class DonateController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'phone' => 'required|int',
-            'credit_num' => 'required|int',
-            'expire' => 'required|date',
-            'ccv' => 'required|int',
             'amount' => 'required|int',
             'currency' => 'required|string',
         ]);
