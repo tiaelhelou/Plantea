@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
   static String urlbase = 'http://127.0.0.1:8000/api/v1';
+
   /*
    * Login api
    */
   static Future<bool> loginUser(String email, String password) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     final url = Uri.parse(
         '$urlbase/authentication/login'); // Replace with your API endpoint for login
 
@@ -25,9 +28,11 @@ class Api {
       );
 
       if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        final token = responseData['token'] as String?;
-        print('im here');
+        final responseData = await json.decode(response.body);
+        final token = responseData['access_token'];
+
+        await saveTokenToLocalStorage(token!);
+
         return true;
       } else {
         print('Login failed with status: ${response.statusCode}');
@@ -37,5 +42,10 @@ class Api {
       print('Error logging in: $error');
       return false;
     }
+  }
+
+  static Future<void> saveTokenToLocalStorage(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('token', token);
   }
 }
