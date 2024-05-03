@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserPlant;
+use App\Models\UserHasPlant;
 use App\Models\Plant;
 
 use Illuminate\Http\Request;
@@ -27,7 +27,7 @@ class PlantInformationController extends Controller
         
         if ($id != null) {
 
-            $plant_add_info = Userplant::where("plant_id", $plant_info->plant_id)->get();
+            $plant_add_info = UserHasplant::where("plant_id", $plant_info->plant_id)->get();
 
             if($id == $plant_add_info->user_id) {
                 return response()->json([

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cameraimage;
 use Illuminate\Http\Request;
 use App\Models\Plant;
 use App\Models\Reminder;
-use App\Models\UserPlant;
+use App\Models\UserHasPlant;
 class PlantCareController extends Controller
 {
     /*
@@ -16,17 +17,24 @@ class PlantCareController extends Controller
     {
         $request->validate([
             'plant_nickname' => 'required',
-            'plant_name' => 'required'
+            'plant_name' => 'required',
+            'plant_image' => 'required'
         ]);
 
         $plantid = Plant::where('plant_name', $request->plant_name)->first()->plant_id;
-        $plant = new UserPlant;
+        $plant = new UserHasPlant;
 
         $plant->user_id = $id;
         $plant->plant_id = $plantid;
         $plant->plant_nickname = $request->plant_nickname;
 
-        if ($plant->save()) {
+
+        $image = new CameraImage;
+
+        $image->camera_image_image = $request->plant_image;
+        $image->user_id = $id;
+
+        if ($plant->save() && $image->save()) {
             return response()->json([
                 'result' => true,
                 'message' => 'Plant added',
@@ -50,14 +58,14 @@ class PlantCareController extends Controller
                 'message' => 'User not found',
             ], 400);
         } else {
-            $user_plants = UserPlant::where('user_id', $id)->get();
+            $user_plants = UserHasPlant::where('user_id', $id)->get();
 
             foreach ($user_plants->plant_id as $plant_id) {
                 $plants_details = Plant::where('plant_id', $plant_id)->get();
             }
 
             return response()->json([
-                'message' => 'Image retrieved successfully',
+                'message' => 'Plants retrieved successfully',
                 'data1' => $user_plants,
                 'data2' => $plants_details
             ], 200);
@@ -82,9 +90,10 @@ class PlantCareController extends Controller
             ]);
 
             $reminder = new Reminder;
-            $reminder->user_id = $id;
+            $reminder->user_has_plants_user_id = $id;
             $reminder->reminder_type = $request->reminder_type;
             $reminder->reminder_time = $request->reminder_time;
+            $reminder->user_has_plants_plant_id = $request->plant_id;
 
             if ($reminder->save()) {
                 return response()->json([

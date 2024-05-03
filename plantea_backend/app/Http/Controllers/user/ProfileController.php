@@ -98,7 +98,7 @@ class ProfileController extends Controller
 
             $user->user_name = $request->user_name;
             $user->user_email = $request->user_email;
-            $user->user_profile = $request->new_profile;
+            $user->user_profile = $request->user_profile;
 
             if ($user->save()) {
                 return response()->json([

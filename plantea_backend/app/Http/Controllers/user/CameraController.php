@@ -29,8 +29,8 @@ class CameraController extends Controller
 
     if ($id != null) {
 
-      $image = new CameraImage();
-      $image->camera_image_images = $request->image_name;
+      $image = new CameraImage;
+      $image->camera_image_image = $request->image_name;
       $image->user_id = $id;
 
       if ($image->save()) {

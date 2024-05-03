@@ -4,7 +4,7 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gift;
-use App\Models\UserGift;
+use App\Models\UserRedeemsGift;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -46,7 +46,7 @@ class RewardController extends Controller
         $user = User::find($id);
         if ($user != null) {
             if ($user->user_points > $reward->gift_points) {
-                $redeemed = new UserGift;
+                $redeemed = new UserRedeemsGift;
                 $redeemed->user_id = $user->user_id;
                 $redeemed->gift_id = $reward->gift_id;
 
