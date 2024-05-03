@@ -39,15 +39,18 @@ Route::group(['prefix' => 'v1'], function () {
         /* Authorization Routes */
         Route::group(['prefix' => 'authorization'], function () {
             Route::group(['prefix' => 'user'], function () {
-                Route::post('/fetch_image', [CameraController::class, 'fetch_image']);
-                Route::get('/insert_image/{id?}', [CameraController::class, 'insert_image']);
 
-                Route::get('/donate/{id?}', [DonateController::class, 'donate']);
+                Route::get('/fetch_image/{id?}', [CameraController::class, 'fetch_image']);
+                Route::post('/insert_image/{id?}', [CameraController::class, 'insert_image']);
 
-                Route::get('/addPlant/{id?}', [PlantCareController::class, 'addPlant']);
-                Route::post('/viewPlants', [PlantCareController::class, 'viewPlants']);
-                Route::get('/addReminder/{id?}', [PlantCareController::class, 'addReminder']);
+                Route::post('/donate/{id?}', [DonateController::class, 'donate']);
+
+                Route::post('/addPlant/{id?}', [PlantCareController::class, 'addPlant']);
+                Route::get('/viewPlants/{id?}', [PlantCareController::class, 'viewPlants']);
+                Route::post('/addReminder/{id?}', [PlantCareController::class, 'addReminder']);
                 Route::get('/deleteReminder/{id?}', [PlantCareController::class, 'deleteReminder']);
+
+                
                
             });
 
