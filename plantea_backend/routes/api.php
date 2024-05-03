@@ -3,6 +3,7 @@
 use App\Http\Controllers\user\CameraController;
 use App\Http\Controllers\user\DonateController;
 use App\Http\Controllers\user\PlantCareController;
+use App\Http\Controllers\user\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,7 +51,10 @@ Route::group(['prefix' => 'v1'], function () {
                 Route::post('/addReminder/{id?}', [PlantCareController::class, 'addReminder']);
                 Route::get('/deleteReminder/{id?}', [PlantCareController::class, 'deleteReminder']);
 
-                
+                Route::get('/viewProfileDetails/{id?}', [ProfileController::class, 'viewProfileDetails']);
+                Route::post('/changePassword', [ProfileController::class, 'changePassword']);
+                Route::post('/editProfile/{id?}', [ProfileController::class, 'editProfile']);
+                Route::post('/checkIn/{id?}', [ProfileController::class, 'checkIn']);
                
             });
 
