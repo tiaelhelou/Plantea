@@ -69,8 +69,7 @@ class ProfileController extends Controller
                 return response()->json([
                     'result' => false,
                     'message' => "Fail :incorrect old pass",
-
-                ], 201);
+                ], 200);
             }
         }
 
@@ -108,8 +107,7 @@ class ProfileController extends Controller
                 return response()->json([
                     'result' => false,
                     'message' => "Information not saved",
-
-                ], 201);
+                ], 200);
             }
         }
 
