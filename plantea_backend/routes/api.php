@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\user\CameraController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +37,9 @@ Route::group(['prefix' => 'v1'], function () {
         /* Authorization Routes */
         Route::group(['prefix' => 'authorization'], function () {
             Route::group(['prefix' => 'user'], function () {
-                //api for user function
+                Route::post('/fetch_image', [CameraController::class, 'fetch_image']);
+                Route::get('/subscribe/{id?}', [CameraController::class, 'insert_image']);
+               
             });
 
             Route::group(['prefix' => 'admin'], function () {
