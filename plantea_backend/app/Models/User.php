@@ -8,6 +8,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Class User
@@ -27,8 +32,29 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class User extends Model
+class User extends Authenticatable implements JWTSubject
 {
+    use HasApiTokens, HasFactory, Notifiable;
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 	protected $table = 'users';
 	protected $primaryKey = 'user_id';
 	public $timestamps = false;
@@ -38,7 +64,8 @@ class User extends Model
 	];
 
 	protected $hidden = [
-		'user_password'
+		'user_password',
+		'remember_token'
 	];
 
 	protected $fillable = [
@@ -74,4 +101,8 @@ class User extends Model
 	{
 		return $this->belongsToMany(Gift::class, 'user_redeems_gifts');
 	}
+	public function getAuthPassword()
+{
+    return $this->user_password;
+}
 }
