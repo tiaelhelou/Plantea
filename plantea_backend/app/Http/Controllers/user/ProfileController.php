@@ -48,15 +48,14 @@ class ProfileController extends Controller
      /*
      * Change password of User.
      */
-    public function changePassword(Request $request)
+    public function changePassword($id = null, Request $request)
     {
          $request->validate([
-            'email' => 'required|email',
             'new_password' => 'required|string',
             'old_password' => 'required|string',
         ]);
 
-        $user = User::where('user_email', $request->email)->first();
+        $user = User::where('user_id', $id)->first();
 
         if (Hash::check($request->old_password, $user->user_password)) {
             $user->user_password = Hash::make($request->new_password); 
