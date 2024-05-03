@@ -77,13 +77,57 @@ class Api {
     }
   }
 
+  /*
+   * Save Token
+   */
   static Future<void> saveTokenToLocalStorage(String token) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
   }
 
+  /*
+   * Save Id
+   */
   static Future<void> saveIdToLocalStorage(int id) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('id', id);
+  }
+
+  /*
+   * Change password api
+   */
+  static Future<bool> ChangePassUser(
+      String oldpassword, String newpassword, int id) async {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // await saveIdToLocalStorage(id);
+    // int? getid = prefs.getInt('id');
+
+    final url = Uri.parse('$urlbase/authorization/user/changePassword/$id');
+  
+    final Map<String, dynamic> data = {
+      'new_password': newpassword,
+      'old_password': oldpassword,
+    };
+
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+   
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        print('Change failed with status: ${response.statusCode}');
+        return false;
+      }
+    } catch (error) {
+      print('Error : $error');
+      return false;
+    }
   }
 }
