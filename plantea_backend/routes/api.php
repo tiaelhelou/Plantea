@@ -4,6 +4,7 @@ use App\Http\Controllers\user\CameraController;
 use App\Http\Controllers\user\DonateController;
 use App\Http\Controllers\user\PlantCareController;
 use App\Http\Controllers\user\ProfileController;
+use App\Http\Controllers\user\RewardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,9 @@ Route::group(['prefix' => 'v1'], function () {
                 Route::post('/changePassword', [ProfileController::class, 'changePassword']);
                 Route::post('/editProfile/{id?}', [ProfileController::class, 'editProfile']);
                 Route::post('/checkIn/{id?}', [ProfileController::class, 'checkIn']);
+
+                Route::post('/redeemReward/{id?}/{name?}', [RewardController::class, 'redeemReward']);
+                Route::get('/displayRewards', [RewardController::class, 'displayRewards']);
                
             });
 
