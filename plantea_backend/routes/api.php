@@ -38,7 +38,7 @@ Route::group(['prefix' => 'v1'], function () {
     });
 
     /* Middleware for authentication */
-    Route::group(['middleware' => 'auth:api'], function () {
+    // Route::group(['middleware' => 'auth:api'], function () {
 
         /* Authorization Routes */
         Route::group(['prefix' => 'authorization'], function () {
@@ -55,7 +55,7 @@ Route::group(['prefix' => 'v1'], function () {
                 Route::get('/deleteReminder/{id?}', [PlantCareController::class, 'deleteReminder']);
 
                 Route::get('/viewProfileDetails/{id?}', [ProfileController::class, 'viewProfileDetails']);
-                Route::post('/changePassword', [ProfileController::class, 'changePassword']);
+                Route::post('/changePassword/{id?}', [ProfileController::class, 'changePassword']);
                 Route::post('/editProfile/{id?}', [ProfileController::class, 'editProfile']);
                 Route::post('/checkIn/{id?}', [ProfileController::class, 'checkIn']);
 
@@ -72,7 +72,7 @@ Route::group(['prefix' => 'v1'], function () {
             });
         });
 
-    });
+    // });
     
 });
 

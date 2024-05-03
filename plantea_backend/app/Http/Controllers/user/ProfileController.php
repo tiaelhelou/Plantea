@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\user;
-
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\CheckIn;
 use Illuminate\Http\Request;
@@ -48,34 +48,48 @@ class ProfileController extends Controller
      /*
      * Change password of User.
      */
-    public function changePassword(Request $request)
-    {
-         $request->validate([
-            'email' => 'required|email',
-            'new_password' => 'required|string',
-            'old_password' => 'required|string',
-        ]);
+public function changePassword(Request $request, $id=null)
+{
+    $validator = Validator::make($request->all(), [
+        'new_password' => 'required|string',
+        'old_password' => 'required|string',
+    ]);
 
-        $user = User::where('user_email', $request->email)->first();
-
-        if (Hash::check($request->old_password, $user->user_password)) {
-            $user->user_password = Hash::make($request->new_password); 
-
-            if ($user->save()) {
-                return response()->json([
-                    'result' => true,
-                    'message' => 'Success: password is changed.',
-                ], 201);
-            } else {
-                return response()->json([
-                    'result' => false,
-                    'message' => "Fail :incorrect old pass",
-
-                ], 201);
-            }
-        }
-
+    if ($validator->fails()) {
+        return response()->json($validator->errors(), 400); // Change the status code to 400 for validation errors
     }
+
+    $user = User::find($id); // Use find() instead of where()->first()
+
+    if (!$user) {
+        return response()->json([
+            'result' => false,
+            'message' => 'User not found',
+        ], 404); // Return 404 if user is not found
+    }
+
+    if (Hash::check($request->old_password, $user->user_password)) {
+        $user->user_password = Hash::make($request->new_password);
+
+        if ($user->save()) {
+            return response()->json([
+                'result' => true,
+                'message' => 'Success: password is changed.',
+            ], 200); // Return 200 for successful operation
+        } else {
+            return response()->json([
+                'result' => false,
+                'message' => 'Failed to save the new password.',
+            ], 500); // Return 500 for server-side errors
+        }
+    } else {
+        return response()->json([
+            'result' => false,
+            'message' => 'Incorrect old password',
+        ], 401); // Return 400 for incorrect old password
+    }
+}
+
   
      /*
      * Edit User profile.
