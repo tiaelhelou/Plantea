@@ -252,9 +252,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                 _formKey.currentState!.validate()) {
                               bool response = await Api.changePassUser(
                                   oldpasswordController.text,
-                                  newpasswordController.text,
-                                  4);
-                              print(response);
+                                  newpasswordController.text);
 
                               if (response)
                               {

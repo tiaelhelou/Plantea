@@ -62,8 +62,10 @@ class Api {
       if (response.statusCode == 200) {
         final responseData = await json.decode(response.body);
         final token = responseData['access_token'];
+        final id = responseData['user']['user_id'];
 
         await saveTokenToLocalStorage(token!);
+        await saveIdToLocalStorage(id!);
 
         return true;
       } else {
@@ -96,14 +98,13 @@ class Api {
    * Change password api
    */
   static Future<bool> changePassUser(
-      String oldpassword, String newpassword, int id) async {
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
+      String oldpassword, String newpassword) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    // await saveIdToLocalStorage(id);
-    // int? getid = prefs.getInt('id');
+    int? id = prefs.getInt('id');
 
     final url = Uri.parse('$urlbase/authorization/user/changePassword/$id');
-  
+
     final Map<String, dynamic> data = {
       'new_password': newpassword,
       'old_password': oldpassword,
@@ -117,7 +118,7 @@ class Api {
         },
         body: jsonEncode(data),
       );
-   
+
       if (response.statusCode == 200) {
         return true;
       } else {

@@ -220,8 +220,7 @@ class _LogWidgetState extends State<LogWidget> {
                                             _formKey.currentState!.validate()) {
                                           bool response = await Api.loginUser(
                                               emailController.text,
-                                              passwordController.text);
-                                          print(response);
+                                              passwordController.text);                                     
 
                                           if (response == true)
 
