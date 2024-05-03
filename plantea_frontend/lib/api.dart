@@ -48,4 +48,10 @@ class Api {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
   }
+
+  static Future<void> saveIdToLocalStorage(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('id', id);
+  }
+  
 }
