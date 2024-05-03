@@ -9,20 +9,7 @@ import 'package:provider/provider.dart';
 import '../models/redeem_model.dart';
 export '../models/redeem_model.dart';
 
-const List<String> list = <String>[
-  'DisplayAll',
-  'One',
-  'Two',
-  'Three',
-  'Four',
-  'One1',
-  'Two2',
-  'Three3',
-  'One11',
-  'Two22',
-  'Three33',
-  'Four44'
-];
+List<String> list = <String>['DisplayAll', 'One', 'Two', 'Three', 'Four'];
 
 class RedeemWidget extends StatefulWidget {
   const RedeemWidget({Key? key}) : super(key: key);
@@ -35,6 +22,14 @@ class _RedeemWidgetState extends State<RedeemWidget> {
   late RedeemModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  int _counter = 0;
+
+  void _reloadPage() {
+    setState(() {
+      _counter++; // Change the state to trigger a rebuild
+    });
+  }
 
   @override
   void initState() {
@@ -244,7 +239,11 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                                       size: 35,
                                     ),
                                     onPressed: () {
-                                      print('IconButton pressed ...');
+                                      print('gift deleted  ...');
+                                      print(item);
+                                      list.removeAt(index);
+
+                                      _reloadPage();
                                     },
                                   ),
                                 ),
