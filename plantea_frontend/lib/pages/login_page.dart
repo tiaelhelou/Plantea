@@ -5,6 +5,7 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/profile_page.dart';
 import '../pages/plant_care_home_page.dart';
 import '../pages/welcome_page.dart';
+import '../api.dart';
 
 import '../models/log_model.dart';
 export '../models/log_model.dart';
@@ -214,16 +215,32 @@ class _LogWidgetState extends State<LogWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 50, 0, 50),
                                     child: FFButtonWidget(
-                                      onPressed: () {
+                                      onPressed: () async {
                                         if (_formKey.currentState != null &&
                                             _formKey.currentState!.validate()) {
+                                          bool response = await Api.loginUser(
+                                              emailController.text,
+                                              passwordController.text);
+                                          print(response);
+
+                                          if (response == true)
+
                                           // Navigate the user to the Home page
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const ProfileWidget()),
-                                          );
+                                          {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const ProfileWidget()),
+                                            );
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                  content: Text(
+                                                      'Incorrect Email or Password')),
+                                            );
+                                          }
                                         } else {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
