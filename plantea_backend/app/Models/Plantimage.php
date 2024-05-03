@@ -22,11 +22,9 @@ use Illuminate\Database\Eloquent\Model;
 class Plantimage extends Model
 {
 	protected $table = 'plantimages';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'plant_image_id' => 'int',
 		'plants_plant_id' => 'int'
 	];
 

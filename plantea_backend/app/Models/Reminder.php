@@ -25,11 +25,9 @@ use Illuminate\Database\Eloquent\Model;
 class Reminder extends Model
 {
 	protected $table = 'reminders';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'reminder_id' => 'int',
 		'reminder_time' => 'datetime',
 		'user_has_plants_user_id' => 'int',
 		'user_has_plants_plant_id' => 'int'

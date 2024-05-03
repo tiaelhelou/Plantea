@@ -9,12 +9,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Tymon\JWTAuth\Contracts\JWTSubject;
-
 /**
  * Class User
  * 
@@ -35,35 +29,11 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  */
 class User extends Model
 {
-	use HasApiTokens, HasFactory, Notifiable;
-	
 	protected $table = 'users';
 	protected $primaryKey = 'user_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    } 
-
 	protected $casts = [
-		'user_id' => 'int',
 		'user_points' => 'int'
 	];
 

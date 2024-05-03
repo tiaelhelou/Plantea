@@ -25,11 +25,9 @@ class Gift extends Model
 {
 	protected $table = 'gifts';
 	protected $primaryKey = 'gift_id';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'gift_id' => 'int',
 		'gift_points' => 'int',
 		'gift_count' => 'int'
 	];

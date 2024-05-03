@@ -28,12 +28,7 @@ class Plant extends Model
 {
 	protected $table = 'plants';
 	protected $primaryKey = 'plant_id';
-	public $incrementing = false;
 	public $timestamps = false;
-
-	protected $casts = [
-		'plant_id' => 'int'
-	];
 
 	protected $fillable = [
 		'plant_images',

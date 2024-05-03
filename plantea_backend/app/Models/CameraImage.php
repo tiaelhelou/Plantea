@@ -22,11 +22,9 @@ use Illuminate\Database\Eloquent\Model;
 class Cameraimage extends Model
 {
 	protected $table = 'cameraimages';
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'camera_image_id' => 'int',
 		'user_id' => 'int'
 	];
 
