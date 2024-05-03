@@ -16,22 +16,22 @@ class PlantCareController extends Controller
     public function addPlant($id = null, Request $request)
     {
         $request->validate([
-            'plant_nickname' => 'required',
-            'plant_name' => 'required',
-            'plant_image' => 'required'
+            'nickname' => 'required',
+            'name' => 'required',
+            'image' => 'required'
         ]);
 
-        $plantid = Plant::where('plant_name', $request->plant_name)->first()->plant_id;
+        $plantid = Plant::where('plant_name', $request->name)->first()->plant_id;
         $plant = new UserHasPlant;
 
         $plant->user_id = $id;
         $plant->plant_id = $plantid;
-        $plant->plant_nickname = $request->plant_nickname;
+        $plant->plant_nickname = $request->nickname;
 
 
         $image = new CameraImage;
 
-        $image->camera_image_image = $request->plant_image;
+        $image->camera_image_image = $request->image;
         $image->user_id = $id;
 
         if ($plant->save() && $image->save()) {
