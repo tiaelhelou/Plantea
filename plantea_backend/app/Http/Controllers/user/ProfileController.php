@@ -123,8 +123,7 @@ public function changePassword(Request $request, $id=null)
                 return response()->json([
                     'result' => false,
                     'message' => "Information not saved",
-
-                ], 201);
+                ], 200);
             }
         }
 
