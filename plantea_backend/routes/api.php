@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\PlantInformationController;
 use App\Http\Controllers\user\CameraController;
 use App\Http\Controllers\user\DonateController;
 use App\Http\Controllers\user\PlantCareController;
@@ -63,7 +64,10 @@ Route::group(['prefix' => 'v1'], function () {
             });
 
             Route::group(['prefix' => 'admin'], function () {
-                // api for admin functions
+                
+                Route::get('/displayInformation/{id?}/{name?}', [PlantInformationController::class, 'displayInformation']);
+                
+
             });
         });
 
