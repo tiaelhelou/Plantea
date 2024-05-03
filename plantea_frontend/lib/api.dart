@@ -43,8 +43,7 @@ class Api {
    */
   static Future<bool> loginUser(String email, String password) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final url = Uri.parse(
-        '$urlbase/authentication/login'); // Replace with your API endpoint for login
+    final url = Uri.parse('$urlbase/authentication/login');
 
     final Map<String, dynamic> data = {
       'user_email': email,
