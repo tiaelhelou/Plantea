@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:plantea/api.dart';
 import 'package:plantea/pages/add_plant_page.dart';
 import 'package:plantea/pages/login_page.dart';
 import 'package:plantea/pages/welcome_page.dart';
@@ -268,17 +269,30 @@ class _SignupWidgetState extends State<SignupWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 50, 0, 0),
                                         child: FFButtonWidget(
-                                          onPressed: () {
+                                          onPressed: () async {
                                             if (_formKey.currentState != null &&
                                                 _formKey.currentState!
                                                     .validate()) {
-                                              // Navigate the user to the Home page
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const LogWidget()),
-                                              );
+                                              bool response =
+                                                  await Api.registerUser(
+                                                      nameController.text,
+                                                      emailController.text,
+                                                      passController.text);
+
+                                              if (response == true) {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const LogWidget()),
+                                                );
+                                              } else {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                      content: Text('Error')),
+                                                );
+                                              }
                                             } else {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
