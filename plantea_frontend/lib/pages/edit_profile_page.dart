@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:plantea/api.dart';
 import 'package:plantea/pages/plant_Info.dart';
 import 'package:plantea/pages/profile_page.dart';
 import 'package:plantea/pages/settings_page.dart';
@@ -296,16 +297,24 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 50),
                           child: FFButtonWidget(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState != null &&
                                   _formKey.currentState!.validate()) {
-                                // Navigate the user to the Home page
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ProfileWidget()),
-                                );
+                                bool response = await Api.editProfile(
+                                    nameController.text, emailController.text);
+
+                                if (response) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProfileWidget()),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Incorrect')),
+                                  );
+                                }
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
