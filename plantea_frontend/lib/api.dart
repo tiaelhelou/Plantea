@@ -245,4 +245,31 @@ class Api {
       return false;
     }
   }
+
+  /*
+   * Get plant name api
+   */
+  static Future<List<String>> getPlantNames() async {
+    final url = Uri.parse('$urlbase/authorization/admin/displayPlants');
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        
+        if (responseData.containsKey('data')) {
+          final List<dynamic> plantsData = responseData['data'];
+          final List<String> plantNames =
+              plantsData.map((plant) => plant['plant_name'] as String).toList();
+          return plantNames;
+        } else {
+          throw Exception('Invalid response format: missing "data" key');
+        }
+      } else {
+        throw Exception('Failed to fetch plant data');
+      }
+    } catch (error) {
+      throw Exception('Error fetching plant data: $error');
+    }
+  }
 }
