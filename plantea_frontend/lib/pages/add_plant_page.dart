@@ -1,20 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:plantea/api.dart';
 import 'package:plantea/pages/image_display.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
 
 import '../models/add_plant_model.dart';
 export '../models/add_plant_model.dart';
 
-const List<String> list = <String>[
-  'One',
-  'Two',
-  'Three',
-  'Four'
-]; // list of plants
+// list of plants
 
 class AddPlantWidget extends StatefulWidget {
   const AddPlantWidget({super.key});
@@ -28,6 +27,29 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
   TextEditingController nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final picker = ImagePicker();
+  File? file;
+  bool image_flag = false;
+  //List<String> list = [];
+  List<String> list = <String>[];
+
+  Future<void> pickImageFromGallery() async {
+    final XFile? pickedImage =
+        await picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        file = File(pickedImage.path);
+        Api.saveImageToLocalStorage(file!.path);
+      });
+    }
+  }
+
+  Future<void> fetchPlantNames() async {
+    // Call the getPlantNames function to fetch plant names
+    List<String> names = await Api.getPlantNames();
+
+    list = names; // Update the state with the fetched plant names
+  }
 
   // String dropdownValue = list.first;
   @override
@@ -54,6 +76,7 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
 
   @override
   Widget build(BuildContext context) {
+    fetchPlantNames();
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -174,13 +197,9 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
                                   size: 24,
                                 ),
                                 onPressed: () {
-                                  print(
-                                      'IconButton pressed ...'); ////// add prersonal image of the plant
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Productdetails()),
-                                  );
+                                  print('IconButton pressed ...');
+                                  image_flag = true;
+                                  pickImageFromGallery(); ////// add prersonal image of the plant
                                 },
                               ),
                             ),
@@ -301,24 +320,36 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 0),
                         child: FFButtonWidget(
-                          onPressed: () {
+                          onPressed: () async {
                             /// check if both field are filled and adds  default image if non selected
                             if (_formKey.currentState != null &&
                                 _formKey.currentState!.validate() &&
-                                isDropdownValueSelected() == true) {
+                                isDropdownValueSelected() == true &&
+                                image_flag) {
                               // Navigate the user to the Home page
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PlantcareWidget()),
-                              );
+                              bool response = await Api.addPlant(
+                                  nameController.text, selectedValue!);
+
+                              if (response) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PlantcareWidget()),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Incorrect')),
+                                );
+                              }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                    content: Text('Please Fill All Input')),
+                                    content: Text('Please fill input')),
                               );
                             }
+
+                            /// check if both field are filled and adds  default image if non selected
                           },
                           text: 'ADD',
                           options: FFButtonOptions(
