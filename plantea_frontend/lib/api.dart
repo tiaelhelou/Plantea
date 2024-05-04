@@ -131,6 +131,9 @@ class Api {
     }
   }
 
+  /*
+   * Reset password api
+   */
   static Future<bool> resetPassword(String email, String newpassword) async {
     final url = Uri.parse('$urlbase/authentication/resetPassword');
 
@@ -151,7 +154,44 @@ class Api {
       if (response.statusCode == 201) {
         return true;
       } else {
-        print('Change failed with status: ${response.statusCode}');
+        print('Reset failed with status: ${response.statusCode}');
+        return false;
+      }
+    } catch (error) {
+      print('Error : $error');
+      return false;
+    }
+  }
+
+  /*
+   * Edit profile api
+   */
+  static Future<bool> editProfile(String name, String email) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    int? id = prefs.getInt('id');
+
+    final url = Uri.parse('$urlbase/authorization/user/editProfile/$id');
+
+    final Map<String, dynamic> data = {
+      'name': name,
+      'email': email,
+      'profile': 'profile'
+    };
+
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        print('Edit failed with status: ${response.statusCode}');
         return false;
       }
     } catch (error) {
