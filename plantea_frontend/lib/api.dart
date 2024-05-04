@@ -207,4 +207,42 @@ class Api {
       return false;
     }
   }
+
+  /*
+   * Add plant api
+   */
+  static Future<bool> addPlant(String name, String speicies) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String? path = prefs.getString('path');
+    int? id = prefs.getInt('id');
+
+    final url = Uri.parse('$urlbase/authorization/user/addPlant/$id');
+
+    final Map<String, dynamic> data = {
+      'nickname': name,
+      'name': speicies,
+      'image': path,
+    };
+
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+      print(data);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        print('Add Plant failed with status: ${response.statusCode}');
+        return false;
+      }
+    } catch (error) {
+      print('Error : $error');
+      return false;
+    }
+  }
 }
