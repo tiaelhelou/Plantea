@@ -95,6 +95,14 @@ class Api {
   }
 
   /*
+   * Save Image
+   */
+  static Future<void> saveImageToLocalStorage(String path) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('path', path);
+  }
+
+  /*
    * Change password api
    */
   static Future<bool> changePassUser(
