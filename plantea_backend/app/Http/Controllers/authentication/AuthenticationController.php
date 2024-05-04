@@ -87,7 +87,7 @@ class AuthenticationController extends Controller
                 'message' => 'error',
             ], 200);
         } else {
-            if ($user->user_password != $request->new_password) { // old = new password
+            
                 $user->user_password = bcrypt($request->new_password); // get new password
 
                 if($user->save()){ // save new password
@@ -102,13 +102,6 @@ class AuthenticationController extends Controller
                         'message' => 'Password could not be changed',
                     ], 200);
                 }
-            }
-            else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'New password cannot be the old password',
-                ], 200);
-            }
         }
 
     }

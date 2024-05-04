@@ -130,4 +130,33 @@ class Api {
       return false;
     }
   }
+
+  static Future<bool> resetPassword(String email, String newpassword) async {
+    final url = Uri.parse('$urlbase/authentication/resetPassword');
+
+    final Map<String, dynamic> data = {
+      'email': email,
+      'new_password': newpassword,
+    };
+
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        print('Change failed with status: ${response.statusCode}');
+        return false;
+      }
+    } catch (error) {
+      print('Error : $error');
+      return false;
+    }
+  }
 }

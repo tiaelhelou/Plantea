@@ -8,10 +8,10 @@ class ResetPassModel extends FlutterFlowModel<ResetPassWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for oldPass widget.
-  FocusNode? oldPassFocusNode;
-  TextEditingController? oldPassTextController;
-  String? Function(BuildContext, String?)? oldPassTextControllerValidator;
+  // State field(s) for email widget.
+  FocusNode? emailFocusNode;
+  TextEditingController? emailTextController;
+  String? Function(BuildContext, String?)? emailTextControllerValidator;
   // State field(s) for newpassword widget.
   FocusNode? newpasswordFocusNode;
   TextEditingController? newpasswordTextController;
@@ -26,8 +26,8 @@ class ResetPassModel extends FlutterFlowModel<ResetPassWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
-    oldPassFocusNode?.dispose();
-    oldPassTextController?.dispose();
+    emailFocusNode?.dispose();
+    emailTextController?.dispose();
 
     newpasswordFocusNode?.dispose();
     newpasswordTextController?.dispose();

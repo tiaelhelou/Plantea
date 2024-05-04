@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:plantea/api.dart';
+import 'package:plantea/pages/login_page.dart';
 import '../pages/plant_care_home_page.dart';
 import '../pages/welcome_page.dart';
 
@@ -18,7 +20,7 @@ class ResetPassWidget extends StatefulWidget {
 class _ResetPassWidgetState extends State<ResetPassWidget> {
   late ResetPassModel _model;
   final _formKey = GlobalKey<FormState>();
-  TextEditingController oldPassController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController newpasswordController = TextEditingController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -27,8 +29,8 @@ class _ResetPassWidgetState extends State<ResetPassWidget> {
     super.initState();
     _model = createModel(context, () => ResetPassModel());
 
-    _model.oldPassTextController ??= TextEditingController();
-    _model.oldPassFocusNode ??= FocusNode();
+    _model.emailTextController ??= TextEditingController();
+    _model.emailFocusNode ??= FocusNode();
 
     _model.newpasswordTextController ??= TextEditingController();
     _model.newpasswordFocusNode ??= FocusNode();
@@ -108,7 +110,7 @@ class _ResetPassWidgetState extends State<ResetPassWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         40, 10, 230, 20),
                                     child: Text(
-                                      'OLD PASSWORD',
+                                      'EMAIL',
                                       textAlign: TextAlign.start,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -123,7 +125,7 @@ class _ResetPassWidgetState extends State<ResetPassWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         45, 0, 45, 16),
                                     child: TextFormField(
-                                      controller: oldPassController,
+                                      controller: emailController,
                                       decoration: InputDecoration(
                                         labelText: '',
                                         labelStyle: FlutterFlowTheme.of(context)
@@ -213,16 +215,31 @@ class _ResetPassWidgetState extends State<ResetPassWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 50, 0, 50),
                                     child: FFButtonWidget(
-                                      onPressed: () {
+                                      onPressed: () async {
                                         if (_formKey.currentState != null &&
                                             _formKey.currentState!.validate()) {
+                                          bool response =
+                                              await Api.resetPassword(
+                                                  emailController.text,
+                                                  newpasswordController.text);
+
+                                          if (response == true)
+
                                           // Navigate the user to the Home page
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const WelcomeWidget()),
-                                          );
+                                          {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const LogWidget()),
+                                            );
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                  content: Text('Error')),
+                                            );
+                                          }
                                         } else {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(

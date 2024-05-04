@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/profile_page.dart';
+import 'package:plantea/pages/reset_pass_page.dart';
 import '../pages/plant_care_home_page.dart';
 import '../pages/welcome_page.dart';
 import '../api.dart';
@@ -220,7 +221,7 @@ class _LogWidgetState extends State<LogWidget> {
                                             _formKey.currentState!.validate()) {
                                           bool response = await Api.loginUser(
                                               emailController.text,
-                                              passwordController.text);                                     
+                                              passwordController.text);
 
                                           if (response == true)
 
@@ -279,6 +280,16 @@ class _LogWidgetState extends State<LogWidget> {
                                 ],
                               ),
                             ),
+                          ),
+                          Center(
+                            child: InkWell(
+                                child: Text('Open Browser'),
+                                onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ResetPassWidget()),
+                                    )),
                           ),
                         ],
                       ),
