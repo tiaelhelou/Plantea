@@ -59,9 +59,13 @@ class PlantCareController extends Controller
             ], 400);
         } else {
             $user_plants = UserHasPlant::where('user_id', $id)->get();
-
-            foreach ($user_plants->plant_id as $plant_id) {
-                $plants_details = Plant::where('plant_id', $plant_id)->get();
+            $plants_details = [];
+            foreach ($user_plants as $user_plant) {
+                $plant_id = $user_plant->plant_id;
+                $plant_details = Plant::where('plant_id', $plant_id)->first();
+                if ($plant_details) {
+                $plants_details[] = $plant_details; // Store details in the array
+            }
             }
 
             return response()->json([
