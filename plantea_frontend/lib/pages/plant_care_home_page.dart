@@ -75,8 +75,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
         plantID.add(plantid);
       }
     }
-    print(newList);
-    print(nick__name);
+
     print(plantID);
     int index = newList.indexOf(nick__name);
     return index != -1 ? plantID[index] : null;
@@ -324,17 +323,17 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                   vertical: 10), // Add vertical padding
                               child: GestureDetector(
                                 onTap: () async {
-                                  print('IconButton pressed ...');
+                                  print(' 1 IconButton pressed ...');
                                   // var plantInfoId =
                                   //     getPlantID(); // add to shred prefs or send through page
                                   int? nicknameInfId =
-                                      await getPlantID(newList[index]);
+                                      await getPlantID(selectedValue!);
                                   print(nicknameInfId);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => PlantInfoWidget(
-                                            nicknameInfId!, newList[index])),
+                                            nicknameInfId!, selectedValue!)),
                                   );
                                 },
                                 child: Container(
@@ -395,7 +394,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                               child: GestureDetector(
                                 onTap: () async {
                                   int? nicknameInfId =
-                                      await getPlantID(selectedValue!);
+                                      await getPlantID(newList[index]);
                                   print(nicknameInfId);
 
                                   Navigator.push(
