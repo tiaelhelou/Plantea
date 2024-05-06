@@ -321,4 +321,24 @@ class Api {
       throw Exception('Error fetching plant data: $error');
     }
   }
+
+  static Future<List> displayRewards() async {
+    final url = Uri.parse('$urlbase/authorization/user/displayRewards');
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+
+        final List<dynamic> rewardsData = responseData['data'];
+        // final List<String> plantNames =
+        //     plantsData.map((plant) => plant['plant_name'] as String).toList();
+        return rewardsData;
+      } else {
+        throw Exception('Invalid response format: missing "data" key');
+      }
+    } catch (error) {
+      throw Exception('Error fetching  data: $error');
+    }
+  }
 }
