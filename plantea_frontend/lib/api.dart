@@ -277,7 +277,7 @@ class Api {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
-    final url = Uri.parse('$urlbase/authorization/user/viewPlants/1');
+    final url = Uri.parse('$urlbase/authorization/user/viewPlants/$id');
 
     try {
       final response = await http.get(url);
