@@ -14,7 +14,7 @@ class PlantLibraryController extends Controller
      */
     public function displayPlants()
     {
-        $plants = Plant::orderBy("plant_category", "asc")->get();
+        $plants = Plant::orderByDesc("plant_category")->get();
 
         if ($plants != null) {
             return response()->json([
