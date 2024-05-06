@@ -132,29 +132,31 @@ public function changePassword(Request $request, $id=null)
     /*
     * Checkin of User.
     */
-    public function checkIn($id = null){
+public function checkIn($id = null){
+    if ($id == null ) {
+        return response()->json(['message' => 'Checkin Failed'], 400);
+    }
+    else {
+        $user = User::find($id);
+        if ($user != null) {
+            $checkins = CheckIn::where('user_id', $id)->get();
 
-        if ($id == null ) {
-            return response()->json(['message' => 'Checkin Failed'], 400);
+            // Iterate over each checkin and update the checkin_total
+            foreach ($checkins as $checkin) {
+                $checkin->checkin_total += 1;
+                $checkin->save();
+            }
+
+            // Update user points
+            $user->user_points += 5;
+            $user->save();
+
+            return response()->json(['message' => 'Checkin Successful'], 200);
         }
         else{
-            $user = User::find($id);
-            if ($user != null) {
-                $checkins = CheckIn::where('user_id', $id)->get();
-                $checkins->checkin_total = $checkins->checkin_total + 1;
-
-                $user->user_points = $user->user_points + 5;
-
-                if($checkins->save() && $user->save()) {
-                    return response()->json(['message' => 'Checkin Successful'], 200);
-                }
-                else{
-                    return response()->json(['message' => 'Checkin Failed'], 400);
-                }
-            }
-            else{
-                return response()->json(['message' => 'User not found'], 400);
-            }
+            return response()->json(['message' => 'User not found'], 400);
         }
     }
+}
+
 }
