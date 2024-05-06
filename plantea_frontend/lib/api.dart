@@ -361,4 +361,33 @@ class Api {
       throw Exception('Error fetching data: $error');
     }
   }
+
+  static Future<bool> checIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    int? id = prefs.getInt('id');
+    final url = Uri.parse('$urlbase/authorization/user/checkIn/1');
+
+    final Map<String, dynamic> data = {};
+
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        print('checkin failed with status: ${response.statusCode}');
+        return false;
+      }
+    } catch (error) {
+      print('Error : $error');
+      return false;
+    }
+  }
 }
