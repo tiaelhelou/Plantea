@@ -270,7 +270,7 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              PlantInfoWidget()),
+                                              PlantInfoWidget(index, null)),
                                     );
                                   },
                                   child: Container(
@@ -300,7 +300,7 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              PlantInfoWidget()),
+                                              PlantInfoWidget(index, null)),
                                     );
                                   },
                                   child: Container(
