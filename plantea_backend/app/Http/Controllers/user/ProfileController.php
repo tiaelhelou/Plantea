@@ -139,21 +139,31 @@ public function checkIn($id = null){
     else {
         $user = User::find($id);
         if ($user != null) {
-            $checkins = CheckIn::where('user_id', $id)->get();
-
-            // Iterate over each checkin and update the checkin_total
-            foreach ($checkins as $checkin) {
-                $checkin->checkin_total += 1;
-                $checkin->save();
+              $checkins = CheckIn::where('user_id', $id)->get();
+             if ($checkins->isEmpty()) {
+            
+                $checkin = new CheckIn();
+                $checkin->user_id = $id;
+                $checkin->checkin_total = 1;
+                $checkin->save(); 
             }
+            else {
+                // Get checkins for the user
+            
 
-            // Update user points
-            $user->user_points += 5;
-            $user->save();
+                // Iterate over each checkin and update the checkin_total
+                foreach ($checkins as $checkin) {
+                    $checkin->checkin_total += 1;
+                    $checkin->save();
+                }
 
-            return response()->json(['message' => 'Checkin Successful'], 200);
-        }
-        else{
+                // Update user points
+                $user->user_points += 5;
+                $user->save();
+
+                return response()->json(['message' => 'Checkin Successful'], 200);
+            }
+     } else{
             return response()->json(['message' => 'User not found'], 400);
         }
     }

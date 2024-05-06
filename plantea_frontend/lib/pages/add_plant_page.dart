@@ -5,10 +5,14 @@ import 'package:flutter/material.dart';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plantea/api.dart';
+import 'package:plantea/pages/donate_page.dart';
 import 'package:plantea/pages/image_display.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
+import 'package:plantea/pages/plant_library_page.dart.dart';
+import 'package:plantea/pages/profile_page.dart';
 
 import '../models/add_plant_model.dart';
 export '../models/add_plant_model.dart';
@@ -377,6 +381,110 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
                           ),
                         ),
                       ),
+                      Container(
+                        width: 500,
+                        height: 89,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF355E3B),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            FlutterFlowIconButton(
+                              borderRadius: 20,
+                              borderWidth: 1,
+                              buttonSize: 60,
+                              icon: Icon(
+                                Icons.library_books_outlined,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                size: 35,
+                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          PlantLibraryWidget()),
+                                );
+                              },
+                            ),
+                            FlutterFlowIconButton(
+                              borderRadius: 20,
+                              borderWidth: 1,
+                              buttonSize: 60,
+                              icon: FaIcon(
+                                FontAwesomeIcons.viadeo,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                size: 35,
+                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PlantcareWidget()),
+                                );
+                              },
+                            ),
+                            FlutterFlowIconButton(
+                              borderRadius: 20,
+                              borderWidth: 1,
+                              buttonSize: 60,
+                              icon: Icon(
+                                Icons.camera_alt,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                size: 35,
+                              ),
+                              onPressed: () {
+                                print('camera pressed ...');
+                              },
+                            ),
+                            FlutterFlowIconButton(
+                              borderRadius: 20,
+                              borderWidth: 1,
+                              buttonSize: 60,
+                              icon: FaIcon(
+                                FontAwesomeIcons.donate,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                size: 35,
+                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DonateWidget()),
+                                );
+                              },
+                            ),
+                            FlutterFlowIconButton(
+                              borderRadius: 20,
+                              borderWidth: 1,
+                              buttonSize: 60,
+                              icon: Icon(
+                                Icons.person,
+                                color: FlutterFlowTheme.of(context)
+                                    .primaryBackground,
+                                size: 35,
+                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ProfileWidget()),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
