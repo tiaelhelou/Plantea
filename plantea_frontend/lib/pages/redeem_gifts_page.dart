@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import '../models/redeem_model.dart';
 export '../models/redeem_model.dart';
 
+String result = '';
 //List<String> list = <String>['DisplayAll', 'One', 'Two', 'Three', 'Four'];
 
 class RedeemWidget extends StatefulWidget {
@@ -50,12 +51,12 @@ class _RedeemWidgetState extends State<RedeemWidget> {
     list.addAll(names);
   }
 
-  Future<void> totalPoints() async {
-    List total = await Api.displayTotalPoints();
+  Future<String> totalPoints() async {
+    String total = await Api.displayTotalPoints();
     if (total == null)
-      print(0);
+      return '0';
     else {
-      print(total);
+      return total;
     }
   }
 
@@ -68,9 +69,19 @@ class _RedeemWidgetState extends State<RedeemWidget> {
   @override
   void initState() {
     extractRewards();
-    totalPoints();
+    fetchStringFromFuture();
+
     super.initState();
     _model = createModel(context, () => RedeemModel());
+  }
+
+  Future<void> fetchStringFromFuture() async {
+    // Call the async function and await the result
+    String futureResult = await totalPoints();
+    // Update the state with the result
+    setState(() {
+      result = futureResult;
+    });
   }
 
   @override
@@ -175,7 +186,7 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
                                 child: Text(
-                                  ' ',
+                                  result,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -237,30 +248,36 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           10, 0, 0, 0),
-                                      child: Row(children: [
-                                        Text(
-                                          '${list[index]}                     ',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                fontSize: 14,
-                                                letterSpacing: 0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                        ),
-                                        Text(
-                                          pointList[index],
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Montserrat',
-                                                fontSize: 14,
-                                                letterSpacing: 0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                        ),
-                                      ]),
+                                      child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              '${list[index]}',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Montserrat',
+                                                    fontSize: 14,
+                                                    letterSpacing: 0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                            ),
+                                            Text(
+                                              pointList[index],
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Montserrat',
+                                                    fontSize: 14,
+                                                    letterSpacing: 0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                            ),
+                                          ]),
                                     ),
                                   ),
                                 ),

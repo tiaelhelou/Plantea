@@ -341,4 +341,24 @@ class Api {
       throw Exception('Error fetching  data: $error');
     }
   }
+
+  static Future<String> displayTotalPoints() async {
+    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/1');
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+
+        final Map<String, dynamic> profileData = responseData['user_data'];
+
+        String totalPoints = profileData['user_points'].toString();
+        return totalPoints;
+      } else {
+        throw Exception('Invalid response format: missing "data" key');
+      }
+    } catch (error) {
+      throw Exception('Error fetching data: $error');
+    }
+  }
 }
