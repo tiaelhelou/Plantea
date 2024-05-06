@@ -8,25 +8,26 @@ use App\Models\UserRedeemsGift;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class RewardController extends Controller
 {
     /*
     * Display rewards for User.
     */
-    public function displayRewards()
-    {
-        $rewards = Gift::has('gift_count', '>=', 1)->get();
+   public function displayRewards()
+{
+    $rewards = Gift::where('gift_count', '>=', 1)->get();
 
-        if ($rewards == null) {
-            return response()->json(['message' => 'Redeemed Failed'], 400);
-        }
-        return response()->json([
-            'message' => 'Gifts retrieved successfully',
-            'data' => $rewards
-        ], 200);
+    if ($rewards->isEmpty()) {
+        return response()->json(['message' => 'No gifts available'], Response::HTTP_NOT_FOUND);
     }
 
+    return response()->json([
+        'message' => 'Gifts retrieved successfully',
+        'data' => $rewards
+    ], 200);
+}
     /*
     * User redeem a Reward.
     */

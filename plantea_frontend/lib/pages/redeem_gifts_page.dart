@@ -265,17 +265,24 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                             ),
-                                            Text(
-                                              pointList[index],
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Montserrat',
-                                                    fontSize: 14,
-                                                    letterSpacing: 0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                  right:
+                                                      10), // Adjust the padding as needed
+                                              child: Text(
+                                                pointList[index],
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Montserrat',
+                                                          fontSize: 14,
+                                                          letterSpacing: 0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                              ),
                                             ),
                                           ]),
                                     ),
