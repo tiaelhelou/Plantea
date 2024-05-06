@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:plantea/api.dart';
 import 'package:plantea/pages/add_plant_page.dart';
 import 'package:plantea/pages/plant_Info.dart';
 import 'package:plantea/pages/reminders_page.dart';
@@ -11,15 +12,6 @@ import '../pages/welcome_page.dart';
 import '../models/plantLibrary_model.dart';
 export '../models/plantLibrary_model.dart';
 
-const List<String> list = <String>[
-  'DisplayAll',
-  'One',
-  'Two',
-  'Three',
-  'Four',
-  'One1'
-];
-List<String> newList = list.sublist(1);
 /**
  * the list should be displayed in the listview and search bar
  *  get from db 
@@ -45,29 +37,51 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String? selectedValue;
   final TextEditingController textEditingController = TextEditingController();
+  List<String> list = [];
+  List<String> newList = [];
+  List<int> idlist = [];
 
-  /// the list should be displayed in the listview and search bar
+  void initializeNewList() {
+    newList = list.sublist(1);
+  }
 
-  /// FECTH DATA FROM DB
-// Future<void> _fetchData() async {
-//     final response = await http.get(Uri.parse('http://your_backend_server_url/data'));
-//     if (response.statusCode == 200) {
-//       setState(() {
-//         _data = json.decode(response.body);
-//       });
-//     } else {
-//       throw Exception('Failed to fetch data');
-//     }
-//   }
+  Future<void> extractPlantNames() async {
+    List<String> plantNames = [];
+    List<int> plantid = [];
+    List<dynamic> userPlants = await Api.viewPlantsInfo();
+    // Iterate over each JSON object in the list
+    for (var plant in userPlants) {
+      String plantName = plant[
+          'plant_name']; // Assuming 'plant_nickname' is the key for the plant name
+      if (plantName != null) {
+        plantNames.add(plantName); // Add the plant name to the list
+      }
+      int plantID = plant['plant_id'];
+      if (plantID != null) {
+        plantid.add(plantID);
+      }
+    }
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     _fetchData();
-//   }
+    idlist.addAll(plantid);
+    list = ['DisplayAll'];
+    list.addAll(plantNames);
+
+    initializeNewList();
+  }
+
+  int? getPlantinfoID(String name) {
+    int index = newList.indexOf(name);
+    if (index != null) {
+      return index != -1 ? idlist[index] : null;
+    } else {
+      return 0;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    extractPlantNames();
     _model = createModel(context, () => PlantLibraryModel());
 
     _model.textController ??= TextEditingController(text: 'search');
@@ -261,16 +275,18 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                               // Display only one container
                               var item =
                                   selectedValue; // Use the selected value
-                              print(selectedValue);
 
                               return GestureDetector(
                                   onTap: () {
-                                    print('IconButton pressed ...');
+                                    print(' 1 IconButton pressed ...');
+                                    // var plantInfoId =
+                                    //     getPlantID(); // add to shred prefs or send through page
+
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              PlantInfoWidget(index, null)),
+                                          builder: (context) => PlantInfoWidget(
+                                              getPlantinfoID(item!), null)),
                                     );
                                   },
                                   child: Container(
@@ -290,17 +306,16 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                             } else {
                               // Return a container with a button inside
                               var item = newList[index];
-                              print(item);
-                              print("object");
 
                               return GestureDetector(
                                   onTap: () {
                                     print('IconButton pressed ...');
+
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              PlantInfoWidget(index, null)),
+                                          builder: (context) => PlantInfoWidget(
+                                              idlist[index], null)),
                                     );
                                   },
                                   child: Container(
