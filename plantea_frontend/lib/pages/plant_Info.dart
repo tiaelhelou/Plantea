@@ -11,7 +11,7 @@ import '../models/plant_info_model.dart';
 export '../models/plant_info_model.dart';
 
 class PlantInfoWidget extends StatefulWidget {
-  const PlantInfoWidget({super.key});
+  const PlantInfoWidget(int id, String? nickname, {super.key});
 
   @override
   State<PlantInfoWidget> createState() => _PlantInfoWidgetState();
