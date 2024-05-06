@@ -322,138 +322,168 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 10), // Add vertical padding
                               child: GestureDetector(
-                                onTap: () async {
-                                  print(' 1 IconButton pressed ...');
-                                  // var plantInfoId =
-                                  //     getPlantID(); // add to shred prefs or send through page
-                                  int? nicknameInfId =
-                                      await getPlantID(selectedValue!);
-                                  print(nicknameInfId);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => PlantInfoWidget(
-                                            nicknameInfId!, selectedValue!)),
-                                  );
-                                },
-                                child: Container(
-                                  width: 296,
-                                  height: 150,
-                                  constraints: BoxConstraints(
-                                    minWidth: 296,
-                                    minHeight: 180,
-                                    maxWidth: 296,
-                                    maxHeight: 180,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      alignment: AlignmentDirectional(0, 0),
-                                      image: Image.network(
-                                        'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
-                                      ).image,
+                                  onTap: () async {
+                                    print(' 1 IconButton pressed ...');
+                                    // var plantInfoId =
+                                    //     getPlantID(); // add to shred prefs or send through page
+                                    int? nicknameInfId =
+                                        await getPlantID(selectedValue!);
+                                    print(nicknameInfId);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PlantInfoWidget(
+                                              nicknameInfId!, selectedValue!)),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 296,
+                                    height: 180,
+                                    constraints: BoxConstraints(
+                                      minWidth: 296,
+                                      minHeight: 180,
+                                      maxWidth: 296,
+                                      maxHeight: 180,
                                     ),
-                                    borderRadius: BorderRadius.circular(23),
-                                  ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(1, 1),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 25, 25),
-                                      child: FlutterFlowIconButton(
-                                        borderRadius: 5,
-                                        borderWidth: 1,
-                                        buttonSize: 40,
-                                        fillColor: Color(0xFFFAF49D),
-                                        icon: Icon(
-                                          Icons.timer_sharp,
-                                          color: Color(0xFF355E3B),
-                                          size: 24,
-                                        ),
-                                        onPressed: () {
-                                          print('IconButton pressed ...');
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    RemindersWidget()),
-                                          );
-                                        },
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage('default.jpg'),
                                       ),
+                                      borderRadius: BorderRadius.circular(23),
                                     ),
-                                  ),
-                                ),
-                              ));
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              25, 25, 50, 25),
+                                          child: Text(
+                                            newList[index] ??
+                                                '', // Display selected value, or empty string if null
+                                            style: TextStyle(
+                                              color:
+                                                  Color.fromRGBO(2, 27, 17, 1),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.bottomRight,
+                                          child: Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                0, 0, 25, 25),
+                                            child: IconButton(
+                                              icon: Icon(
+                                                Icons.timer_sharp,
+                                                color: Color(0xFF355E3B),
+                                                size: 24,
+                                              ),
+                                              onPressed: () {
+                                                print('IconButton pressed ...');
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        RemindersWidget(),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )));
                         } else {
                           return Padding(
                               // list of container
                               padding: const EdgeInsets.symmetric(
                                   vertical: 10), // Add vertical padding
                               child: GestureDetector(
-                                onTap: () async {
-                                  int? nicknameInfId =
-                                      await getPlantID(newList[index]);
-                                  print(nicknameInfId);
+                                  onTap: () async {
+                                    int? nicknameInfId =
+                                        await getPlantID(newList[index]);
+                                    print(nicknameInfId);
 
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => PlantInfoWidget(
-                                            nicknameInfId!, newList[index])),
-                                  );
-                                },
-                                child: Container(
-                                  width: 296,
-                                  height: 150,
-                                  constraints: BoxConstraints(
-                                    minWidth: 296,
-                                    minHeight: 180,
-                                    maxWidth: 296,
-                                    maxHeight: 180,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      alignment: AlignmentDirectional(0, 0),
-                                      image: Image.network(
-                                        'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
-                                      ).image,
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PlantInfoWidget(
+                                              nicknameInfId!, newList[index])),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 296,
+                                    height: 180,
+                                    constraints: BoxConstraints(
+                                      minWidth: 296,
+                                      minHeight: 180,
+                                      maxWidth: 296,
+                                      maxHeight: 180,
                                     ),
-                                    borderRadius: BorderRadius.circular(23),
-                                  ),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(1, 1),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 25, 25),
-                                      child: FlutterFlowIconButton(
-                                        borderRadius: 5,
-                                        borderWidth: 1,
-                                        buttonSize: 40,
-                                        fillColor: Color(0xFFFAF49D),
-                                        icon: Icon(
-                                          Icons.timer_sharp,
-                                          color: Color(0xFF355E3B),
-                                          size: 24,
-                                        ),
-                                        onPressed: () {
-                                          print('IconButton pressed ...');
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    RemindersWidget()),
-                                          );
-                                        },
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage('default.jpg'),
                                       ),
+                                      borderRadius: BorderRadius.circular(23),
                                     ),
-                                  ),
-                                ),
-                              ));
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              25, 25, 50, 25),
+                                          child: Text(
+                                            newList[index] ??
+                                                '', // Display selected value, or empty string if null
+                                            style: TextStyle(
+                                              color:
+                                                  Color.fromRGBO(5, 39, 27, 1),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.bottomRight,
+                                          child: Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                0, 0, 25, 25),
+                                            child: IconButton(
+                                              icon: Icon(
+                                                Icons.timer_sharp,
+                                                color: Color(0xFF355E3B),
+                                                size: 24,
+                                              ),
+                                              onPressed: () {
+                                                print('IconButton pressed ...');
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        RemindersWidget(),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )));
                         }
                       },
                     ))
