@@ -256,7 +256,7 @@ class Api {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
-        
+
         if (responseData.containsKey('data')) {
           final List<dynamic> plantsData = responseData['data'];
           final List<String> plantNames =
@@ -267,6 +267,35 @@ class Api {
         }
       } else {
         throw Exception('Failed to fetch plant data');
+      }
+    } catch (error) {
+      throw Exception('Error fetching plant data: $error');
+    }
+  }
+
+  static Future<List> viewPlants(bool getInfo) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    int? id = prefs.getInt('id');
+    final url = Uri.parse('$urlbase/authorization/user/viewPlants/1');
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        if (getInfo) {
+          final List<dynamic> plantsData = responseData['data2'];
+          // final List<String> plantNames =
+          //     plantsData.map((plant) => plant['plant_name'] as String).toList();
+          return plantsData;
+        } else {
+          final List<dynamic> plantsData = responseData['data1'];
+          // final List<String> plantNames =
+          //     plantsData.map((plant) => plant['plant_name'] as String).toList();
+          return plantsData;
+        }
+      } else {
+        throw Exception('Invalid response format: missing "data" key');
       }
     } catch (error) {
       throw Exception('Error fetching plant data: $error');
