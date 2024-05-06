@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:plantea/api.dart';
 import 'package:plantea/pages/add_plant_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +11,7 @@ import 'package:provider/provider.dart';
 import '../models/redeem_model.dart';
 export '../models/redeem_model.dart';
 
-List<String> list = <String>['DisplayAll', 'One', 'Two', 'Three', 'Four'];
+//List<String> list = <String>['DisplayAll', 'One', 'Two', 'Three', 'Four'];
 
 class RedeemWidget extends StatefulWidget {
   const RedeemWidget({Key? key}) : super(key: key);
@@ -25,6 +27,38 @@ class _RedeemWidgetState extends State<RedeemWidget> {
 
   int _counter = 0;
 
+  List<String> list = [];
+  List<String> pointList = [];
+
+  Future<void> extractRewards() async {
+    List<String> names = [];
+    List<String> points = [];
+    List<dynamic> rewards = await Api.displayRewards();
+    // Iterate over each JSON object in the list
+    for (var reward in rewards) {
+      String rewardName = reward[
+          'gift_name']; // Assuming 'plant_nickname' is the key for the plant name
+      if (rewardName != null) {
+        names.add(rewardName); // Add the plant name to the list
+      }
+      String gift_point = reward['gift_points'].toString();
+      if (gift_point != null) {
+        points.add(gift_point);
+      }
+    }
+    pointList.addAll(points);
+    list.addAll(names);
+  }
+
+  Future<void> totalPoints() async {
+    List total = await Api.displayTotalPoints();
+    if (total == null)
+      print(0);
+    else {
+      print(total);
+    }
+  }
+
   void _reloadPage() {
     setState(() {
       _counter++; // Change the state to trigger a rebuild
@@ -33,6 +67,8 @@ class _RedeemWidgetState extends State<RedeemWidget> {
 
   @override
   void initState() {
+    extractRewards();
+    totalPoints();
     super.initState();
     _model = createModel(context, () => RedeemModel());
   }
@@ -180,14 +216,7 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                         itemCount:
                             list.length, // Conditionally set the itemCount
                         itemBuilder: (context, index) {
-                          // Retrieve the item from yourList
-
-                          /////////////add cond if selected value null or not
-
-                          // Return a container with a button inside
                           var item = list[index];
-                          print(item);
-                          print("object");
 
                           return Row(
                             mainAxisSize: MainAxisSize.max,
@@ -208,17 +237,30 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           10, 0, 0, 0),
-                                      child: Text(
-                                        ' ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Montserrat',
-                                              fontSize: 14,
-                                              letterSpacing: 0,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                      ),
+                                      child: Row(children: [
+                                        Text(
+                                          '${list[index]}                     ',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Montserrat',
+                                                fontSize: 14,
+                                                letterSpacing: 0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                        Text(
+                                          pointList[index],
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Montserrat',
+                                                fontSize: 14,
+                                                letterSpacing: 0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                      ]),
                                     ),
                                   ),
                                 ),
@@ -241,9 +283,11 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                                     onPressed: () {
                                       print('gift deleted  ...');
                                       print(item);
+                                      print(list);
                                       list.removeAt(index);
+                                      print(list);
 
-                                      _reloadPage();
+                                      _reloadPage(); //
                                     },
                                   ),
                                 ),
