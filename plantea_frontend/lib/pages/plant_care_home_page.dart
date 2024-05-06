@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:plantea/api.dart';
 import 'package:plantea/pages/add_plant_page.dart';
 import 'package:plantea/pages/plant_Info.dart';
+import 'package:plantea/pages/plant_library_page.dart.dart';
 import 'package:plantea/pages/reminders_page.dart';
 import '../pages/plant_care_home_page.dart';
 import '../pages/welcome_page.dart';
@@ -11,18 +13,6 @@ import '../pages/welcome_page.dart';
 import '../models/plantcare_model.dart';
 export '../models/plantcare_model.dart';
 
-const List<String> list = <String>[
-  'DisplayAll',
-  'One',
-  'Two',
-  'Three',
-  'Four',
-  'One1',
-  'Two2',
-  'Three3',
-  'Four4'
-];
-List<String> newList = list.sublist(1);
 /**
  * the list should be displayed in the listview and search bar
  *  get from db 
@@ -34,6 +24,7 @@ List<String> newList = list.sublist(1);
 /**
  * when the user clicks the button the plant details (plant id, plantwill be transported to the next page  to add a reminder  to this specific plant
  */
+
 class PlantcareWidget extends StatefulWidget {
   const PlantcareWidget({super.key});
 
@@ -48,26 +39,49 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String? selectedValue;
   final TextEditingController textEditingController = TextEditingController();
+  List<String> list = [];
+  List<String> newList = [];
 
-  /// the list should be displayed in the listview and search bar
+  void initializeNewList() {
+    newList = list.sublist(1);
+  }
 
-  /// FECTH DATA FROM DB
-// Future<void> _fetchData() async {
-//     final response = await http.get(Uri.parse('http://your_backend_server_url/data'));
-//     if (response.statusCode == 200) {
-//       setState(() {
-//         _data = json.decode(response.body);
-//       });
-//     } else {
-//       throw Exception('Failed to fetch data');
-//     }
-//   }
+  Future<void> extractPlantNames() async {
+    List<String> plantNames = [];
+    List<dynamic> userPlants = await Api.viewPlants(false);
+    // Iterate over each JSON object in the list
+    for (var plant in userPlants) {
+      String plantName = plant[
+          'plant_nickname']; // Assuming 'plant_nickname' is the key for the plant name
+      if (plantName != null) {
+        plantNames.add(plantName); // Add the plant name to the list
+      }
+    }
+    list = ['DisplayAll'];
+    list.addAll(plantNames);
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     _fetchData();
-//   }
+    initializeNewList();
+  }
+
+  // when we have the selected value and theimage is pressed, match nickname to the nickname in
+  Future<int?> getPlantID(String nick__name) async {
+    List<int> plantID = [];
+    List<dynamic> userPlants =
+        await Api.viewPlants(true); // Adjust this call as needed
+    // Iterate over each JSON object in the list
+    for (var plant in userPlants) {
+      int? plantid = plant['plant_id'];
+      if (plantid != null) {
+        plantID.add(plantid);
+      }
+    }
+    print(newList);
+    print(nick__name);
+    print(plantID);
+    int index = newList.indexOf(nick__name);
+    return index != -1 ? plantID[index] : null;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -75,6 +89,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
 
     _model.textController ??= TextEditingController(text: 'search');
     _model.textFieldFocusNode ??= FocusNode();
+    extractPlantNames();
   }
 
   @override
@@ -288,63 +303,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
-                    child:
-//FECTHED DATA WILL BE STORED IN A LIST
-// ListView.builder(
-//         itemCount: _data.length,
-//         itemBuilder: (context, index) {
-//           final item = _data[index];
-//           return ListTile(
-//             title: Text(item['title']),
-//             subtitle: Text(item['description']),
-                        //                 Padding( // list of container
-                        //   padding: const EdgeInsets.symmetric(vertical: 10), // Add vertical padding
-                        //   child: Container(
-                        //     width: 296,
-                        //     height: 150,
-                        //     constraints: BoxConstraints(
-                        //       minWidth: 296,
-                        //       minHeight: 180,
-                        //       maxWidth: 296,
-                        //       maxHeight: 180,
-                        //     ),
-                        //     decoration: BoxDecoration(
-                        //       color: FlutterFlowTheme.of(context).secondaryBackground,
-                        //       image: DecorationImage(
-                        //         fit: BoxFit.cover,
-                        //         alignment: AlignmentDirectional(0, 0),
-                        //         image: Image.network(
-                        //           'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
-                        //         ).image,
-                        //       ),
-                        //       borderRadius: BorderRadius.circular(23),
-                        //     ),
-                        //     child: Align(
-                        //       alignment: AlignmentDirectional(1, 1),
-                        //       child: Padding(
-                        //         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
-                        //         child: FlutterFlowIconButton(
-                        //           borderRadius: 5,
-                        //           borderWidth: 1,
-                        //           buttonSize: 40,
-                        //           fillColor: Color(0xFFFAF49D),
-                        //           icon: Icon(
-                        //             Icons.add_rounded,
-                        //             color: Color(0xFF355E3B),
-                        //             size: 24,
-                        //           ),
-                        //           onPressed: () {
-                        //             print('IconButton pressed ...');
-                        //           },
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // );
-//           );
-//         },
-//       ),
-                        ListView.builder(
+                    child: ListView.builder(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
                       itemCount: selectedValue != null &&
@@ -353,23 +312,29 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                           : newList
                               .length, // Define the number of items in your list
                       itemBuilder: (context, index) {
+                        //var item = selectedValue;
                         if (selectedValue != null &&
                             selectedValue != 'DisplayAll') {
                           // Display only one container
-                          var item = selectedValue; // Use the selected value
-                          print(selectedValue);
+                          // Use the selected value
+                          // print(selectedValue);
                           return Padding(
                               // list of container
                               padding: const EdgeInsets.symmetric(
                                   vertical: 10), // Add vertical padding
                               child: GestureDetector(
-                                onTap: () {
+                                onTap: () async {
                                   print('IconButton pressed ...');
+                                  // var plantInfoId =
+                                  //     getPlantID(); // add to shred prefs or send through page
+                                  int? nicknameInfId =
+                                      await getPlantID(newList[index]);
+                                  print(nicknameInfId);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            PlantInfoWidget()),
+                                        builder: (context) => PlantInfoWidget(
+                                            nicknameInfId!, newList[index])),
                                   );
                                 },
                                 child: Container(
@@ -428,13 +393,16 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 10), // Add vertical padding
                               child: GestureDetector(
-                                onTap: () {
-                                  print('IconButton pressed ...');
+                                onTap: () async {
+                                  int? nicknameInfId =
+                                      await getPlantID(selectedValue!);
+                                  print(nicknameInfId);
+
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            PlantInfoWidget()),
+                                        builder: (context) => PlantInfoWidget(
+                                            nicknameInfId!, newList[index])),
                                   );
                                 },
                                 child: Container(
