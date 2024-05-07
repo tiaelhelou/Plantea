@@ -273,6 +273,9 @@ class Api {
     }
   }
 
+  /*
+   * View plant api
+   */
   static Future<List> viewPlants(bool getInfo) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -302,6 +305,9 @@ class Api {
     }
   }
 
+  /*
+   * View plant information api
+   */
   static Future<List> viewPlantsInfo() async {
     final url = Uri.parse('$urlbase/authorization/admin/displayPlants');
 
@@ -322,6 +328,9 @@ class Api {
     }
   }
 
+  /*
+   * Display rewards api
+   */
   static Future<List> displayRewards() async {
     final url = Uri.parse('$urlbase/authorization/user/displayRewards');
 
@@ -342,6 +351,9 @@ class Api {
     }
   }
 
+  /*
+   * Display total points api
+   */
   static Future<String> displayTotalPoints() async {
     final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/1');
 
@@ -362,6 +374,9 @@ class Api {
     }
   }
 
+  /*
+   * Checkin api
+   */
   static Future<bool> checIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -390,4 +405,40 @@ class Api {
       return false;
     }
   }
+
+  /*
+   * Donate api
+   */
+  static Future<bool> donate(int amount, String currency) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    int? id = prefs.getInt('id');
+
+    final url = Uri.parse('$urlbase/authorization/user/donate/$id');
+
+    final Map<String, dynamic> data = {
+      'amount': amount,
+      'currency': currency
+    };
+
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        print('Donation failed with status: ${response.statusCode}');
+        return false;
+      }
+    } catch (error) {
+      print('Error : $error');
+      return false;
+    }
+  } 
 }

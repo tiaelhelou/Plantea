@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\user;
+
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\CheckIn;
@@ -44,54 +45,54 @@ class ProfileController extends Controller
 
         }
     }
-    
-     /*
+
+    /*
      * Change password of User.
      */
-public function changePassword(Request $request, $id=null)
-{
-    $validator = Validator::make($request->all(), [
-        'new_password' => 'required|string',
-        'old_password' => 'required|string',
-    ]);
+    public function changePassword(Request $request, $id = null)
+    {
+        $validator = Validator::make($request->all(), [
+            'new_password' => 'required|string',
+            'old_password' => 'required|string',
+        ]);
 
-    if ($validator->fails()) {
-        return response()->json($validator->errors(), 400); // Change the status code to 400 for validation errors
-    }
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400); // Change the status code to 400 for validation errors
+        }
 
-    $user = User::find($id); // Use find() instead of where()->first()
+        $user = User::find($id); // Use find() instead of where()->first()
 
-    if (!$user) {
-        return response()->json([
-            'result' => false,
-            'message' => 'User not found',
-        ], 404); // Return 404 if user is not found
-    }
-
-    if (Hash::check($request->old_password, $user->user_password)) {
-        $user->user_password = Hash::make($request->new_password);
-
-        if ($user->save()) {
+        if (!$user) {
             return response()->json([
-                'result' => true,
-                'message' => 'Success: password is changed.',
-            ], 200); // Return 200 for successful operation
+                'result' => false,
+                'message' => 'User not found',
+            ], 404); // Return 404 if user is not found
+        }
+
+        if (Hash::check($request->old_password, $user->user_password)) {
+            $user->user_password = Hash::make($request->new_password);
+
+            if ($user->save()) {
+                return response()->json([
+                    'result' => true,
+                    'message' => 'Success: password is changed.',
+                ], 200); // Return 200 for successful operation
+            } else {
+                return response()->json([
+                    'result' => false,
+                    'message' => 'Failed to save the new password.',
+                ], 500); // Return 500 for server-side errors
+            }
         } else {
             return response()->json([
                 'result' => false,
-                'message' => 'Failed to save the new password.',
-            ], 500); // Return 500 for server-side errors
+                'message' => 'Incorrect old password',
+            ], 401); // Return 400 for incorrect old password
         }
-    } else {
-        return response()->json([
-            'result' => false,
-            'message' => 'Incorrect old password',
-        ], 401); // Return 400 for incorrect old password
     }
-}
 
-  
-     /*
+
+    /*
      * Edit User profile.
      */
     public function editProfile($id = null, Request $request)
@@ -130,43 +131,37 @@ public function changePassword(Request $request, $id=null)
     }
 
     /*
-    * Checkin of User.
-    */
-public function checkIn($id = null){
-    if ($id == null ) {
-        return response()->json(['message' => 'Checkin Failed'], 400);
-    }
-    else {
-        $user = User::find($id);
-        if ($user != null) {
-              $checkins = CheckIn::where('user_id', $id)->get();
-             if ($checkins->isEmpty()) {
-            
-                $checkin = new CheckIn();
-                $checkin->user_id = $id;
-                $checkin->checkin_total = 1;
-                $checkin->save(); 
-            }
-            else {
-                // Get checkins for the user
-            
+     * Checkin of User.
+     */
+    public function checkIn($id = null)
+    {
+        if ($id == null) {
+            return response()->json(['message' => 'Checkin Failed'], 400);
+        } else {
+            $user = User::find($id);
+            if ($user != null) {
+                $checkins = CheckIn::where('user_id', $id)->get();
+                if ($checkins->isEmpty()) {
 
-                // Iterate over each checkin and update the checkin_total
-                foreach ($checkins as $checkin) {
-                    $checkin->checkin_total += 1;
+                    $checkin = new CheckIn();
+                    $checkin->user_id = $id;
+                    $checkin->checkin_total = 1;
                     $checkin->save();
+                } else {
+
+                    foreach ($checkins as $checkin) {
+                        $checkin->checkin_total += 1;
+                        $checkin->save();
+                    }
+
+                    $user->user_points += 5;
+                    $user->save();
+
+                    return response()->json(['message' => 'Checkin Successful'], 200);
                 }
-
-                // Update user points
-                $user->user_points += 5;
-                $user->save();
-
-                return response()->json(['message' => 'Checkin Successful'], 200);
+            } else {
+                return response()->json(['message' => 'User not found'], 400);
             }
-     } else{
-            return response()->json(['message' => 'User not found'], 400);
         }
     }
-}
-
 }
