@@ -90,7 +90,7 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
         backgroundColor: FlutterFlowTheme.of(context).accent2,
         body: Container(
           width: 1445,
-          height: 1373,
+          height: 1550,
           constraints: BoxConstraints(
             minWidth: 20,
             minHeight: 20,
@@ -108,8 +108,8 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
           ),
           alignment: AlignmentDirectional(0, 1),
           child: Container(
-            width: 389,
-            height: 550,
+            width: 500,
+            height: 510,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).secondaryBackground,
               borderRadius: BorderRadius.only(
@@ -121,193 +121,188 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
             ),
             child: Form(
               key: _formKey,
-              child: Align(
-                alignment: AlignmentDirectional(-1, 0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    //crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 200, 10),
-                        child: Text(
-                          'PLANT NICKNAME',
-                          textAlign: TextAlign.start,
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Montserrat',
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  //crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 10, 200, 10),
+                      child: Text(
+                        'PLANT NICKNAME',
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Montserrat',
+                              letterSpacing: 0,
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 80),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              flex: 10,
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 0, 50, 0),
-                                child: TextFormField(
-                                  controller: nameController,
-                                  decoration: InputDecoration(
-                                    labelText: '',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .override(
-                                          fontFamily: 'Montserrat',
-                                          letterSpacing: 0,
-                                        ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xFFA8ABAC),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 80),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            flex: 10,
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(20, 0, 50, 0),
+                              child: TextFormField(
+                                controller: nameController,
+                                decoration: InputDecoration(
+                                  labelText: '',
+                                  labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
-                                        fontFamily: 'Readex Pro',
+                                        fontFamily: 'Montserrat',
                                         letterSpacing: 0,
                                       ),
-                                  textAlign: TextAlign.start,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please enter some text';
-                                    }
-                                    return null;
-                                  },
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFFA8ABAC),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
-                              child: FlutterFlowIconButton(
-                                borderColor: Color(0xFF355E3B),
-                                borderRadius: 5,
-                                borderWidth: 1,
-                                buttonSize: 47,
-                                icon: Icon(
-                                  Icons.camera_alt,
-                                  color: Color(0xFF8A9A5B),
-                                  size: 24,
-                                ),
-                                onPressed: () {
-                                  print('IconButton pressed ...');
-                                  image_flag = true;
-                                  pickImageFromGallery(); ////// add prersonal image of the plant
+                                style: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0,
+                                    ),
+                                textAlign: TextAlign.start,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter some text';
+                                  }
+                                  return null;
                                 },
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 225, 10),
-                        child: Text(
-                          'SPECIES',
-                          textAlign: TextAlign.start,
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Montserrat',
-                                    letterSpacing: 0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                      ),
-                      Padding(
-                        //////drop down  in flutter
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton2<String>(
-                            isExpanded: true,
-                            hint: Text(
-                              'Select Item',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Theme.of(context).hintColor,
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                            child: FlutterFlowIconButton(
+                              borderColor: Color(0xFF355E3B),
+                              borderRadius: 5,
+                              borderWidth: 1,
+                              buttonSize: 47,
+                              icon: Icon(
+                                Icons.camera_alt,
+                                color: Color(0xFF8A9A5B),
+                                size: 24,
                               ),
-                            ),
-                            items: list
-                                .map((item) => DropdownMenuItem(
-                                      value: item,
-                                      child: Text(
-                                        item,
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ))
-                                .toList(),
-                            value: selectedValue,
-                            onChanged: (value) {
-                              setState(() {
-                                selectedValue = value;
-                              });
-                            },
-                            buttonStyleData: const ButtonStyleData(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                              height: 54,
-                              width: 296,
-                            ),
-                            dropdownStyleData: const DropdownStyleData(
-                              maxHeight: 200,
-                            ),
-                            menuItemStyleData: const MenuItemStyleData(
-                              height: 40,
-                            ),
-                            dropdownSearchData: DropdownSearchData(
-                              searchController: textEditingController,
-                              searchInnerWidgetHeight: 50,
-                              searchInnerWidget: Container(
-                                height: 50,
-                                padding: const EdgeInsets.only(
-                                  top: 8,
-                                  bottom: 4,
-                                  right: 8,
-                                  left: 8,
-                                ),
-                                child: TextFormField(
-                                  expands: true,
-                                  maxLines: null,
-                                  controller: textEditingController,
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                      vertical: 8,
-                                    ),
-                                    hintText: 'Search for an item...',
-                                    hintStyle: const TextStyle(fontSize: 12),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              searchMatchFn: (item, searchValue) {
-                                return item.value
-                                    .toString()
-                                    .contains(searchValue);
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                                image_flag = true;
+                                pickImageFromGallery(); ////// add prersonal image of the plant
                               },
                             ),
-                            //This to clear the search value when you close the menu
-                            onMenuStateChange: (isOpen) {
-                              if (!isOpen) {
-                                textEditingController.clear();
-                              }
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 225, 10),
+                      child: Text(
+                        'SPECIES',
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Montserrat',
+                              letterSpacing: 0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ),
+                    Padding(
+                      //////drop down  in flutter
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton2<String>(
+                          isExpanded: true,
+                          hint: Text(
+                            'Select Item',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).hintColor,
+                            ),
+                          ),
+                          items: list
+                              .map((item) => DropdownMenuItem(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          value: selectedValue,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedValue = value;
+                            });
+                          },
+                          buttonStyleData: const ButtonStyleData(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            height: 54,
+                            width: 296,
+                          ),
+                          dropdownStyleData: const DropdownStyleData(
+                            maxHeight: 200,
+                          ),
+                          menuItemStyleData: const MenuItemStyleData(
+                            height: 40,
+                          ),
+                          dropdownSearchData: DropdownSearchData(
+                            searchController: textEditingController,
+                            searchInnerWidgetHeight: 50,
+                            searchInnerWidget: Container(
+                              height: 50,
+                              padding: const EdgeInsets.only(
+                                top: 8,
+                                bottom: 4,
+                                right: 8,
+                                left: 8,
+                              ),
+                              child: TextFormField(
+                                expands: true,
+                                maxLines: null,
+                                controller: textEditingController,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 8,
+                                  ),
+                                  hintText: 'Search for an item...',
+                                  hintStyle: const TextStyle(fontSize: 12),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            searchMatchFn: (item, searchValue) {
+                              return item.value
+                                  .toString()
+                                  .contains(searchValue);
                             },
                           ),
+                          //This to clear the search value when you close the menu
+                          onMenuStateChange: (isOpen) {
+                            if (!isOpen) {
+                              textEditingController.clear();
+                            }
+                          },
                         ),
-                        /*DropdownMenu<String>(
+                      ),
+                      /*DropdownMenu<String>(
                         
                        // initialSelection: list.first,
                         onSelected: (String? value) {
@@ -320,173 +315,169 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
                           return DropdownMenuEntry<String>(value: value, label: value);
                         }).toList(),
                       ),*/
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            /// check if both field are filled and adds  default image if non selected
-                            if (_formKey.currentState != null &&
-                                _formKey.currentState!.validate() &&
-                                isDropdownValueSelected() == true &&
-                                image_flag) {
-                              // Navigate the user to the Home page
-                              bool response = await Api.addPlant(
-                                  nameController.text, selectedValue!);
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 10),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          /// check if both field are filled and adds  default image if non selected
+                          if (_formKey.currentState != null &&
+                              _formKey.currentState!.validate() &&
+                              isDropdownValueSelected() == true &&
+                              image_flag) {
+                            // Navigate the user to the Home page
+                            bool response = await Api.addPlant(
+                                nameController.text, selectedValue!);
 
-                              if (response) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PlantcareWidget()),
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Incorrect')),
-                                );
-                              }
+                            if (response) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PlantcareWidget()),
+                              );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Please fill input')),
+                                const SnackBar(content: Text('Incorrect')),
                               );
                             }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Please fill input')),
+                            );
+                          }
 
-                            /// check if both field are filled and adds  default image if non selected
-                          },
-                          text: 'ADD',
-                          options: FFButtonOptions(
-                            width: 296,
-                            height: 54,
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                            iconPadding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                            color: Color(0xFF355E3B),
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  fontSize: 16,
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                            elevation: 3,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
+                          /// check if both field are filled and adds  default image if non selected
+                        },
+                        text: 'ADD',
+                        options: FFButtonOptions(
+                          width: 296,
+                          height: 54,
+                          padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                          iconPadding:
+                              EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          color: Color(0xFF355E3B),
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 16,
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                          elevation: 3,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
                           ),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      Container(
-                        width: 500,
-                        height: 89,
-                        decoration: BoxDecoration(
-                          color: Color(0xFF355E3B),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            FlutterFlowIconButton(
-                              borderRadius: 20,
-                              borderWidth: 1,
-                              buttonSize: 60,
-                              icon: Icon(
-                                Icons.library_books_outlined,
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                size: 35,
-                              ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          PlantLibraryWidget()),
-                                );
-                              },
+                    ),
+                    Container(
+                      width: 500,
+                      height: 89,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF355E3B),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderRadius: 20,
+                            borderWidth: 1,
+                            buttonSize: 60,
+                            icon: Icon(
+                              Icons.library_books_outlined,
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              size: 35,
                             ),
-                            FlutterFlowIconButton(
-                              borderRadius: 20,
-                              borderWidth: 1,
-                              buttonSize: 60,
-                              icon: FaIcon(
-                                FontAwesomeIcons.viadeo,
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                size: 35,
-                              ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PlantcareWidget()),
-                                );
-                              },
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PlantLibraryWidget()),
+                              );
+                            },
+                          ),
+                          FlutterFlowIconButton(
+                            borderRadius: 20,
+                            borderWidth: 1,
+                            buttonSize: 60,
+                            icon: FaIcon(
+                              FontAwesomeIcons.viadeo,
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              size: 35,
                             ),
-                            FlutterFlowIconButton(
-                              borderRadius: 20,
-                              borderWidth: 1,
-                              buttonSize: 60,
-                              icon: Icon(
-                                Icons.camera_alt,
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                size: 35,
-                              ),
-                              onPressed: () {
-                                print('camera pressed ...');
-                              },
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PlantcareWidget()),
+                              );
+                            },
+                          ),
+                          FlutterFlowIconButton(
+                            borderRadius: 20,
+                            borderWidth: 1,
+                            buttonSize: 60,
+                            icon: Icon(
+                              Icons.camera_alt,
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              size: 35,
                             ),
-                            FlutterFlowIconButton(
-                              borderRadius: 20,
-                              borderWidth: 1,
-                              buttonSize: 60,
-                              icon: FaIcon(
-                                FontAwesomeIcons.donate,
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                size: 35,
-                              ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DonateWidget()),
-                                );
-                              },
+                            onPressed: () {
+                              print('camera pressed ...');
+                            },
+                          ),
+                          FlutterFlowIconButton(
+                            borderRadius: 20,
+                            borderWidth: 1,
+                            buttonSize: 60,
+                            icon: FaIcon(
+                              FontAwesomeIcons.donate,
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              size: 35,
                             ),
-                            FlutterFlowIconButton(
-                              borderRadius: 20,
-                              borderWidth: 1,
-                              buttonSize: 60,
-                              icon: Icon(
-                                Icons.person,
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                size: 35,
-                              ),
-                              onPressed: () {
-                                print('IconButton pressed ...');
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ProfileWidget()),
-                                );
-                              },
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DonateWidget()),
+                              );
+                            },
+                          ),
+                          FlutterFlowIconButton(
+                            borderRadius: 20,
+                            borderWidth: 1,
+                            buttonSize: 60,
+                            icon: Icon(
+                              Icons.person,
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              size: 35,
                             ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProfileWidget()),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
             ),
