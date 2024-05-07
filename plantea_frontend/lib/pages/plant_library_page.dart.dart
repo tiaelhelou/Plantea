@@ -48,7 +48,7 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
   Future<void> extractPlantNames() async {
     List<String> plantNames = [];
     List<int> plantid = [];
-    List<dynamic> userPlants = await Api.viewPlant();
+    List<dynamic> userPlants = await Api.viewAllPlant();
     // Iterate over each JSON object in the list
     for (var plant in userPlants) {
       String plantName = plant[

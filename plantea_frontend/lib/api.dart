@@ -309,7 +309,7 @@ class Api {
   /*
    * View all plant api
    */
-  static Future<List> viewPlant() async {
+  static Future<List> viewAllPlant() async {
     final url = Uri.parse('$urlbase/authorization/admin/displayPlants');
 
     try {
@@ -326,6 +326,31 @@ class Api {
       }
     } catch (error) {
       throw Exception('Error fetching plant data: $error');
+    }
+  }
+
+  /*
+   * Display plant information api
+   */
+  static Future<List> displayPlantInfo(String name) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    int? id = prefs.getInt('id');
+    final url = Uri.parse('$urlbase/authorization/admin/displayInformation/$id/$name');
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+
+        final List<dynamic> plantData = responseData['data'];
+
+        return plantData;
+      } else {
+        throw Exception('Invalid response format: missing "data" key');
+      }
+    } catch (error) {
+      throw Exception('Error fetching data: $error');
     }
   }
 
