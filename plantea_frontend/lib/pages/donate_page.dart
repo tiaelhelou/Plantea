@@ -5,6 +5,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:plantea/api.dart';
 
 import 'package:plantea/pages/plant_care_home_page.dart';
 import 'package:plantea/pages/plant_library_page.dart.dart';
@@ -721,23 +722,32 @@ class _DonateWidgetState extends State<DonateWidget> {
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 30, 20, 10),
                         child: FFButtonWidget(
-                          onPressed: () {
+                          onPressed: () async {
                             print(
                                 'Button pressed ...'); // save in db the amount and date
                             if (_formKey.currentState != null &&
                                 _formKey.currentState!.validate()) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ProfileWidget()),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Please Fill All Input')),
-                              );
-                            }
+                            bool response = await Api.donate(
+                                    amount as int, _selectedCurrency!);
+
+                                if (response) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProfileWidget()),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Incorrect')),
+                                  );
+                                }
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Please fill input')),
+                                );
+                              }
                           },
                           text: 'Donate',
                           options: FFButtonOptions(
