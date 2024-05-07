@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:plantea/pages/reminders_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
@@ -306,9 +307,9 @@ class Api {
   }
 
   /*
-   * View plant information api
+   * View all plant api
    */
-  static Future<List> viewPlantsInfo() async {
+  static Future<List> viewPlant() async {
     final url = Uri.parse('$urlbase/authorization/admin/displayPlants');
 
     try {
@@ -473,5 +474,7 @@ class Api {
       print('Error : $error');
       return false;
     }
-  } 
+  }
+
+  static viewPlantsInfo() {} 
 }
