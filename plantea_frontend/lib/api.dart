@@ -385,7 +385,7 @@ class Api {
   /*
    * Display total points api
    */
-  static Future<String> displayTotalPoints() async {
+  static Future<String> displayTotalPoint() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
@@ -399,6 +399,32 @@ class Api {
         final Map<String, dynamic> profileData = responseData['user_data'];
 
         String totalPoints = profileData['user_points'].toString();
+        return totalPoints;
+      } else {
+        throw Exception('Invalid response format: missing "data" key');
+      }
+    } catch (error) {
+      throw Exception('Error fetching data: $error');
+    }
+  }
+
+  /*
+   * Display user name api
+   */
+  static Future<String> displayUserName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    int? id = prefs.getInt('id');
+    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/$id');
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+
+        final Map<String, dynamic> profileData = responseData['user_data'];
+
+        String totalPoints = profileData['user_name'].toString();
         return totalPoints;
       } else {
         throw Exception('Invalid response format: missing "data" key');

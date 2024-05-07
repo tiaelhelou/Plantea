@@ -52,7 +52,7 @@ class _RedeemWidgetState extends State<RedeemWidget> {
   }
 
   Future<String> totalPoints() async {
-    String total = await Api.displayTotalPoints();
+    String total = await Api.displayTotalPoint();
     if (total == null)
       return '0';
     else {
