@@ -304,14 +304,20 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                                           .primaryText,
                                       size: 35,
                                     ),
-                                    onPressed: () {
-                                      print('gift deleted  ...');
-                                      print(item);
-                                      print(list);
-                                      list.removeAt(index);
-                                      print(list);
-
-                                      _reloadPage(); //
+                                    onPressed: () async {
+                                      bool response =
+                                          await Api.redeemReward(list.elementAt(index));
+                                      if (response) {
+                                        print('gift deleted  ...');
+                                        list.removeAt(index);
+                                        _reloadPage();
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text('Incorrect')),
+                                        );
+                                      }
                                     },
                                   ),
                                 ),
