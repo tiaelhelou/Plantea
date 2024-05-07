@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plantea/api.dart';
 import 'package:plantea/pages/add_plant_page.dart';
+import 'package:plantea/pages/donate_page.dart';
 import 'package:plantea/pages/plant_Info.dart';
 import 'package:plantea/pages/plant_library_page.dart.dart';
+import 'package:plantea/pages/profile_page.dart';
 import 'package:plantea/pages/reminders_page.dart';
 import '../pages/plant_care_home_page.dart';
 import '../pages/welcome_page.dart';
@@ -101,48 +104,6 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
   @override
   Widget build(BuildContext context) {
     List<Container> containerList = [];
-
-    containerList.add(Container(
-      width: 296,
-      height: 150,
-      constraints: BoxConstraints(
-        minWidth: 296,
-        minHeight: 180,
-        maxWidth: 296,
-        maxHeight: 180,
-      ),
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          alignment: AlignmentDirectional(0, 0),
-          image: Image.network(
-            'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
-          ).image,
-        ),
-        borderRadius: BorderRadius.circular(23),
-      ),
-      child: Align(
-        alignment: AlignmentDirectional(1, 1),
-        child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 25, 25),
-          child: FlutterFlowIconButton(
-            borderRadius: 5,
-            borderWidth: 1,
-            buttonSize: 40,
-            fillColor: Color(0xFFFAF49D),
-            icon: Icon(
-              Icons.add_rounded,
-              color: Color(0xFF355E3B),
-              size: 24,
-            ),
-            onPressed: () {
-              print('IconButton pressed ...');
-            },
-          ),
-        ),
-      ),
-    ));
 
 // Add more containers to the list as needed
 
@@ -486,7 +447,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                   )));
                         }
                       },
-                    ))
+                    )),
               ],
             ),
           ),
