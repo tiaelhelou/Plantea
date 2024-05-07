@@ -424,8 +424,34 @@ class Api {
 
         final Map<String, dynamic> profileData = responseData['user_data'];
 
-        String totalPoints = profileData['user_name'].toString();
-        return totalPoints;
+        String username = profileData['user_name'].toString();
+        return username;
+      } else {
+        throw Exception('Invalid response format: missing "data" key');
+      }
+    } catch (error) {
+      throw Exception('Error fetching data: $error');
+    }
+  }
+
+  /*
+   * Display user image api
+   */
+  static Future<List> displayUserImage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    int? id = prefs.getInt('id');
+    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/$id');
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+
+        final Map<String, dynamic> profileData = responseData['user_plants'];
+
+        List images = profileData['images'];
+        return images;
       } else {
         throw Exception('Invalid response format: missing "data" key');
       }
