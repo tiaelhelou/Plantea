@@ -355,7 +355,10 @@ class Api {
    * Display total points api
    */
   static Future<String> displayTotalPoints() async {
-    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/1');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    int? id = prefs.getInt('id');
+    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/$id');
 
     try {
       final response = await http.get(url);
@@ -381,7 +384,7 @@ class Api {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
-    final url = Uri.parse('$urlbase/authorization/user/checkIn/1');
+    final url = Uri.parse('$urlbase/authorization/user/checkIn/$id');
 
     final Map<String, dynamic> data = {};
 
