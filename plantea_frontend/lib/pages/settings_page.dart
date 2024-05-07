@@ -5,7 +5,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/api.dart';
 import 'package:plantea/pages/edit_profile_page.dart';
-import 'package:plantea/pages/image_display.dart';
+
 import 'package:plantea/pages/plant_care_home_page.dart';
 import 'package:plantea/pages/profile_page.dart';
 import 'package:plantea/pages/welcome_page.dart';
@@ -254,8 +254,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   oldpasswordController.text,
                                   newpasswordController.text);
 
-                              if (response)
-                              {
+                              if (response) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

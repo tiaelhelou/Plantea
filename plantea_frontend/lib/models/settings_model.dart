@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
-import 'package:plantea/pages/image_display.dart';
+
 import 'package:plantea/pages/plant_care_home_page.dart';
 
 import '../pages/settings_page.dart';
-
 
 class SettingsModel extends FlutterFlowModel<SettingsWidget> {
   ///  State fields for stateful widgets in this page.

@@ -9,7 +9,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plantea/api.dart';
 import 'package:plantea/pages/donate_page.dart';
-import 'package:plantea/pages/image_display.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
 import 'package:plantea/pages/plant_library_page.dart.dart';
 import 'package:plantea/pages/profile_page.dart';
