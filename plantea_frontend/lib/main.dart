@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       home: ChangeNotifierProvider(
         create: (context) => IdentificationProvider(),
         builder: ((context, child) {
-          return const camera();
+          return const EditProfileWidget();
         }),
       ),
     );
