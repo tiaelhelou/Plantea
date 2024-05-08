@@ -283,7 +283,7 @@ class Api {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
-    final url = Uri.parse('$urlbase/authorization/user/viewPlants/$id');
+    final url = Uri.parse('$urlbase/authorization/user/viewPlants/1');
 
     try {
       final response = await http.get(url);
@@ -334,7 +334,8 @@ class Api {
   /*
    * Display plant information api
    */
-  static Future<List<Map<String, dynamic>>> displayPlantInfo(String name) async {
+  static Future<List<Map<String, dynamic>>> displayPlantInfo(
+      String name) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
