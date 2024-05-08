@@ -4,9 +4,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:plantea/pages/home_screen_components.dart';
+import 'package:plantea/api.dart';
+import 'package:plantea/pages/camera_components.dart';
 import 'package:plantea/models/models.dart';
 import 'package:plantea/services/apis.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum IdentificationState {
   noimage,
@@ -26,7 +28,7 @@ class IdentificationProvider extends ChangeNotifier {
   File? _image;
   bool _isLoading = false;
   IdentificationState _state = IdentificationState.noimage;
-  String _name = '.....';
+  String _name = 'Identify';
   bool _isImageSet = false;
   List<Plant> _plants = [];
   PlantsAPI api = PlantsAPI();
@@ -49,6 +51,7 @@ class IdentificationProvider extends ChangeNotifier {
       _plants = await api.identifyPlant(toBase64(image));
       if (_plants.isNotEmpty) {
         _name = _plants[0].plantName;
+        print(_name);
         _state = IdentificationState.identified;
         buttonLabel = const ButtonWidget(
           text: 'RETRY',
@@ -72,6 +75,11 @@ class IdentificationProvider extends ChangeNotifier {
     XFile? file = (await picker.pickImage(source: ImageSource.gallery));
     print('image captured');
     _image = File(file!.path);
+
+    SharedPreferences prefs = (await SharedPreferences.getInstance());
+    Api.saveImageToLocalStorage(_image!.path);
+    print(prefs.getString('path'));
+
     _isImageSet = true;
     _state = IdentificationState.image;
     buttonLabel = const ButtonWidget(

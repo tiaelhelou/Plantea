@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:plantea/pages/home_screen_components.dart';
+import 'package:plantea/pages/camera_components.dart';
 import 'package:plantea/constants.dart';
-import 'package:plantea/camera_screens/who_am_i_screen.dart';
 import 'package:plantea/services/providers.dart';
 import 'package:provider/provider.dart';
 
@@ -22,24 +21,7 @@ class _cameraState extends State<camera> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        actions: [
-          GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const WhoAreWePage(),
-                    ));
-              },
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Icon(
-                  FontAwesomeIcons.circleInfo,
-                  color: kPrimaryColor,
-                  size: 32,
-                ),
-              ))
-        ],
+        actions: [],
       ),
       body: ModalProgressHUD(
         progressIndicator: const CircularProgressIndicator(

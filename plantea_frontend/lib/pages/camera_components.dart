@@ -105,7 +105,7 @@ class PlantNameWidget extends StatelessWidget {
           child: Text(
         Provider.of<IdentificationProvider>(context).isImageSet
             ? (Provider.of<IdentificationProvider>(context).name)
-            : 'Please Capture image',
+            : 'Capture image',
         style: kPlantNameStyle,
       )),
     );
@@ -131,7 +131,7 @@ class ButtonWidget extends StatelessWidget {
           Text(
             text,
             style: const TextStyle(
-              fontSize: 24,
+              fontSize: 14,
               color: Colors.black,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.bold,

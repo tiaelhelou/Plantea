@@ -15,4 +15,4 @@ const kWhoAreWeStyle = TextStyle(
 
 // COLORS
 const Color kSecondaryColor = Colors.white;
-const Color kPrimaryColor = Color(0xFF0FFF50);
+const Color kPrimaryColor = Color(0xFF355E3B);
