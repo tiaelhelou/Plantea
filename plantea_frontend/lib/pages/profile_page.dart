@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
@@ -17,6 +19,13 @@ import 'package:provider/provider.dart';
 import '../models/profile_model.dart';
 export '../models/profile_model.dart';
 
+String points = '';
+String name = '';
+Future<void> setparam() async {
+  points = await Api.displayTotalPoint();
+  name = await Api.displayUserName();
+}
+
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({super.key});
 
@@ -26,11 +35,12 @@ class ProfileWidget extends StatefulWidget {
 
 class _ProfileWidgetState extends State<ProfileWidget> {
   late ProfileModel _model;
-
+  final List<String> imagePaths = [];
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
+    setparam();
     super.initState();
     _model = createModel(context, () => ProfileModel());
   }
@@ -138,13 +148,22 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               Align(
                 alignment: AlignmentDirectional(0, 0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: Icon(
                     Icons.tag_faces_sharp,
                     color: Color(0xFF355E3B),
                     size: 160,
                   ),
                 ),
+              ),
+              Text(
+                name, //////////////////////replace name
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Montserrat',
+                      fontSize: 14,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
@@ -163,14 +182,18 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             color: Color(0xFFBCB88A),
                             borderRadius: BorderRadius.circular(23),
                           ),
-                          child: Text(
-                            '',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  letterSpacing: 0,
-                                ),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 10, 0, 0),
+                            child: Text(
+                              points, //////////////////add points
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0,
+                                  ),
+                            ),
                           ),
                         ),
                       ),
@@ -264,34 +287,20 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       childAspectRatio: 1,
                     ),
                     scrollDirection: Axis.vertical,
-                    children: [
-                      Container(
+                    children: List.generate(
+                      imagePaths.length,
+                      (index) => Container(
                         width: 125,
                         height: 115,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: Image.network(
-                              'https://images.unsplash.com/photo-1518709779341-56cf4535e94b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxfHxST1NFU3xlbnwwfHx8fDE3MTQzODg2NTJ8MA&ixlib=rb-4.0.3&q=80&w=1080',
-                            ).image,
+                            image: FileImage(File(imagePaths[index])),
                           ),
                           borderRadius: BorderRadius.circular(23),
                         ),
                       ),
-                      Container(
-                        width: 125,
-                        height: 115,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: Image.network(
-                              'https://images.unsplash.com/photo-1585337913966-114ba3cf1f80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyMXx8Zmxvd2VyfGVufDB8fHx8MTcxNDM4MDY4OHww&ixlib=rb-4.0.3&q=80&w=1080',
-                            ).image,
-                          ),
-                          borderRadius: BorderRadius.circular(23),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
