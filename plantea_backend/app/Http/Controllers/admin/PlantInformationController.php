@@ -13,7 +13,7 @@ class PlantInformationController extends Controller
     /*
     * Display plant informaion for User.
     */
-    public function displayInformation($id = null, $id_plant = null)
+    public function displayInformation($id_plant = null, $id = null)
     {
         if ($id_plant == null) {
             return response()->json(['message' => 'Display Information Failed'], 400);

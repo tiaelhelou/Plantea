@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:plantea/pages/reminders_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+int id = 1;
+
 class Api {
   static String urlbase = 'http://127.0.0.1:8000/api/v1';
   //for the emulaator : 'http://10.0.2.2:8000/api/v1';
@@ -266,7 +268,7 @@ class Api {
               plantsData.map((plant) => plant['plant_name'] as String).toList();
           return plantNames;
         } else {
-          throw Exception('Invalid response format: missing "data" key');
+          throw Exception('Invalid response format: ${response.statusCode}');
         }
       } else {
         throw Exception('Failed to fetch plant data');
@@ -301,7 +303,7 @@ class Api {
           return plantsData;
         }
       } else {
-        throw Exception('Invalid response format: missing "data" key');
+        throw Exception('Invalid response format: ${response.statusCode}');
       }
     } catch (error) {
       throw Exception('Error fetching plant data: $error');
@@ -324,7 +326,7 @@ class Api {
         //     plantsData.map((plant) => plant['plant_name'] as String).toList();
         return plantsData;
       } else {
-        throw Exception('Invalid response format: missing "data" key');
+        throw Exception('Invalid response format: ${response.statusCode}');
       }
     } catch (error) {
       throw Exception('Error fetching plant data: $error');
@@ -335,12 +337,12 @@ class Api {
    * Display plant information api
    */
   static Future<List<Map<String, dynamic>>> displayPlantInfo(
-      String name) async {
+      int? plant_id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
     final url =
-        Uri.parse('$urlbase/authorization/admin/displayInformation/$id/$name');
+        Uri.parse('$urlbase/authorization/admin/displayInformation/$plant_id');
 
     try {
       final response = await http.get(url);
@@ -357,7 +359,7 @@ class Api {
         }
         return plantDetailsList;
       } else {
-        throw Exception('Invalid response format: missing "data" key');
+        throw Exception('Invalid response format: ${response.statusCode}');
       }
     } catch (error) {
       throw Exception('Error fetching data: $error');
@@ -380,7 +382,7 @@ class Api {
         //     plantsData.map((plant) => plant['plant_name'] as String).toList();
         return rewardsData;
       } else {
-        throw Exception('Invalid response format: missing "data" key');
+        throw Exception('Invalid response format: ${response.statusCode}');
       }
     } catch (error) {
       throw Exception('Error fetching  data: $error');
@@ -424,7 +426,7 @@ class Api {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
-    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/$id');
+    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/1');
 
     try {
       final response = await http.get(url);
@@ -436,7 +438,7 @@ class Api {
         String totalPoints = profileData['user_points'].toString();
         return totalPoints;
       } else {
-        throw Exception('Invalid response format: missing "data" key');
+        throw Exception('Invalid response format: ${response.statusCode}');
       }
     } catch (error) {
       throw Exception('Error fetching data: $error');
@@ -450,7 +452,7 @@ class Api {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
-    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/$id');
+    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/1');
 
     try {
       final response = await http.get(url);
@@ -462,7 +464,7 @@ class Api {
         String username = profileData['user_name'].toString();
         return username;
       } else {
-        throw Exception('Invalid response format: missing "data" key');
+        throw Exception('Invalid response format: ${response.statusCode}');
       }
     } catch (error) {
       throw Exception('Error fetching data: $error');
@@ -497,7 +499,7 @@ class Api {
 
         return images;
       } else {
-        throw Exception('Invalid response format: missing "data" key');
+        throw Exception('Invalid response format: ${response.statusCode}');
       }
     } catch (error) {
       throw Exception('Error fetching data: $error');
