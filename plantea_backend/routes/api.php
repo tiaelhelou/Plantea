@@ -66,7 +66,7 @@ Route::group(['prefix' => 'v1'], function () {
 
             Route::group(['prefix' => 'admin'], function () {
                 
-                Route::get('/displayInformation/{id?}/{name?}', [PlantInformationController::class, 'displayInformation']);
+                Route::get('/displayInformation/{id?}/{id_plant?}', [PlantInformationController::class, 'displayInformation']);
                 Route::get('/displayPlants', [PlantLibraryController::class, 'displayPlants']);
 
             });
