@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:plantea/api.dart';
 import 'package:plantea/camera_screens/camera_page.dart';
 import 'package:plantea/pages/donate_page.dart';
 import 'package:plantea/pages/plant_library_page.dart.dart';
@@ -18,7 +19,14 @@ import '../models/plant_info_model.dart';
 export '../models/plant_info_model.dart';
 
 class PlantInfoWidget extends StatefulWidget {
-  const PlantInfoWidget(int? id, String? nickname, {super.key});
+  final int? id;
+  final String? nickname;
+
+  const PlantInfoWidget({
+    Key? key,
+    required this.id,
+    required this.nickname,
+  }) : super(key: key);
 
   @override
   State<PlantInfoWidget> createState() => _PlantInfoWidgetState();
@@ -28,9 +36,58 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
   late PlantInfoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  String description = '';
+  String details = '';
+  String characteristics = '';
+  String category = '';
+  String? displayName = '';
+  bool myplant = false;
+  bool check() {
+    if (widget.nickname != null) {
+      myplant = true;
+      // Use widget.nickname to access the nickname passed to the widget
+      print('Nickname: ${widget.nickname}');
+      return myplant;
+    }
+    return false;
+  }
+
+  Future<void> getInfo() async {
+    List data = await Api.displayPlantInfo(widget.id);
+
+    List plantNames =
+        data.map((plantDetails) => plantDetails["plant_name"]).toList();
+    print(plantNames);
+    List plantdesc =
+        data.map((plantDetails) => plantDetails["plant_description"]).toList();
+    print(plantdesc);
+
+    List plantchara = data
+        .map((plantDetails) => plantDetails["plant_characteristics"])
+        .toList();
+    print(plantchara);
+    List plantdet =
+        data.map((plantDetails) => plantDetails["plant_details"]).toList();
+    print(plantdet);
+    List plantcat =
+        data.map((plantDetails) => plantDetails["plant_category"]).toList();
+    print(plantcat);
+
+    //my plant
+
+    characteristics = plantchara[0].toString();
+    details = plantdet[0].toString();
+    category = plantcat[0].toString();
+    description = plantdesc[0].toString();
+    name = plantNames[0].toString();
+    if (check()) {
+      displayName = widget.nickname;
+    }
+  }
 
   @override
   void initState() {
+    getInfo();
     super.initState();
     _model = createModel(context, () => PlantInfoModel());
   }
@@ -38,13 +95,11 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var myplant = false;
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -187,7 +242,7 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                   borderRadius: BorderRadius.circular(23),
                                 ),
                                 child: Text(
-                                  'Input here from db',
+                                  '$displayName          $description', ////////////////////////////////////////dsc
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -224,7 +279,7 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                     borderRadius: BorderRadius.circular(23),
                                   ),
                                   child: Text(
-                                    'Input here from db',
+                                    "$details        Category:   $category", //////////////////////////////////////////det
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -297,7 +352,7 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                 borderRadius: BorderRadius.circular(23),
                               ),
                               child: Text(
-                                'Input here from db',
+                                characteristics,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -307,44 +362,6 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                               ),
                             ),
                           ),
-                          // Text(
-                          //   'Description',
-                          //   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          //         fontFamily: 'Montserrat',
-                          //         fontSize: 16,
-                          //         letterSpacing: 0,
-                          //         fontWeight: FontWeight.bold,
-                          //       ),
-                          // ),
-                          // Align(
-                          //   alignment: AlignmentDirectional(0, 0),
-                          //   child: Container(
-                          //     width: 340,
-                          //     height: 81,
-                          //     decoration: BoxDecoration(
-                          //       color: Color(0xFFF3F3F3),
-                          //       boxShadow: [
-                          //         BoxShadow(
-                          //           blurRadius: 4,
-                          //           color: Color(0xFF9FBCAA),
-                          //           offset: Offset(
-                          //             0,
-                          //             2,
-                          //           ),
-                          //         )
-                          //       ],
-                          //       borderRadius: BorderRadius.circular(23),
-                          //     ),
-                          //     child: Text(
-                          //       'Input here from db',
-                          //       style:
-                          //           FlutterFlowTheme.of(context).bodyMedium.override(
-                          //                 fontFamily: 'Montserrat',
-                          //                 letterSpacing: 0,
-                          //               ),
-                          //     ),
-                          //   ),
-                          // ),
                         ].divide(SizedBox(height: 10)),
                       ),
                     ),

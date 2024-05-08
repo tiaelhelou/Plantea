@@ -35,7 +35,10 @@ class MyApp extends StatelessWidget {
       home: ChangeNotifierProvider(
         create: (context) => IdentificationProvider(),
         builder: ((context, child) {
-          return const EditProfileWidget();
+          return const PlantInfoWidget(
+            id: 1,
+            nickname: null, // Provide the nickname value here
+          );
         }),
       ),
     );
