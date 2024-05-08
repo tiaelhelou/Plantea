@@ -303,8 +303,9 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     PlantInfoWidget(
-                                                        getPlantinfoID(item!),
-                                                        null)),
+                                                        id: getPlantinfoID(
+                                                            item!),
+                                                        nickname: null)),
                                           );
                                         },
                                         child: Container(
@@ -337,7 +338,8 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     PlantInfoWidget(
-                                                        idlist[index], null)),
+                                                        id: idlist[index],
+                                                        nickname: null)),
                                           );
                                         },
                                         child: Container(

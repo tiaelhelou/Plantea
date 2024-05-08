@@ -274,7 +274,8 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => PlantInfoWidget(
-                                            nicknameInfId!, selectedValue!)),
+                                            id: nicknameInfId!,
+                                            nickname: selectedValue!)),
                                   );
                                 },
                                 child: Container(
@@ -352,7 +353,8 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => PlantInfoWidget(
-                                            nicknameInfId!, newList[index])),
+                                            id: nicknameInfId!,
+                                            nickname: newList[index])),
                                   );
                                 },
                                 child: Container(
