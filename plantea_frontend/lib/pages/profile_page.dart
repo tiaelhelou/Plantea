@@ -5,11 +5,14 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plantea/api.dart';
+import 'package:plantea/camera_screens/camera_page.dart';
 import 'package:plantea/pages/donate_page.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
 import 'package:plantea/pages/plant_library_page.dart.dart';
 import 'package:plantea/pages/redeem_gifts_page.dart';
 import 'package:plantea/pages/settings_page.dart';
+import 'package:plantea/services/providers.dart';
+import 'package:provider/provider.dart';
 
 import '../models/profile_model.dart';
 export '../models/profile_model.dart';
@@ -350,6 +353,26 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                       onPressed: () {
                         print('camera pressed ...');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Navigator(
+                              pages: [
+                                MaterialPage(
+                                  child: ChangeNotifierProvider(
+                                    create: (context) =>
+                                        IdentificationProvider(),
+                                    builder: (context, child) {
+                                      return camera();
+                                    },
+                                  ),
+                                ),
+                              ],
+                              onPopPage: (route, result) =>
+                                  route.didPop(result),
+                            ),
+                          ),
+                        );
                       },
                     ),
                     FlutterFlowIconButton(
