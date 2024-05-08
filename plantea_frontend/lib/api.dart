@@ -334,7 +334,7 @@ class Api {
   /*
    * Display plant information api
    */
-  static Future<List> displayPlantInfo(String name) async {
+  static Future<List<Map<String, dynamic>>> displayPlantInfo(String name) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
@@ -346,9 +346,15 @@ class Api {
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
 
+        final List<Map<String, dynamic>> plantDetailsList = [];
         final List<dynamic> plantData = responseData['data'];
 
-        return plantData;
+        for (var plant in plantData) {
+          if (plant is Map<String, dynamic>) {
+            plantDetailsList.add(plant);
+          }
+        }
+        return plantDetailsList;
       } else {
         throw Exception('Invalid response format: missing "data" key');
       }
@@ -475,10 +481,19 @@ class Api {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
-
+        final List<dynamic> images = [];
         final Map<String, dynamic> profileData = responseData['user_plants'];
 
-        List images = profileData['images'];
+        profileData.forEach((key, value) {
+          if (value is List) {
+            for (var image in value) {
+              if (image is String) {
+                images.add(image);
+              }
+            }
+          }
+        });
+
         return images;
       } else {
         throw Exception('Invalid response format: missing "data" key');
