@@ -13,6 +13,7 @@ import 'package:plantea/pages/redeem_gifts_page.dart';
 import 'package:plantea/pages/reminders_page.dart';
 //import 'package:plantea/pages/reset_pass_page.dart';
 import 'package:plantea/pages/settings_page.dart';
+import 'package:plantea/pages/signup_page.dart';
 //import 'package:plantea/pages/signup_page.dart';
 import 'package:plantea/pages/splash_screen.dart';
 import 'package:plantea/camera_screens/camera_page.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       home: ChangeNotifierProvider(
         create: (context) => IdentificationProvider(),
         builder: ((context, child) {
-          return const AddPlantWidget();
+          return const camera();
         }),
       ),
     );

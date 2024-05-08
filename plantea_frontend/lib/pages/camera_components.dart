@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:plantea/api.dart';
 import 'package:plantea/constants.dart';
 import 'package:plantea/models/models.dart';
 import 'package:plantea/camera_screens/image_preview.dart';
@@ -225,6 +226,7 @@ class _PlantSuggestionWidgetState extends State<PlantSuggestionWidget> {
               MaterialPageRoute(
                   builder: ((context) =>
                       ImagePreviewPage(url: widget.plant.imagePath))));
+          Api.insertImage();
         },
         child: Stack(children: [
           Image(

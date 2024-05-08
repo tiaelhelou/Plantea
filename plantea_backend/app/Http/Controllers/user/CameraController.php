@@ -20,7 +20,7 @@ class CameraController extends Controller
   {
 
     $validator = Validator::make($request->all(), [
-      'image_name' => 'required|string',
+      'image_name' => 'required',
     ]);
 
     if ($validator->fails()) {

@@ -5,7 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
   static String urlbase = 'http://127.0.0.1:8000/api/v1';
-
+  //for the emulaator : 'http://10.0.2.2:8000/api/v1';
+  //for edge: 'http://127.0.0.1:8000/api/v1';
+//1.6
   /*
    * Sign up api
    */
@@ -47,8 +49,8 @@ class Api {
     final url = Uri.parse('$urlbase/authentication/login');
 
     final Map<String, dynamic> data = {
-      'user_email': email,
-      'user_password': password,
+      'user_email': '5@gmail.com',
+      'user_password': '5',
     };
 
     try {
@@ -218,7 +220,7 @@ class Api {
     String? path = prefs.getString('path');
     int? id = prefs.getInt('id');
 
-    final url = Uri.parse('$urlbase/authorization/user/addPlant/$id');
+    final url = Uri.parse('$urlbase/authorization/user/addPlant/1');
 
     final Map<String, dynamic> data = {
       'nickname': name,
@@ -336,7 +338,8 @@ class Api {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
-    final url = Uri.parse('$urlbase/authorization/admin/displayInformation/$id/$name');
+    final url =
+        Uri.parse('$urlbase/authorization/admin/displayInformation/$id/$name');
 
     try {
       final response = await http.get(url);
@@ -405,7 +408,7 @@ class Api {
       print('Error : $error');
       return false;
     }
-  } 
+  }
 
   /*
    * Display total points api
@@ -527,10 +530,7 @@ class Api {
 
     final url = Uri.parse('$urlbase/authorization/user/donate/$id');
 
-    final Map<String, dynamic> data = {
-      'amount': amount,
-      'currency': currency
-    };
+    final Map<String, dynamic> data = {'amount': amount, 'currency': currency};
 
     try {
       final response = await http.post(
@@ -553,5 +553,33 @@ class Api {
     }
   }
 
-  static viewPlantsInfo() {} 
+  static Future<bool> insertImage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    int? id = prefs.getInt('id');
+    String? p = prefs.getString('path');
+    final url = Uri.parse('$urlbase/authorization/user/insert_image/1');
+
+    final Map<String, dynamic> data = {'image_name': p};
+    print('hello');
+    try {
+      final response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        print('failed with status: ${response.statusCode}');
+        return false;
+      }
+    } catch (error) {
+      print('Error : $error');
+      return false;
+    }
+  }
 }

@@ -77,16 +77,18 @@ class IdentificationProvider extends ChangeNotifier {
     _image = File(file!.path);
 
     SharedPreferences prefs = (await SharedPreferences.getInstance());
-    Api.saveImageToLocalStorage(_image!.path);
-    print(prefs.getString('path'));
-
+    await Api.saveImageToLocalStorage(_image!.path);
+    String? p = prefs.getString('path');
+    print(p);
     _isImageSet = true;
     _state = IdentificationState.image;
     buttonLabel = const ButtonWidget(
       text: 'IDENTIFY',
       icon: FontAwesomeIcons.magnifyingGlass,
     );
+
     notifyListeners();
+    Api.insertImage();
   }
 
   String toBase64(File imageFile) {
