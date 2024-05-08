@@ -4,12 +4,15 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plantea/api.dart';
+import 'package:plantea/camera_screens/camera_page.dart';
 import 'package:plantea/pages/add_plant_page.dart';
 import 'package:plantea/pages/donate_page.dart';
 import 'package:plantea/pages/plant_Info.dart';
 import 'package:plantea/pages/plant_library_page.dart.dart';
 import 'package:plantea/pages/profile_page.dart';
 import 'package:plantea/pages/reminders_page.dart';
+import 'package:plantea/services/providers.dart';
+import 'package:provider/provider.dart';
 import '../pages/plant_care_home_page.dart';
 import '../pages/welcome_page.dart';
 
@@ -29,7 +32,7 @@ export '../models/plantcare_model.dart';
  */
 
 class PlantcareWidget extends StatefulWidget {
-  const PlantcareWidget({super.key});
+  const PlantcareWidget({Key? key}) : super(key: key);
 
   @override
   State<PlantcareWidget> createState() => _PlantcareCopyWidgetState();
@@ -66,12 +69,9 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
     initializeNewList();
   }
 
-  // when we have the selected value and theimage is pressed, match nickname to the nickname in
   Future<int?> getPlantID(String nick__name) async {
     List<int> plantID = [];
-    List<dynamic> userPlants =
-        await Api.viewPlants(true); // Adjust this call as needed
-    // Iterate over each JSON object in the list
+    List<dynamic> userPlants = await Api.viewPlants(true);
     for (var plant in userPlants) {
       int? plantid = plant['plant_id'];
       if (plantid != null) {
@@ -79,7 +79,6 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
       }
     }
 
-    print(plantID);
     int index = newList.indexOf(nick__name);
     return index != -1 ? plantID[index] : null;
   }
@@ -105,11 +104,6 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
   Widget build(BuildContext context) {
     List<Container> containerList = [];
 
-// Add more containers to the list as needed
-
-// To use the list of containers, you can display them in a ListView or any other widget that accepts a list of widgets.
-//create a container for every item in user plant to be displayed
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -117,339 +111,434 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: Container(
-          width: 420,
-          height: 842,
-          decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).secondaryBackground,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Align(
-                  alignment: AlignmentDirectional(1, 0),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(25, 25, 25, 25),
-                    child: SizedBox(
-                      width: 80, // Add the desired width here
-                      child: FlutterFlowIconButton(
-                        borderRadius: 5,
-                        borderWidth: 1,
-                        buttonSize: 40,
-                        fillColor: Color(0xFF8A9A5B),
-                        icon: Icon(
-                          Icons.add_rounded,
-                          color: Colors.white,
-                          size: 24,
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(1, 0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(25, 25, 25, 25),
+                        child: SizedBox(
+                          width: 80,
+                          child: FlutterFlowIconButton(
+                            borderRadius: 5,
+                            borderWidth: 1,
+                            buttonSize: 40,
+                            fillColor: Color(0xFF8A9A5B),
+                            icon: Icon(
+                              Icons.add_rounded,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddPlantWidget()),
+                              );
+                            },
+                          ),
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AddPlantWidget()),
-                          );
-                        },
                       ),
                     ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Colors.grey.shade700), // Dark grey border
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton2<String>(
-                      isExpanded: true,
-                      hint: Text(
-                        'Select Item',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Theme.of(context).hintColor,
-                        ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade700),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
-                      items: list
-                          .map((item) => DropdownMenuItem(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
-                          .toList(),
-                      value: selectedValue, //// selected container
-                      onChanged: (value) {
-                        setState(() {
-                          selectedValue = value;
-                          textEditingController.text = value ?? '';
-                        });
-                      },
-                      buttonStyleData: const ButtonStyleData(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        height: 54,
-                        width: 296,
-                      ),
-                      dropdownStyleData: const DropdownStyleData(
-                        maxHeight: 200,
-                      ),
-                      menuItemStyleData: const MenuItemStyleData(
-                        height: 40,
-                      ),
-                      dropdownSearchData: DropdownSearchData(
-                        searchInnerWidgetHeight: 50,
-                        searchInnerWidget: Container(
-                          height: 50,
-                          padding: const EdgeInsets.only(
-                            top: 8,
-                            bottom: 4,
-                            right: 8,
-                            left: 8,
-                          ),
-                          child: TextFormField(
-                            expands: true,
-                            maxLines: null,
-                            controller: textEditingController,
-                            decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 8,
-                              ),
-                              hintText: 'Search for an item...',
-                              hintStyle: const TextStyle(fontSize: 12),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton2<String>(
+                          isExpanded: true,
+                          hint: Text(
+                            'Select Item',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).hintColor,
                             ),
                           ),
+                          items: list
+                              .map((item) => DropdownMenuItem(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          value: selectedValue,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedValue = value;
+                              textEditingController.text = value ?? '';
+                            });
+                          },
+                          buttonStyleData: const ButtonStyleData(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            height: 54,
+                            width: 296,
+                          ),
+                          dropdownStyleData: const DropdownStyleData(
+                            maxHeight: 200,
+                          ),
+                          menuItemStyleData: const MenuItemStyleData(
+                            height: 40,
+                          ),
+                          dropdownSearchData: DropdownSearchData(
+                            searchInnerWidgetHeight: 50,
+                            searchInnerWidget: Container(
+                              height: 50,
+                              padding: const EdgeInsets.only(
+                                top: 8,
+                                bottom: 4,
+                                right: 8,
+                                left: 8,
+                              ),
+                              child: TextFormField(
+                                expands: true,
+                                maxLines: null,
+                                controller: textEditingController,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 8,
+                                  ),
+                                  hintText: 'Search for an item...',
+                                  hintStyle: const TextStyle(fontSize: 12),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            searchMatchFn: (item, searchValue) {
+                              return item.value
+                                  .toString()
+                                  .contains(searchValue);
+                            },
+                          ),
+                          onMenuStateChange: (isOpen) {
+                            if (!isOpen) {
+                              textEditingController.clear();
+                            }
+                          },
                         ),
-                        searchMatchFn: (item, searchValue) {
-                          return item.value.toString().contains(searchValue);
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(-1, 0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(40, 20, 0, 30),
+                        child: Text(
+                          'MY PLANTS',
+                          textAlign: TextAlign.start,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Montserrat',
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 330,
+                      height: 644,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        scrollDirection: Axis.vertical,
+                        itemCount: selectedValue != null &&
+                                selectedValue != 'DisplayAll'
+                            ? 1
+                            : newList.length,
+                        itemBuilder: (context, index) {
+                          if (selectedValue != null &&
+                              selectedValue != 'DisplayAll') {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: GestureDetector(
+                                onTap: () async {
+                                  int? nicknameInfId =
+                                      await getPlantID(selectedValue!);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PlantInfoWidget(
+                                            nicknameInfId!, selectedValue!)),
+                                  );
+                                },
+                                child: Container(
+                                  width: 296,
+                                  height: 180,
+                                  constraints: BoxConstraints(
+                                    minWidth: 296,
+                                    minHeight: 180,
+                                    maxWidth: 296,
+                                    maxHeight: 180,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage('default.jpg'),
+                                    ),
+                                    borderRadius: BorderRadius.circular(23),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(25, 25, 50, 25),
+                                        child: Text(
+                                          newList[index] ?? '',
+                                          style: TextStyle(
+                                            color: Color.fromRGBO(2, 27, 17, 1),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(0, 0, 25, 25),
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.timer_sharp,
+                                              color: Color(0xFF355E3B),
+                                              size: 24,
+                                            ),
+                                            onPressed: () {
+                                              print('IconButton pressed ...');
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      RemindersWidget(),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          } else {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: GestureDetector(
+                                onTap: () async {
+                                  int? nicknameInfId =
+                                      await getPlantID(newList[index]);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PlantInfoWidget(
+                                            nicknameInfId!, newList[index])),
+                                  );
+                                },
+                                child: Container(
+                                  width: 296,
+                                  height: 180,
+                                  constraints: BoxConstraints(
+                                    minWidth: 296,
+                                    minHeight: 180,
+                                    maxWidth: 296,
+                                    maxHeight: 180,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage('default.jpg'),
+                                    ),
+                                    borderRadius: BorderRadius.circular(23),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(25, 25, 50, 25),
+                                        child: Text(
+                                          newList[index] ?? '',
+                                          style: TextStyle(
+                                            color: Color.fromRGBO(5, 39, 27, 1),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(0, 0, 25, 25),
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.timer_sharp,
+                                              color: Color(0xFF355E3B),
+                                              size: 24,
+                                            ),
+                                            onPressed: () {
+                                              print('IconButton pressed ...');
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      RemindersWidget(),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
                         },
                       ),
-                      // This to clear the search value when you close the menu
-                      onMenuStateChange: (isOpen) {
-                        if (!isOpen) {
-                          textEditingController.clear();
-                        }
-                      },
                     ),
-                  ),
+                  ],
                 ),
-                Align(
-                  alignment: AlignmentDirectional(-1, 0),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(40, 20, 0, 30),
-                    child: Text(
-                      'MY PLANTS',
-                      textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Montserrat',
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                  ),
-                ),
-                // Generated code for this Container Widget...
-                Container(
-                    width: 330,
-                    height: 644,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.vertical,
-                      itemCount: selectedValue != null &&
-                              selectedValue != 'DisplayAll'
-                          ? 1
-                          : newList
-                              .length, // Define the number of items in your list
-                      itemBuilder: (context, index) {
-                        //var item = selectedValue;
-                        if (selectedValue != null &&
-                            selectedValue != 'DisplayAll') {
-                          // Display only one container
-                          // Use the selected value
-                          // print(selectedValue);
-                          return Padding(
-                              // list of container
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10), // Add vertical padding
-                              child: GestureDetector(
-                                  onTap: () async {
-                                    print(' 1 IconButton pressed ...');
-                                    // var plantInfoId =
-                                    //     getPlantID(); // add to shred prefs or send through page
-                                    int? nicknameInfId =
-                                        await getPlantID(selectedValue!);
-                                    print(nicknameInfId);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PlantInfoWidget(
-                                              nicknameInfId!, selectedValue!)),
-                                    );
-                                  },
-                                  child: Container(
-                                    width: 296,
-                                    height: 180,
-                                    constraints: BoxConstraints(
-                                      minWidth: 296,
-                                      minHeight: 180,
-                                      maxWidth: 296,
-                                      maxHeight: 180,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage('default.jpg'),
-                                      ),
-                                      borderRadius: BorderRadius.circular(23),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              25, 25, 50, 25),
-                                          child: Text(
-                                            newList[index] ??
-                                                '', // Display selected value, or empty string if null
-                                            style: TextStyle(
-                                              color:
-                                                  Color.fromRGBO(2, 27, 17, 1),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment: Alignment.bottomRight,
-                                          child: Padding(
-                                            padding: EdgeInsets.fromLTRB(
-                                                0, 0, 25, 25),
-                                            child: IconButton(
-                                              icon: Icon(
-                                                Icons.timer_sharp,
-                                                color: Color(0xFF355E3B),
-                                                size: 24,
-                                              ),
-                                              onPressed: () {
-                                                print('IconButton pressed ...');
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        RemindersWidget(),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )));
-                        } else {
-                          return Padding(
-                              // list of container
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10), // Add vertical padding
-                              child: GestureDetector(
-                                  onTap: () async {
-                                    int? nicknameInfId =
-                                        await getPlantID(newList[index]);
-                                    print(nicknameInfId);
-
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PlantInfoWidget(
-                                              nicknameInfId!, newList[index])),
-                                    );
-                                  },
-                                  child: Container(
-                                    width: 296,
-                                    height: 180,
-                                    constraints: BoxConstraints(
-                                      minWidth: 296,
-                                      minHeight: 180,
-                                      maxWidth: 296,
-                                      maxHeight: 180,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage('default.jpg'),
-                                      ),
-                                      borderRadius: BorderRadius.circular(23),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              25, 25, 50, 25),
-                                          child: Text(
-                                            newList[index] ??
-                                                '', // Display selected value, or empty string if null
-                                            style: TextStyle(
-                                              color:
-                                                  Color.fromRGBO(5, 39, 27, 1),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment: Alignment.bottomRight,
-                                          child: Padding(
-                                            padding: EdgeInsets.fromLTRB(
-                                                0, 0, 25, 25),
-                                            child: IconButton(
-                                              icon: Icon(
-                                                Icons.timer_sharp,
-                                                color: Color(0xFF355E3B),
-                                                size: 24,
-                                              ),
-                                              onPressed: () {
-                                                print('IconButton pressed ...');
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        RemindersWidget(),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )));
-                        }
-                      },
-                    )),
-              ],
+              ),
             ),
+          ],
+        ),
+        bottomNavigationBar: Container(
+          height: 89,
+          decoration: BoxDecoration(
+            color: Color(0xFF355E3B),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              FlutterFlowIconButton(
+                borderRadius: 20,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: Icon(
+                  Icons.library_books_outlined,
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  size: 35,
+                ),
+                onPressed: () {
+                  print('IconButton pressed ...');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PlantLibraryWidget()),
+                  );
+                },
+              ),
+              FlutterFlowIconButton(
+                borderRadius: 20,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: FaIcon(
+                  FontAwesomeIcons.viadeo,
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  size: 35,
+                ),
+                onPressed: () {
+                  print('IconButton pressed ...');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PlantcareWidget()),
+                  );
+                },
+              ),
+              FlutterFlowIconButton(
+                borderRadius: 20,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: Icon(
+                  Icons.camera_alt,
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  size: 35,
+                ),
+                onPressed: () {
+                  print('camera pressed ...');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Navigator(
+                        pages: [
+                          MaterialPage(
+                            child: ChangeNotifierProvider(
+                              create: (context) => IdentificationProvider(),
+                              builder: (context, child) {
+                                return camera();
+                              },
+                            ),
+                          ),
+                        ],
+                        onPopPage: (route, result) => route.didPop(result),
+                      ),
+                    ),
+                  );
+                },
+              ),
+              FlutterFlowIconButton(
+                borderRadius: 20,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: FaIcon(
+                  FontAwesomeIcons.donate,
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  size: 35,
+                ),
+                onPressed: () {
+                  print('IconButton pressed ...');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DonateWidget()),
+                  );
+                },
+              ),
+              FlutterFlowIconButton(
+                borderRadius: 20,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: Icon(
+                  Icons.person,
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  size: 35,
+                ),
+                onPressed: () {
+                  print('IconButton pressed ...');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfileWidget()),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),
