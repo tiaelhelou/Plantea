@@ -1,0 +1,25 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "plantea-46392",
+                    "appId": "1:86613155445:android:a9cb3cb65316f9150e223c",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "plantea-46392",
+                    "configurations": {
+                        "android": "1:86613155445:android:a9cb3cb65316f9150e223c",
+                        "ios": "1:86613155445:ios:50d95af3f3465de00e223c",
+                        "macos": "1:86613155445:ios:50d95af3f3465de00e223c",
+                        "web": "1:86613155445:web:d34cfc4b73903fb20e223c",
+                        "windows": "1:86613155445:web:840d65baddabcc260e223c"
+                    }
+                }
+            }
+        }
+    }
+}

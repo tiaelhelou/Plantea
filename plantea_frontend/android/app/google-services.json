@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "86613155445",
+    "project_id": "plantea-46392",
+    "storage_bucket": "plantea-46392.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86613155445:android:a9cb3cb65316f9150e223c",
+        "android_client_info": {
+          "package_name": "com.example.plantea_frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgNGPj5pQdn913Fnt56fJ-etl6okXWMbE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

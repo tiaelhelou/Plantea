@@ -12,6 +12,9 @@ import 'package:plantea/pages/donate_page.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
 import 'package:plantea/pages/plant_library_page.dart.dart';
 import 'package:plantea/pages/profile_page.dart';
+import 'package:plantea/camera_screens/camera_page.dart';
+import 'package:plantea/services/providers.dart';
+import 'package:provider/provider.dart';
 
 import '../models/add_plant_model.dart';
 export '../models/add_plant_model.dart';
@@ -433,6 +436,26 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
                             ),
                             onPressed: () {
                               print('camera pressed ...');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Navigator(
+                                    pages: [
+                                      MaterialPage(
+                                        child: ChangeNotifierProvider(
+                                          create: (context) =>
+                                              IdentificationProvider(),
+                                          builder: (context, child) {
+                                            return camera();
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                    onPopPage: (route, result) =>
+                                        route.didPop(result),
+                                  ),
+                                ),
+                              );
                             },
                           ),
                           FlutterFlowIconButton(
