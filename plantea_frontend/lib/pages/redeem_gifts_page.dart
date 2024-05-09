@@ -132,6 +132,11 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                         child: FFButtonWidget(
                           onPressed: () {
                             print('back pressed ...');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProfileWidget()),
+                            );
                           },
                           text: '',
                           icon: FaIcon(
