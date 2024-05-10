@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 int id = 1;
 
 class Api {
-  static String urlbase = 'http://127.0.0.1:8000/api/v1';
+  static String urlbase = 'http://10.0.2.2:8000/api/v1';
   //for the emulaator : 'http://10.0.2.2:8000/api/v1';
   //for edge: 'http://127.0.0.1:8000/api/v1';
 //1.6
@@ -397,7 +397,7 @@ class Api {
 
     int? id = prefs.getInt('id');
 
-    final url = Uri.parse('$urlbase/authorization/user/redeemReward/$id/$name');
+    final url = Uri.parse('$urlbase/authorization/user/redeemReward/1/$name');
 
     try {
       final response = await http.post(
@@ -407,7 +407,7 @@ class Api {
         },
       );
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         return true;
       } else {
         print('Redeem reward failed with status: ${response.statusCode}');
@@ -474,29 +474,25 @@ class Api {
   /*
    * Display user image api
    */
-  static Future<List> displayUserImage() async {
+  static Future<List<Map<String, dynamic>>> displayUserImage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
-    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/$id');
+    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/1');
 
     try {
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
-        final List<dynamic> images = [];
-        final Map<String, dynamic> profileData = responseData['user_plants'];
 
-        profileData.forEach((key, value) {
-          if (value is List) {
-            for (var image in value) {
-              if (image is String) {
-                images.add(image);
-              }
-            }
+        final List<Map<String, dynamic>> images = [];
+        final List<dynamic> userData = responseData['images'];
+
+        for (var image in userData) {
+          if (image is Map<String, dynamic>) {
+            images.add(image);
           }
-        });
-
+        }
         return images;
       } else {
         throw Exception('Invalid response format: ${response.statusCode}');
@@ -546,7 +542,7 @@ class Api {
 
     int? id = prefs.getInt('id');
 
-    final url = Uri.parse('$urlbase/authorization/user/donate/$id');
+    final url = Uri.parse('$urlbase/authorization/user/donate/1');
 
     final Map<String, dynamic> data = {'amount': amount, 'currency': currency};
 
@@ -559,7 +555,7 @@ class Api {
         body: jsonEncode(data),
       );
 
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         return true;
       } else {
         print('Donation failed with status: ${response.statusCode}');
@@ -589,7 +585,7 @@ class Api {
         body: jsonEncode(data),
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         return true;
       } else {
         print('failed with status: ${response.statusCode}');

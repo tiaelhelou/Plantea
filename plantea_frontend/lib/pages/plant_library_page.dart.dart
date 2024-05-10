@@ -46,6 +46,19 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
   List<String> list = [];
   List<String> newList = [];
   List<int> idlist = [];
+  String tulip = 'tul';
+  String maple = 'map';
+  String image = '';
+
+  void check(int? id) {
+    print(" hihi");
+    print(id);
+    if (id == 1) {
+      image = tulip;
+    } else {
+      image = maple;
+    }
+  }
 
   void initializeNewList() {
     newList = list.sublist(1);
@@ -291,7 +304,8 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                     // Display only one container
                                     var item =
                                         selectedValue; // Use the selected value
-
+                                    check(getPlantinfoID(item!));
+                                    print(getPlantinfoID(item!));
                                     return GestureDetector(
                                         onTap: () {
                                           print(' 1 IconButton pressed ...');
@@ -304,21 +318,20 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                                 builder: (context) =>
                                                     PlantInfoWidget(
                                                         id: getPlantinfoID(
-                                                            item!),
+                                                            item),
                                                         nickname: null)),
                                           );
                                         },
                                         child: Container(
                                           margin: EdgeInsets.all(8),
                                           decoration: BoxDecoration(
-                                            color:
-                                                Color.fromARGB(255, 10, 59, 27),
+                                            // color:
+                                            //     Color.fromARGB(255, 10, 59, 27),
                                             image: DecorationImage(
                                               fit: BoxFit.cover,
-                                              alignment:
-                                                  AlignmentDirectional(0, 0),
-                                              image: Image.network(
-                                                'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
+                                              image: Image.asset(
+                                                'assets/$image'
+                                                '.jpeg', // image of selected plant or default
                                               ).image,
                                             ),
                                             borderRadius:
@@ -328,7 +341,7 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                   } else {
                                     // Return a container with a button inside
                                     var item = newList[index];
-
+                                    check(getPlantinfoID(item!));
                                     return GestureDetector(
                                         onTap: () {
                                           print('IconButton pressed ...');
@@ -349,10 +362,9 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                                 Color.fromARGB(255, 18, 75, 29),
                                             image: DecorationImage(
                                               fit: BoxFit.cover,
-                                              alignment:
-                                                  AlignmentDirectional(0, 0),
-                                              image: Image.network(
-                                                'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
+                                              image: Image.asset(
+                                                'assets/$image'
+                                                '.jpeg', // image of selected plant or default
                                               ).image,
                                             ),
                                             borderRadius:

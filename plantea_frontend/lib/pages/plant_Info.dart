@@ -34,6 +34,9 @@ class PlantInfoWidget extends StatefulWidget {
 
 class _PlantInfoWidgetState extends State<PlantInfoWidget> {
   late PlantInfoModel _model;
+  String tulip = 'tul';
+  String maple = 'map';
+  String image = '';
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String description = '';
@@ -43,6 +46,11 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
   String? displayName = '';
   bool myplant = false;
   bool check() {
+    if (widget.id == 1) {
+      image = tulip;
+    } else {
+      image = maple;
+    }
     if (widget.nickname != null) {
       myplant = true;
       // Use widget.nickname to access the nickname passed to the widget
@@ -149,6 +157,19 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Center(
+                            child: Text(
+                              displayName!,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 16,
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                          ),
                           Text(
                             'Images',
                             style: FlutterFlowTheme.of(context)
@@ -169,45 +190,28 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                   .secondaryBackground,
                             ),
                             child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    // ClipRRect(
-                                    //   borderRadius: BorderRadius.circular(8),
-                                    //   child: Image.network(
-                                    //     'https://picsum.photos/seed/942/600',
-                                    //     width: 193,
-                                    //     height: 1,
-                                    //     fit: BoxFit.cover,
-                                    //   ),
-                                    // ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: Image.network(
-                                        'https://picsum.photos/seed/942/600',
-                                        width: 193,
-                                        height: 130,
-                                        fit: BoxFit.cover,
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Image.asset(
+                                          'assets/$image.jpeg', // Replace 'assets/image1.jpg' with your asset image path
+                                          width: 193,
+                                          height: 130,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                    ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: Image.network(
-                                        'https://picsum.photos/seed/555/600',
-                                        width: 193,
-                                        height: 130,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ].divide(SizedBox(width: 10)),
-                                ),
-                              ),
-                            ),
+
+                                      // Add more images as needed using the same pattern
+                                    ],
+                                  ),
+                                )),
                           ),
 
                           //plant informtion displayed. extracted from db ad replaced in container instead of  "Input here from db"
@@ -242,7 +246,7 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                   borderRadius: BorderRadius.circular(23),
                                 ),
                                 child: Text(
-                                  '$displayName          $description', ////////////////////////////////////////dsc
+                                  description, ////////////////////////////////////////dsc
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(

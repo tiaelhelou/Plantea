@@ -58,7 +58,7 @@ class _DonateWidgetState extends State<DonateWidget> {
   String? _selectedCurrency;
   final _formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  String? amount = '0';
+  int amount = 0;
   String? curr = '';
 
   @override
@@ -693,15 +693,13 @@ class _DonateWidgetState extends State<DonateWidget> {
                                                 ),
                                             textAlign: TextAlign.start,
                                             keyboardType: TextInputType.number,
-                                            onChanged: (value) {
-                                              amount =
-                                                  value; // Update the variable with the new value
-                                            },
+
                                             validator: (value) {
                                               if (value == null ||
                                                   value.isEmpty) {
                                                 return 'Amount is required';
                                               }
+                                              //amount = value as int;
                                               return null;
                                             },
                                           ),
@@ -769,7 +767,8 @@ class _DonateWidgetState extends State<DonateWidget> {
                                   if (_formKey.currentState != null &&
                                       _formKey.currentState!.validate()) {
                                     bool response = await Api.donate(
-                                        amount as int, _selectedCurrency!);
+                                        _model.textController6.hashCode,
+                                        _selectedCurrency!);
 
                                     if (response) {
                                       Navigator.push(

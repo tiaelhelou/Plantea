@@ -330,6 +330,7 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                                             size: 35,
                                           ),
                                           onPressed: () async {
+                                            print(index);
                                             bool response =
                                                 await Api.redeemReward(
                                                     list.elementAt(index));

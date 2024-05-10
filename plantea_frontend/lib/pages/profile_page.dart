@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:async_extension/async_extension.dart';
 import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
@@ -21,9 +22,18 @@ export '../models/profile_model.dart';
 
 String points = '';
 String name = '';
+List<String> imagePaths = []; // Specify the type of elements in the list
+
 Future<void> setparam() async {
+  List data = await Api.displayUserImage();
+  // Use the map method to extract image paths from the data list
+  imagePaths = data
+      .map((plantDetails) => plantDetails["camera_image_image"] as String)
+      .toList();
   points = await Api.displayTotalPoint();
   name = await Api.displayUserName();
+  String i = imagePaths[0]; // No need to call toString() here
+  print(i);
 }
 
 class ProfileWidget extends StatefulWidget {
@@ -35,7 +45,7 @@ class ProfileWidget extends StatefulWidget {
 
 class _ProfileWidgetState extends State<ProfileWidget> {
   late ProfileModel _model;
-  final List<String> imagePaths = [];
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -278,7 +288,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       topRight: Radius.circular(16),
                     ),
                   ),
-                  child: GridView(
+                  child: GridView.builder(
                     padding: EdgeInsets.zero,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
@@ -287,20 +297,26 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       childAspectRatio: 1,
                     ),
                     scrollDirection: Axis.vertical,
-                    children: List.generate(
-                      imagePaths.length,
-                      (index) => Container(
+                    itemCount: imagePaths.length,
+                    itemBuilder: (context, index) {
+                      final imagePath = imagePaths[index];
+                      final imageFile = File(imagePath);
+                      if (!imageFile.existsSync()) {
+                        print('Image file not found at path: $imagePath');
+                        return Container(); // Return an empty container if file not found
+                      }
+                      return Container(
                         width: 125,
                         height: 115,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: FileImage(File(imagePaths[index])),
+                            image: FileImage(imageFile),
                           ),
                           borderRadius: BorderRadius.circular(23),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ),
               ),

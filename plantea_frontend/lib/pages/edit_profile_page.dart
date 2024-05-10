@@ -147,38 +147,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 50),
-                        child: FFButtonWidget(
-                          onPressed: () {
-                            print('edit pressed ...');
-                          },
-                          text: 'Edit Photo',
-                          options: FFButtonOptions(
-                            width: 119,
-                            height: 34,
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                            iconPadding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                            color: Color(0xFF8A9A5B),
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.white,
-                                  fontSize: 13,
-                                  letterSpacing: 0,
-                                ),
-                            elevation: 3,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                      ),
                       Form(
                         key: _formKey,
                         child: Expanded(

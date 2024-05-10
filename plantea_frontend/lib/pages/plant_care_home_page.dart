@@ -41,12 +41,26 @@ class PlantcareWidget extends StatefulWidget {
 class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
   late PlantcareModel _model;
   TextEditingController nameController = TextEditingController();
-
+  List<int> plantID = [];
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String? selectedValue;
   final TextEditingController textEditingController = TextEditingController();
   List<String> list = [];
   List<String> newList = [];
+  String tulip = 'tul.jpeg';
+  String maple = 'map.jpeg';
+  String image = '';
+
+  void check(int? id) {
+    print(id);
+    if (id == 1) {
+      image = tulip;
+    } else if (id == 2) {
+      image = maple;
+    } else {
+      image = 'def.jpg';
+    }
+  }
 
   void initializeNewList() {
     newList = list.sublist(1);
@@ -70,7 +84,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
   }
 
   Future<int?> getPlantID(String nick__name) async {
-    List<int> plantID = [];
+    plantID = [];
     List<dynamic> userPlants = await Api.viewPlants(true);
     for (var plant in userPlants) {
       int? plantid = plant['plant_id'];
@@ -80,12 +94,26 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
     }
 
     int index = newList.indexOf(nick__name);
+    print(newList);
+    print(plantID);
     return index != -1 ? plantID[index] : null;
+  }
+
+  Future<int?> getPlantIDp() async {
+    plantID = [];
+    List<dynamic> userPlants = await Api.viewPlants(true);
+    for (var plant in userPlants) {
+      int? plantid = plant['plant_id'];
+      if (plantid != null) {
+        plantID.add(plantid);
+      }
+    }
   }
 
   @override
   void initState() {
     super.initState();
+    getPlantIDp();
     _model = createModel(context, () => PlantcareModel());
 
     _model.textController ??= TextEditingController(text: 'search');
@@ -264,6 +292,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                         itemBuilder: (context, index) {
                           if (selectedValue != null &&
                               selectedValue != 'DisplayAll') {
+                            check(plantID[index]);
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10),
                               child: GestureDetector(
@@ -292,7 +321,9 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                         .secondaryBackground,
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
-                                      image: AssetImage('default.jpg'),
+                                      image: Image.asset(
+                                        'assets/$image', // image of selected plant or default
+                                      ).image,
                                     ),
                                     borderRadius: BorderRadius.circular(23),
                                   ),
@@ -307,7 +338,8 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                         child: Text(
                                           newList[index] ?? '',
                                           style: TextStyle(
-                                            color: Color.fromRGBO(2, 27, 17, 1),
+                                            color: Color.fromRGBO(
+                                                230, 235, 233, 1),
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -321,7 +353,8 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                           child: IconButton(
                                             icon: Icon(
                                               Icons.timer_sharp,
-                                              color: Color(0xFF355E3B),
+                                              color: Color.fromARGB(
+                                                  255, 205, 206, 205),
                                               size: 24,
                                             ),
                                             onPressed: () {
@@ -343,6 +376,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                               ),
                             );
                           } else {
+                            check(plantID[index]);
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10),
                               child: GestureDetector(
@@ -371,7 +405,9 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                         .secondaryBackground,
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
-                                      image: AssetImage('default.jpg'),
+                                      image: Image.asset(
+                                        'assets/$image', // image of selected plant or default
+                                      ).image,
                                     ),
                                     borderRadius: BorderRadius.circular(23),
                                   ),
@@ -386,7 +422,8 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                         child: Text(
                                           newList[index] ?? '',
                                           style: TextStyle(
-                                            color: Color.fromRGBO(5, 39, 27, 1),
+                                            color: Color.fromRGBO(
+                                                241, 253, 249, 1),
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -400,7 +437,8 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                           child: IconButton(
                                             icon: Icon(
                                               Icons.timer_sharp,
-                                              color: Color(0xFF355E3B),
+                                              color: Color.fromARGB(
+                                                  255, 248, 249, 248),
                                               size: 24,
                                             ),
                                             onPressed: () {

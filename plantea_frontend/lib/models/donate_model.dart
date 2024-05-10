@@ -36,7 +36,7 @@ class DonateModel extends FlutterFlowModel<DonateWidget> {
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode6;
   TextEditingController? textController6;
-  String? Function(BuildContext, String?)? textController6Validator;
+  int Function(BuildContext, int?)? textController6Validator;
   // State field(s) for DropDown widget.
   String? dropDownValue;
   FormFieldController<String>? dropDownValueController;
