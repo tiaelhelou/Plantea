@@ -1,11 +1,8 @@
-import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/profile_page.dart';
 import 'package:plantea/pages/reset_pass_page.dart';
-import '../pages/plant_care_home_page.dart';
-import '../pages/welcome_page.dart';
 import '../api.dart';
 
 import '../models/log_model.dart';
@@ -94,7 +91,6 @@ class _LogWidgetState extends State<LogWidget> {
                     child: SingleChildScrollView(
                       // Wrap with SingleChildScrollView
                       child: Column(
-                        /////////////////////////////////////////////email
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -225,7 +221,6 @@ class _LogWidgetState extends State<LogWidget> {
 
                                           if (response == true)
 
-                                          // Navigate the user to the Home page
                                           {
                                             Navigator.push(
                                               context,

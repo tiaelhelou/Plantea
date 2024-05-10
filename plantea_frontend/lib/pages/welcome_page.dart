@@ -1,10 +1,8 @@
+// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
-
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/pages/login_page.dart';
-import 'package:plantea/main.dart';
 import 'package:plantea/pages/signup_page.dart';
-//import 'package:plantea/pages/signup_page.dart';
 
 import '../models/welcome_model.dart';
 export '../models/welcome_model.dart';
@@ -108,8 +106,6 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             print('Button pressed ...');
-
-                            /// navigate to other page without cond
                             Navigator.push(
                               context,
                               MaterialPageRoute(

@@ -1,11 +1,8 @@
-import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/api.dart';
 import 'package:plantea/pages/login_page.dart';
-import '../pages/plant_care_home_page.dart';
-import '../pages/welcome_page.dart';
 
 import '../models/reset_pass_model.dart';
 export '../models/reset_pass_model.dart';
@@ -91,9 +88,7 @@ class _ResetPassWidgetState extends State<ResetPassWidget> {
                       ),
                     ),
                     child: SingleChildScrollView(
-                      // Wrap with SingleChildScrollView
                       child: Column(
-                        /////////////////////////////////////////////oldnewpassword
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -225,7 +220,6 @@ class _ResetPassWidgetState extends State<ResetPassWidget> {
 
                                           if (response == true)
 
-                                          // Navigate the user to the Home page
                                           {
                                             Navigator.push(
                                               context,

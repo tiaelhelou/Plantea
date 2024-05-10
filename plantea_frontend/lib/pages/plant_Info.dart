@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plantea/api.dart';
@@ -13,7 +10,6 @@ import 'package:plantea/pages/profile_page.dart';
 import 'package:plantea/services/providers.dart';
 import 'package:provider/provider.dart';
 import '../pages/plant_care_home_page.dart';
-import '../pages/welcome_page.dart';
 
 import '../models/plant_info_model.dart';
 export '../models/plant_info_model.dart';
@@ -53,8 +49,6 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
     }
     if (widget.nickname != null) {
       myplant = true;
-      // Use widget.nickname to access the nickname passed to the widget
-      print('Nickname: ${widget.nickname}');
       return myplant;
     }
     return false;
@@ -65,23 +59,17 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
 
     List plantNames =
         data.map((plantDetails) => plantDetails["plant_name"]).toList();
-    print(plantNames);
     List plantdesc =
         data.map((plantDetails) => plantDetails["plant_description"]).toList();
-    print(plantdesc);
 
     List plantchara = data
         .map((plantDetails) => plantDetails["plant_characteristics"])
         .toList();
-    print(plantchara);
     List plantdet =
         data.map((plantDetails) => plantDetails["plant_details"]).toList();
-    print(plantdet);
     List plantcat =
         data.map((plantDetails) => plantDetails["plant_category"]).toList();
-    print(plantcat);
 
-    //my plant
 
     characteristics = plantchara[0].toString();
     details = plantdet[0].toString();
@@ -132,7 +120,7 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: Image.asset(
-                      'assets/background.jpg', // image of selected plant or default
+                      'assets/background.jpg', 
                     ).image,
                   ),
                 ),
@@ -182,7 +170,6 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                 ),
                           ),
                           Container(
-                            // containe images for specified plant which will be extracted from db
                             width: 413,
                             height: 130,
                             decoration: BoxDecoration(
@@ -201,21 +188,17 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(8),
                                         child: Image.asset(
-                                          'assets/$image.jpeg', // Replace 'assets/image1.jpg' with your asset image path
+                                          'assets/$image.jpeg', 
                                           width: 193,
                                           height: 130,
                                           fit: BoxFit.cover,
                                         ),
-                                      ),
-
-                                      // Add more images as needed using the same pattern
+                                      ),      
                                     ],
                                   ),
                                 )),
                           ),
 
-                          //plant informtion displayed. extracted from db ad replaced in container instead of  "Input here from db"
-                          //replace hardcoded for main text
                           Text(
                             'Description',
                             style: FlutterFlowTheme.of(context)
@@ -246,7 +229,7 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                   borderRadius: BorderRadius.circular(23),
                                 ),
                                 child: Text(
-                                  description, ////////////////////////////////////////dsc
+                                  description, 
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -283,7 +266,7 @@ class _PlantInfoWidgetState extends State<PlantInfoWidget> {
                                     borderRadius: BorderRadius.circular(23),
                                   ),
                                   child: Text(
-                                    "$details        Category:   $category", //////////////////////////////////////////det
+                                    "$details        Category:   $category", 
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(

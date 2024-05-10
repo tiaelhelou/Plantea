@@ -1,12 +1,9 @@
-import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:plantea/api.dart';
 import 'package:plantea/camera_screens/camera_page.dart';
-import 'package:plantea/pages/add_plant_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:plantea/pages/donate_page.dart';
 import 'package:plantea/pages/plant_care_home_page.dart';
 import 'package:plantea/pages/plant_library_page.dart.dart';
@@ -18,7 +15,6 @@ import '../models/redeem_model.dart';
 export '../models/redeem_model.dart';
 
 String result = '';
-//List<String> list = <String>['DisplayAll', 'One', 'Two', 'Three', 'Four'];
 
 class RedeemWidget extends StatefulWidget {
   const RedeemWidget({Key? key}) : super(key: key);
@@ -41,12 +37,12 @@ class _RedeemWidgetState extends State<RedeemWidget> {
     List<String> names = [];
     List<String> points = [];
     List<dynamic> rewards = await Api.displayRewards();
-    // Iterate over each JSON object in the list
+    
     for (var reward in rewards) {
       String rewardName = reward[
-          'gift_name']; // Assuming 'plant_nickname' is the key for the plant name
+          'gift_name']; 
       if (rewardName != null) {
-        names.add(rewardName); // Add the plant name to the list
+        names.add(rewardName);
       }
       String gift_point = reward['gift_points'].toString();
       if (gift_point != null) {
@@ -68,7 +64,7 @@ class _RedeemWidgetState extends State<RedeemWidget> {
 
   void _reloadPage() {
     setState(() {
-      _counter++; // Change the state to trigger a rebuild
+      _counter++;
     });
   }
 
@@ -82,9 +78,7 @@ class _RedeemWidgetState extends State<RedeemWidget> {
   }
 
   Future<void> fetchStringFromFuture() async {
-    // Call the async function and await the result
     String futureResult = await totalPoints();
-    // Update the state with the result
     setState(() {
       result = futureResult;
     });
@@ -233,7 +227,6 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                       ].divide(SizedBox(width: 10)),
                     ),
                     Padding(
-                      //// list of redeeeem
                       padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                       child: SingleChildScrollView(
                         child: Container(
@@ -245,7 +238,7 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                             ),
                             child: ListView.builder(
                               itemCount: list
-                                  .length, // Conditionally set the itemCount
+                                  .length, 
                               itemBuilder: (context, index) {
                                 var item = list[index];
 
@@ -293,7 +286,7 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                                                   Padding(
                                                     padding: EdgeInsets.only(
                                                         right:
-                                                            10), // Adjust the padding as needed
+                                                            10), 
                                                     child: Text(
                                                       pointList[index],
                                                       style: FlutterFlowTheme
@@ -330,7 +323,6 @@ class _RedeemWidgetState extends State<RedeemWidget> {
                                             size: 35,
                                           ),
                                           onPressed: () async {
-                                            print(index);
                                             bool response =
                                                 await Api.redeemReward(
                                                     list.elementAt(index));

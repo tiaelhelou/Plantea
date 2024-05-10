@@ -1,10 +1,7 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'dart:io';
-
 import 'package:async_extension/async_extension.dart';
 import 'package:flutter/material.dart';
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plantea/api.dart';
@@ -22,18 +19,17 @@ export '../models/profile_model.dart';
 
 String points = '';
 String name = '';
-List<String> imagePaths = []; // Specify the type of elements in the list
+List<String> imagePaths = []; 
 
 Future<void> setparam() async {
   List data = await Api.displayUserImage();
-  // Use the map method to extract image paths from the data list
+  
   imagePaths = data
       .map((plantDetails) => plantDetails["camera_image_image"] as String)
       .toList();
   points = await Api.displayTotalPoint();
   name = await Api.displayUserName();
-  String i = imagePaths[0]; // No need to call toString() here
-  print(i);
+  String i = imagePaths[0]; 
 }
 
 class ProfileWidget extends StatefulWidget {
@@ -101,13 +97,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             if (isCheckedIn == false) {
                               isCheckedIn = !isCheckedIn;
                             }
-                            // Toggle the isCheckedIn state
+                          
                           });
                           print(isCheckedIn ? 'CHECKED IN' : 'CHECKIN');
                         },
                         text: isCheckedIn
                             ? 'CHECKED IN'
-                            : 'CHECKIN', // Change text based on isCheckedIn state
+                            : 'CHECKIN', 
                         options: FFButtonOptions(
                           width: 110,
                           height: 34,
@@ -167,7 +163,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 ),
               ),
               Text(
-                name, //////////////////////replace name
+                name, 
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Montserrat',
                       fontSize: 14,
@@ -196,7 +192,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(20, 10, 0, 0),
                             child: Text(
-                              points, //////////////////add points
+                              points, 
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -303,7 +299,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       final imageFile = File(imagePath);
                       if (!imageFile.existsSync()) {
                         print('Image file not found at path: $imagePath');
-                        return Container(); // Return an empty container if file not found
+                        return Container(); 
                       }
                       return Container(
                         width: 125,
@@ -320,7 +316,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                 ),
               ),
-              // Generated code for this Container Widget...
               Container(
                 width: 500,
                 height: 89,

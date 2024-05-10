@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plantea/camera_screens/camera_page.dart';
@@ -166,7 +164,7 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                                           elevation: 0,
                                           style: TextStyle(color: Colors.black),
                                           underline:
-                                              SizedBox(), // Hide default underline
+                                              SizedBox(), 
                                           onChanged: (String? newValue1) {
                                             setState(() {
                                               savetype = newValue1;
@@ -178,7 +176,7 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                                             'sunlight',
                                             'water',
                                             'repot'
-                                          ] // Currency signs
+                                          ] 
                                               .map<DropdownMenuItem<String>>(
                                                   (String value) {
                                             return DropdownMenuItem<String>(
@@ -208,7 +206,6 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                                         ),
                                         onPressed: () {
                                           print('IconButton pressed ...');
-                                          // save selected dropdown in db
                                         },
                                       ),
                                     ),
@@ -241,7 +238,7 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                                           elevation: 0,
                                           style: TextStyle(color: Colors.black),
                                           underline:
-                                              SizedBox(), // Hide default underline
+                                              SizedBox(), 
                                           onChanged: (String? newValue2) {
                                             setState(() {
                                               savetype = newValue2;
@@ -253,7 +250,7 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                                             'sunlight',
                                             'water',
                                             'repot'
-                                          ] // Currency signs
+                                          ] 
                                               .map<DropdownMenuItem<String>>(
                                                   (String value) {
                                             return DropdownMenuItem<String>(
@@ -315,7 +312,7 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                                           elevation: 0,
                                           style: TextStyle(color: Colors.black),
                                           underline:
-                                              SizedBox(), // Hide default underline
+                                              SizedBox(), 
                                           onChanged: (String? newValue3) {
                                             setState(() {
                                               savetype = newValue3;
@@ -327,7 +324,7 @@ class _RemindersWidgetState extends State<RemindersWidget> {
                                             'sunlight',
                                             'water',
                                             'repot'
-                                          ] // Currency signs
+                                          ]
                                               .map<DropdownMenuItem<String>>(
                                                   (String value) {
                                             return DropdownMenuItem<String>(

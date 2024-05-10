@@ -2,9 +2,7 @@
 import 'dart:convert';
 import 'package:beautiful_soup_dart/beautiful_soup.dart';
 import 'package:http/http.dart' as http;
-import 'package:plantea/api.dart';
 import 'package:plantea/models/models.dart';
-//import 'package:plantea/secret_keys.dart';
 
 class PlantsAPI {
   final String _endpoint = 'https://api.plant.id/v2/identify';

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,22 +14,11 @@ import 'package:plantea/pages/reminders_page.dart';
 import 'package:plantea/services/providers.dart';
 import 'package:provider/provider.dart';
 import '../pages/plant_care_home_page.dart';
-import '../pages/welcome_page.dart';
+
 
 import '../models/plantcare_model.dart';
 export '../models/plantcare_model.dart';
 
-/**
- * the list should be displayed in the listview and search bar
- *  get from db 
- *  store container in list 
- *  let list diplay container from db then store selected container and display it only
- * 
- */
-
-/**
- * when the user clicks the button the plant details (plant id, plantwill be transported to the next page  to add a reminder  to this specific plant
- */
 
 class PlantcareWidget extends StatefulWidget {
   const PlantcareWidget({Key? key}) : super(key: key);
@@ -52,7 +41,6 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
   String image = '';
 
   void check(int? id) {
-    print(id);
     if (id == 1) {
       image = tulip;
     } else if (id == 2) {
@@ -69,12 +57,12 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
   Future<void> extractPlantNames() async {
     List<String> plantNames = [];
     List<dynamic> userPlants = await Api.viewPlants(false);
-    // Iterate over each JSON object in the list
+    
     for (var plant in userPlants) {
       String plantName = plant[
-          'plant_nickname']; // Assuming 'plant_nickname' is the key for the plant name
+          'plant_nickname']; 
       if (plantName != null) {
-        plantNames.add(plantName); // Add the plant name to the list
+        plantNames.add(plantName); 
       }
     }
     list = ['DisplayAll'];
@@ -94,8 +82,6 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
     }
 
     int index = newList.indexOf(nick__name);
-    print(newList);
-    print(plantID);
     return index != -1 ? plantID[index] : null;
   }
 
@@ -322,7 +308,7 @@ class _PlantcareCopyWidgetState extends State<PlantcareWidget> {
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
                                       image: Image.asset(
-                                        'assets/$image', // image of selected plant or default
+                                        'assets/$image', 
                                       ).image,
                                     ),
                                     borderRadius: BorderRadius.circular(23),

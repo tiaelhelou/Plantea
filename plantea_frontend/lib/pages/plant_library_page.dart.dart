@@ -1,34 +1,20 @@
-import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plantea/api.dart';
 import 'package:plantea/camera_screens/camera_page.dart';
-import 'package:plantea/pages/add_plant_page.dart';
 import 'package:plantea/pages/donate_page.dart';
 import 'package:plantea/pages/plant_Info.dart';
 import 'package:plantea/pages/profile_page.dart';
-import 'package:plantea/pages/reminders_page.dart';
 import 'package:plantea/services/providers.dart';
 import 'package:provider/provider.dart';
 import '../pages/plant_care_home_page.dart';
-import '../pages/welcome_page.dart';
 
 import '../models/plantLibrary_model.dart';
 export '../models/plantLibrary_model.dart';
 
-/**
- * the list should be displayed in the listview and search bar
- *  get from db 
- *  store container in list 
- *  let list diplay container from db then store selected container and display it only
- * 
- */
-
-/**
- * when the user clicks the button the plant details (plant id, plantwill be transported to the next page  to add a reminder  to this specific plant
- */
 class PlantLibraryWidget extends StatefulWidget {
   const PlantLibraryWidget({super.key});
 
@@ -51,8 +37,6 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
   String image = '';
 
   void check(int? id) {
-    print(" hihi");
-    print(id);
     if (id == 1) {
       image = tulip;
     } else {
@@ -68,12 +52,12 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
     List<String> plantNames = [];
     List<int> plantid = [];
     List<dynamic> userPlants = await Api.viewAllPlant();
-    // Iterate over each JSON object in the list
+
     for (var plant in userPlants) {
       String plantName = plant[
-          'plant_name']; // Assuming 'plant_nickname' is the key for the plant name
+          'plant_name']; 
       if (plantName != null) {
-        plantNames.add(plantName); // Add the plant name to the list
+        plantNames.add(plantName); 
       }
       int plantID = plant['plant_id'];
       if (plantID != null) {
@@ -118,33 +102,6 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
   Widget build(BuildContext context) {
     List<Container> containerList = [];
 
-    // containerList.add(Container(
-    //   width: 296,
-    //   height: 150,
-    //   constraints: BoxConstraints(
-    //     minWidth: 296,
-    //     minHeight: 180,
-    //     maxWidth: 296,
-    //     maxHeight: 180,
-    //   ),
-    //   decoration: BoxDecoration(
-    //     color: FlutterFlowTheme.of(context).secondaryBackground,
-    //     image: DecorationImage(
-    //       fit: BoxFit.cover,
-    //       alignment: AlignmentDirectional(0, 0),
-    //       image: Image.network(
-    //         'https://images.unsplash.com/photo-1495231916356-a86217efff12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxNXx8Zmxvd2VyfGVufDB8fHx8MTcxNDE0NjE1M3ww&ixlib=rb-4.0.3&q=80&w=400',
-    //       ).image,
-    //     ),
-    //     borderRadius: BorderRadius.circular(23),
-    //   ),
-    // ));
-
-// Add more containers to the list as needed
-
-// To use the list of containers, you can display them in a ListView or any other widget that accepts a list of widgets.
-//create a container for every item in user plant to be displayed
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -171,7 +128,7 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                           decoration: BoxDecoration(
                             border: Border.all(
                                 color:
-                                    Colors.grey.shade700), // Dark grey border
+                                    Colors.grey.shade700),
                             borderRadius: BorderRadius.circular(5.0),
                           ),
                           child: DropdownButtonHideUnderline(
@@ -195,7 +152,7 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                         ),
                                       ))
                                   .toList(),
-                              value: selectedValue, //// selected container
+                              value: selectedValue, 
                               onChanged: (value) {
                                 setState(() {
                                   selectedValue = value;
@@ -248,7 +205,6 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                       .contains(searchValue);
                                 },
                               ),
-                              // This to clear the search value when you close the menu
                               onMenuStateChange: (isOpen) {
                                 if (!isOpen) {
                                   textEditingController.clear();
@@ -258,7 +214,6 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                           ),
                         ),
                       ),
-                      // Generated code for this Container Widget...
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                         child: Text(
@@ -287,30 +242,23 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount:
-                                      2, // Number of columns in the grid
+                                      2, 
                                 ),
                                 itemCount: selectedValue != null &&
                                         selectedValue != 'DisplayAll'
                                     ? 1
                                     : newList
-                                        .length, // Conditionally set the itemCount
+                                        .length, 
                                 itemBuilder: (context, index) {
-                                  // Retrieve the item from yourList
-
-                                  /////////////add cond if selected value null or not
 
                                   if (selectedValue != null &&
                                       selectedValue != 'DisplayAll') {
-                                    // Display only one container
                                     var item =
-                                        selectedValue; // Use the selected value
+                                        selectedValue;
                                     check(getPlantinfoID(item!));
-                                    print(getPlantinfoID(item!));
                                     return GestureDetector(
                                         onTap: () {
                                           print(' 1 IconButton pressed ...');
-                                          // var plantInfoId =
-                                          //     getPlantID(); // add to shred prefs or send through page
 
                                           Navigator.push(
                                             context,
@@ -325,13 +273,11 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                         child: Container(
                                           margin: EdgeInsets.all(8),
                                           decoration: BoxDecoration(
-                                            // color:
-                                            //     Color.fromARGB(255, 10, 59, 27),
                                             image: DecorationImage(
                                               fit: BoxFit.cover,
                                               image: Image.asset(
                                                 'assets/$image'
-                                                '.jpeg', // image of selected plant or default
+                                                '.jpeg', 
                                               ).image,
                                             ),
                                             borderRadius:
@@ -339,7 +285,6 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                           ),
                                         ));
                                   } else {
-                                    // Return a container with a button inside
                                     var item = newList[index];
                                     check(getPlantinfoID(item!));
                                     return GestureDetector(
@@ -364,7 +309,7 @@ class _PlantLibraryCopyWidgetState extends State<PlantLibraryWidget> {
                                               fit: BoxFit.cover,
                                               image: Image.asset(
                                                 'assets/$image'
-                                                '.jpeg', // image of selected plant or default
+                                                '.jpeg', 
                                               ).image,
                                             ),
                                             borderRadius:

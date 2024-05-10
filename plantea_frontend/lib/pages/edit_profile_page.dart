@@ -6,14 +6,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plantea/api.dart';
 import 'package:plantea/camera_screens/camera_page.dart';
 import 'package:plantea/pages/donate_page.dart';
-import 'package:plantea/pages/plant_Info.dart';
 import 'package:plantea/pages/plant_library_page.dart.dart';
 import 'package:plantea/pages/profile_page.dart';
 import 'package:plantea/pages/settings_page.dart';
 import 'package:plantea/services/providers.dart';
 import 'package:provider/provider.dart';
 import '../pages/plant_care_home_page.dart';
-import '../pages/welcome_page.dart';
 
 import '../models/edit_profile_model.dart';
 export '../models/edit_profile_model.dart';

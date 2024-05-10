@@ -1,14 +1,11 @@
-import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:plantea/api.dart';
 import 'package:plantea/camera_screens/camera_page.dart';
 import 'package:plantea/pages/donate_page.dart';
 import 'package:plantea/pages/edit_profile_page.dart';
-
 import 'package:plantea/pages/plant_care_home_page.dart';
 import 'package:plantea/pages/plant_library_page.dart.dart';
 import 'package:plantea/pages/profile_page.dart';
@@ -17,7 +14,6 @@ import 'package:plantea/services/providers.dart';
 import 'package:provider/provider.dart';
 
 import '../models/settings_model.dart';
-
 export '../models/settings_model.dart';
 
 class SettingsWidget extends StatefulWidget {

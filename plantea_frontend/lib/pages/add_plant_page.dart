@@ -1,8 +1,6 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -57,7 +55,6 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
     list = names; // Update the state with the fetched plant names
   }
 
-  // String dropdownValue = list.first;
   @override
   void initState() {
     super.initState();
@@ -201,7 +198,7 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
                               onPressed: () {
                                 print('IconButton pressed ...');
                                 image_flag = true;
-                                pickImageFromGallery(); ////// add prersonal image of the plant
+                                pickImageFromGallery(); 
                               },
                             ),
                           ),
@@ -304,30 +301,17 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
                           },
                         ),
                       ),
-                      /*DropdownMenu<String>(
-                        
-                       // initialSelection: list.first,
-                        onSelected: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValue = value!;
-                          });
-                        },
-                        dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
-                          return DropdownMenuEntry<String>(value: value, label: value);
-                        }).toList(),
-                      ),*/
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 10),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          /// check if both field are filled and adds  default image if non selected
+                          // check if both field are filled and adds  default image if non selected
                           if (_formKey.currentState != null &&
                               _formKey.currentState!.validate() &&
                               isDropdownValueSelected() == true &&
                               image_flag) {
-                            // Navigate the user to the Home page
+                        
                             bool response = await Api.addPlant(
                                 nameController.text, selectedValue!);
 
@@ -350,7 +334,7 @@ class _AddPlantWidgetState extends State<AddPlantWidget> {
                             );
                           }
 
-                          /// check if both field are filled and adds  default image if non selected
+                          // check if both field are filled and adds  default image if non selected
                         },
                         text: 'ADD',
                         options: FFButtonOptions(
