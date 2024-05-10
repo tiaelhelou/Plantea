@@ -1,22 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plantea/pages/add_plant_page.dart';
-import 'package:plantea/pages/donate_page.dart';
-import 'package:plantea/pages/edit_profile_page.dart';
-import 'package:plantea/pages/login_page.dart';
-
-import 'package:plantea/pages/plant_Info.dart';
-import 'package:plantea/pages/plant_care_home_page.dart';
-import 'package:plantea/pages/plant_library_page.dart.dart';
-import 'package:plantea/pages/profile_page.dart';
-import 'package:plantea/pages/redeem_gifts_page.dart';
-//import 'package:plantea/pages/redeem_gifts_page.dart';
-import 'package:plantea/pages/reminders_page.dart';
-//import 'package:plantea/pages/reset_pass_page.dart';
-import 'package:plantea/pages/settings_page.dart';
-import 'package:plantea/pages/signup_page.dart';
-//import 'package:plantea/pages/signup_page.dart';
 import 'package:plantea/pages/splash_screen.dart';
-import 'package:plantea/camera_screens/camera_page.dart';
 import 'package:plantea/services/providers.dart';
 import 'package:provider/provider.dart';
 
@@ -35,10 +18,7 @@ class MyApp extends StatelessWidget {
       home: ChangeNotifierProvider(
         create: (context) => IdentificationProvider(),
         builder: ((context, child) {
-          return const PlantInfoWidget(
-            id: 1,
-            nickname: null, // Provide the nickname value here
-          );
+          return const SplashScreen();
         }),
       ),
     );

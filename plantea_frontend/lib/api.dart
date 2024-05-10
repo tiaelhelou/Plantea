@@ -3,13 +3,12 @@ import 'package:http/http.dart' as http;
 import 'package:plantea/pages/reminders_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-int id = 1;
 
 class Api {
   static String urlbase = 'http://10.0.2.2:8000/api/v1';
   //for the emulaator : 'http://10.0.2.2:8000/api/v1';
   //for edge: 'http://127.0.0.1:8000/api/v1';
-//1.6
+
   /*
    * Sign up api
    */
@@ -222,7 +221,7 @@ class Api {
     String? path = prefs.getString('path');
     int? id = prefs.getInt('id');
 
-    final url = Uri.parse('$urlbase/authorization/user/addPlant/1');
+    final url = Uri.parse('$urlbase/authorization/user/addPlant/$id');
 
     final Map<String, dynamic> data = {
       'nickname': name,
@@ -238,7 +237,7 @@ class Api {
         },
         body: jsonEncode(data),
       );
-      print(data);
+      
       if (response.statusCode == 200) {
         return true;
       } else {
@@ -285,7 +284,7 @@ class Api {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
-    final url = Uri.parse('$urlbase/authorization/user/viewPlants/1');
+    final url = Uri.parse('$urlbase/authorization/user/viewPlants/$id');
 
     try {
       final response = await http.get(url);
@@ -378,8 +377,7 @@ class Api {
         final Map<String, dynamic> responseData = json.decode(response.body);
 
         final List<dynamic> rewardsData = responseData['data'];
-        // final List<String> plantNames =
-        //     plantsData.map((plant) => plant['plant_name'] as String).toList();
+
         return rewardsData;
       } else {
         throw Exception('Invalid response format: ${response.statusCode}');
@@ -397,7 +395,7 @@ class Api {
 
     int? id = prefs.getInt('id');
 
-    final url = Uri.parse('$urlbase/authorization/user/redeemReward/1/$name');
+    final url = Uri.parse('$urlbase/authorization/user/redeemReward/$id/$name');
 
     try {
       final response = await http.post(
@@ -426,7 +424,7 @@ class Api {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
-    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/1');
+    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/$id');
 
     try {
       final response = await http.get(url);
@@ -452,7 +450,7 @@ class Api {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
-    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/1');
+    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/$id');
 
     try {
       final response = await http.get(url);
@@ -478,7 +476,7 @@ class Api {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
-    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/1');
+    final url = Uri.parse('$urlbase/authorization/user/viewProfileDetails/$id');
 
     try {
       final response = await http.get(url);
@@ -542,7 +540,7 @@ class Api {
 
     int? id = prefs.getInt('id');
 
-    final url = Uri.parse('$urlbase/authorization/user/donate/1');
+    final url = Uri.parse('$urlbase/authorization/user/donate/$id');
 
     final Map<String, dynamic> data = {'amount': amount, 'currency': currency};
 
@@ -567,15 +565,18 @@ class Api {
     }
   }
 
+  /*
+   * Insert image api
+   */
   static Future<bool> insertImage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int? id = prefs.getInt('id');
     String? p = prefs.getString('path');
-    final url = Uri.parse('$urlbase/authorization/user/insert_image/1');
+    final url = Uri.parse('$urlbase/authorization/user/insert_image/$id');
 
     final Map<String, dynamic> data = {'image_name': p};
-    print('hello');
+
     try {
       final response = await http.post(
         url,
