@@ -68,3 +68,6 @@ flutter:
   assets:
     - assets/background.jpg
     - assets/logo.jpg
+    - assets/def.jpg
+    - assets/map.jpeg
+    - assets/tul.jpeg
