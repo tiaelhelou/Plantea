@@ -17,7 +17,7 @@ The application provides users access to:
 
 -------------------------------------------------------------------------------------------------------------------------
 
-## Why Use Plantea?
+## Why Use Plantea? :blossom:
 
 :deciduous_tree: Encourage ecological practices which the society and environment
 
@@ -33,19 +33,19 @@ The application provides users access to:
 
 -------------------------------------------------------------------------------------------------------------------------
 
-## Plantea Wire Frame
+## Plantea Wire Frame :pencil2:
 
 ![wire frame](https://github.com/tiaelhelou/Plantea/assets/74878673/33b9a0f8-8c2d-411e-bc9b-11a87b978f85)
 
 -------------------------------------------------------------------------------------------------------------------------
 
-## Plantea UI/UX
+## Plantea UI/UX :pen:
 
 ![ui_ux](https://github.com/tiaelhelou/Plantea/assets/74878673/7ae86c56-5b2a-411d-83e9-222d03529b53)
 
 -------------------------------------------------------------------------------------------------------------------------
 
-## Future Work
+## Future Work :rocket:
 
 :bouquet: Plant library shall include all kinds of available plants 
 
@@ -59,7 +59,7 @@ The application provides users access to:
 
 -------------------------------------------------------------------------------------------------------------------------
 
-## Challenges Faced
+## Challenges Faced :crossed_swords:
 
 :keyboard: Flutter as frontend development stack 
 
@@ -71,14 +71,14 @@ The application provides users access to:
 
 -------------------------------------------------------------------------------------------------------------------------
 
-## Conclusion 
+## Conclusion :scroll:
 
 The ecosystem plays a vital role in our lives, so it is our responsibility to be aware of our surroundings and maintain the stability of every species within it. It's important to remember that human activity has caused the gradual degradation of forests and vegetation over time, and it is now our responsibility to fix this problem. To address this issue, we have developed an app that will make it easy for people to take care of the environment while also increasing awareness about the different plant species, including those that are dangerous. Our app have several features, including camera plant detection, plant care reminders, and tutorials, plus a library of plants and vegetation with their details. Contributing to this project will help decrease the amount of CO2 in the atmosphere, which might improve the effects of global warming.
 
 
 -------------------------------------------------------------------------------------------------------------------------
 
-## Contact Details
+## Contact Details :phone:
 
 :e-mail: Tia El Helou: tia.elhelou@outlook.com
 
