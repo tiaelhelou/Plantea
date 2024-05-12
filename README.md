@@ -15,7 +15,18 @@ The application provides users access to:
 
 :potted_plant: A plant care section where they can access all their plant that they are taking care o currently
 
+-------------------------------------------------------------------------------------------------------------------------
 
+## Why Use Plantea?
 
+:deciduous_tree: Encourage ecological practices which the society and environment
 
+:gift: Obtain various reward like discounts, gift cards by simply checking-in
 
+:bookmark_tabs: Keep track of your plant
+
+:mag_right: Identify any plant around you
+ 
+:unlock: Have access to unlimited features
+
+:moneybag: Easily donate to NGOs 
