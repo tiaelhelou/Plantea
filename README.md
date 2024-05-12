@@ -53,7 +53,7 @@ The application provides users access to:
 
 :gift: Reward feature should offer actualgifts and rewards to the user by making deals with multiple companies
 
-:moneybag: Users will be able to make actual donations to reforestation NGOs
+:moneybag: Users wiil be able to make actual donations to reforestation NGOs
 
 :iphone: Deploy the application on App store and Google play
 
@@ -73,7 +73,7 @@ The application provides users access to:
 
 ## Conclusion :scroll:
 
-The ecosystem plays a vital role in our lives, so it is our responsibility to be aware of our surroundings and maintain the stability of every species within it. It's important to remember that human activity has caused the gradual degradation of forests and vegetation over time, and it is now our responsibility to fix this problem. To address this issue, we have developed an app that will make it easy for people to take care of the environment while also increasing awareness about the different plant species, including those that are dangerous. Our app have several features, including camera plant detection, plant care reminders, and tutorials, plus a library of plants and vegetation with their details. Contributing to this project will help decrease the amount of CO2 in the atmosphere, which might improve the effects of global warming.
+The ecosystem plays a vital role in our lives, hence it is our responsibility to be aware of our surroundings and maintain the stability of every species within it. It's important to remember that human activity has caused the gradual degradation of forests and vegetation over time, and it is now our responsibility to fix this problem. To address this issue, we have developed an app that will make it easy for people to take care of the environment while also increasing awareness about the different plant species, including those that are dangerous. Our app have several features, including camera plant detection, plant care reminders, and tutorials, plus a library of plants and vegetation with their details. Contributing to this project will help decrease the amount of CO2 in the atmosphere, which might improve the effects of global warming.
 
 
 -------------------------------------------------------------------------------------------------------------------------
