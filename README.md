@@ -1,6 +1,6 @@
 # Plantea :seedling:
 
-## Description: :scroll:
+## Description :scroll:
 
 A wellness hybrid application that focuses on agriculture and ecosystem advancement. 
 The application provides users access to:
@@ -37,5 +37,9 @@ The application provides users access to:
 
 ![wire frame](https://github.com/tiaelhelou/Plantea/assets/74878673/33b9a0f8-8c2d-411e-bc9b-11a87b978f85)
 
+
+## Plantea UI/UX
+
+![ui_ux](https://github.com/tiaelhelou/Plantea/assets/74878673/7ae86c56-5b2a-411d-83e9-222d03529b53)
 
 
