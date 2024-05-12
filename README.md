@@ -1,4 +1,4 @@
-![image](https://github.com/tiaelhelou/Plantea/assets/74878673/bd93c868-3125-4af1-a5d0-c204db71c47f)![image](https://github.com/tiaelhelou/Plantea/assets/74878673/24dd3aa5-36c5-429d-9586-40e3fbf7419a)# Plantea :seedling:
+# Plantea :seedling:
 
 ## Description :scroll:
 
@@ -56,6 +56,23 @@ The application provides users access to:
 :moneybag: Users will be able to make actual donations to reforestation NGOs
 
 :iphone: Deploy the application on App store and Google play
+
+-------------------------------------------------------------------------------------------------------------------------
+
+## Challenges Faced
+
+:keyboard: Flutter as frontend development stack 
+
+:computer: Computer performance 
+
+:mag_right: Identification of plants
+
+:bouquet: Plant library and information (datasets)
+
+
+
+
+
 
 
 
