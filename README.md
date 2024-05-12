@@ -30,3 +30,12 @@ The application provides users access to:
 :unlock: Have access to unlimited features
 
 :moneybag: Easily donate to NGOs 
+
+-------------------------------------------------------------------------------------------------------------------------
+
+## Plantea Wire Frame
+
+![wire frame](https://github.com/tiaelhelou/Plantea/assets/74878673/33b9a0f8-8c2d-411e-bc9b-11a87b978f85)
+
+
+
