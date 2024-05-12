@@ -1,4 +1,4 @@
-# Plantea :seedling:
+![image](https://github.com/tiaelhelou/Plantea/assets/74878673/bd93c868-3125-4af1-a5d0-c204db71c47f)![image](https://github.com/tiaelhelou/Plantea/assets/74878673/24dd3aa5-36c5-429d-9586-40e3fbf7419a)# Plantea :seedling:
 
 ## Description :scroll:
 
@@ -37,9 +37,29 @@ The application provides users access to:
 
 ![wire frame](https://github.com/tiaelhelou/Plantea/assets/74878673/33b9a0f8-8c2d-411e-bc9b-11a87b978f85)
 
+-------------------------------------------------------------------------------------------------------------------------
 
 ## Plantea UI/UX
 
 ![ui_ux](https://github.com/tiaelhelou/Plantea/assets/74878673/7ae86c56-5b2a-411d-83e9-222d03529b53)
+
+-------------------------------------------------------------------------------------------------------------------------
+
+## Future Work
+
+:bouquet: Plant library shall include all kinds of available plants 
+
+:camera_flash: Camera shall be able to detect all types of plants that are in the plant library
+
+:gift: Reward feature should offer actualgifts and rewards to the user by making deals with multiple companies
+
+:moneybag: Users will be able to make actual donations to reforestation NGOs
+
+:iphone: Deploy the application on App store and Google play
+
+
+
+
+
 
 
