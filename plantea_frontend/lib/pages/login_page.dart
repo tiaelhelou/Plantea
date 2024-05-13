@@ -219,9 +219,7 @@ class _LogWidgetState extends State<LogWidget> {
                                               emailController.text,
                                               passwordController.text);
 
-                                          if (response == true)
-
-                                          {
+                                          if (response == true) {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -278,7 +276,7 @@ class _LogWidgetState extends State<LogWidget> {
                           ),
                           Center(
                             child: InkWell(
-                                child: Text('Open Browser'),
+                                child: Text('Reset Password'),
                                 onTap: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
