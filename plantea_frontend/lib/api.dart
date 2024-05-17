@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class Api {
   static String urlbase = 'http://10.0.2.2:8000/api/v1';
   //for the emulaator : 'http://10.0.2.2:8000/api/v1';
@@ -49,8 +48,8 @@ class Api {
     final url = Uri.parse('$urlbase/authentication/login');
 
     final Map<String, dynamic> data = {
-      'user_email': '5@gmail.com',
-      'user_password': '5',
+      'user_email': email,
+      'user_password': password,
     };
 
     try {
@@ -236,7 +235,7 @@ class Api {
         },
         body: jsonEncode(data),
       );
-      
+
       if (response.statusCode == 200) {
         return true;
       } else {
